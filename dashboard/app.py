@@ -1,13 +1,14 @@
 """OneCognizant AI Evergreen — Enterprise Continuous Qualification & Governance Console.
 
-A unified enterprise control plane providing:
-1. Enterprise AI Platform Connectors (AWS Bedrock, Azure AI Foundry, Databricks Mosaic AI, Portkey)
-2. Multi-Geo Data Sovereignty & Resident AI Estate Mapping (Americas, Europe, Nordics, APAC)
-3. Change event ingestion and deterministic blast radius calculation
-4. Differential regression execution and 100% seeded defect detection
-5. Tamper-evident Human Approval Gate with cryptographic audit sealing
-6. Live canary telemetry monitoring and automated deterministic rollback
-7. Autonomous Missing-Test Discovery & Contract Validation
+Authored to the OneCognizant Enterprise Design System standard by Enterprise UI/UX Architecture.
+Implements the 7-stage AI Governance Lifecycle:
+1. Connect: Enterprise AI Platform Connectors & Multi-Geo Sovereignty
+2. Discover: AI Estate Portfolio & Dependency Navigator
+3. Ingest: Change Signal Ingestion & Deterministic Blast Radius
+4. Qualify: Differential Qualification & Seeded Defect Injection
+5. Gate: Tamper-Evident Digital Approval & Cryptographic Sealing
+6. Canary: Real-Time Telemetry & Sub-Second Auto-Rollback
+7. Expand: Autonomous Missing-Test Discovery
 """
 
 import json
@@ -38,10 +39,10 @@ from ai_evergreen.rollback.controller import RollbackController
 from ai_evergreen.trusted_kernel.kernel import TrustedKernel
 
 # -----------------------------------------------------------------------------
-# Page Configuration & OneCognizant Enterprise Theme
+# Streamlit Page Setup & OneCognizant Design Tokens
 # -----------------------------------------------------------------------------
 st.set_page_config(
-    page_title="OneCognizant | AI Evergreen Control Plane",
+    page_title="OneCognizant | AI Evergreen Control Console",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -49,55 +50,67 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* OneCognizant Global Palette & Typography */
+    /* ==========================================================================
+       OneCognizant Global Palette & Typography Tokens
+       ========================================================================== */
     :root {
         --cognizant-navy: #000048;
         --cognizant-blue: #0033A0;
         --cognizant-cyan: #00A3E0;
         --cognizant-slate: #5A6B82;
         --cognizant-bg: #F4F6FB;
-        --card-bg: #FFFFFF;
-        --card-border: #E2E8F0;
+        --surface-white: #FFFFFF;
+        --border-subtle: #E2E8F0;
+        --status-pass-bg: #EBFBEE;
+        --status-pass-text: #2B8A3E;
+        --status-block-bg: #FFEAEA;
+        --status-block-text: #C92A2A;
+        --status-warn-bg: #FFF4E5;
+        --status-warn-text: #D9480F;
     }
 
-    /* Main Container Padding */
+    /* Overall Layout Adjustments */
     .block-container {
-        padding-top: 1.5rem;
-        padding-bottom: 2rem;
+        padding-top: 1.2rem;
+        padding-bottom: 2.5rem;
+        max-width: 1400px;
     }
 
-    /* OneCognizant Top Header Bar */
+    /* ==========================================================================
+       Persistent Top Governance Header Bar
+       ========================================================================== */
     .one-cognizant-header {
-        background: linear-gradient(135deg, #000048 0%, #001B6B 70%, #0033A0 100%);
+        background: linear-gradient(135deg, #000048 0%, #001B6B 65%, #0033A0 100%);
         color: #ffffff;
-        padding: 18px 24px;
+        padding: 16px 24px;
         border-radius: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 14px rgba(0, 0, 72, 0.15);
-        border-bottom: 3px solid #00A3E0;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 16px rgba(0, 0, 72, 0.16);
+        border-bottom: 3.5px solid #00A3E0;
     }
     .brand-title {
-        font-size: 1.45rem;
+        font-size: 1.35rem;
         font-weight: 700;
         letter-spacing: -0.3px;
         color: #ffffff;
         margin: 0;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
     .brand-subtitle {
-        font-size: 0.85rem;
-        color: #B4C6E7;
+        font-size: 0.82rem;
+        color: #C2D4F8;
         margin-top: 4px;
+        font-weight: 400;
     }
-    .user-badge {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 20px;
+    .user-pill {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 24px;
         padding: 6px 16px;
         font-size: 0.82rem;
         color: #ffffff;
@@ -106,18 +119,20 @@ st.markdown("""
         gap: 8px;
     }
 
-    /* OneCognizant Card Aesthetic */
+    /* ==========================================================================
+       OneCognizant Elevation Cards
+       ========================================================================== */
     .cognizant-card {
         background-color: #ffffff;
         border: 1px solid #E2E8F0;
         border-radius: 10px;
-        padding: 20px;
+        padding: 20px 22px;
         margin-bottom: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 72, 0.04);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 72, 0.04);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .cognizant-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 72, 0.08);
+        box-shadow: 0 6px 16px rgba(0, 0, 72, 0.08);
     }
     .card-accent-navy {
         border-top: 4px solid #000048;
@@ -129,55 +144,31 @@ st.markdown("""
         border-top: 4px solid #00A3E0;
     }
     .card-accent-green {
-        border-top: 4px solid #00875A;
+        border-top: 4px solid #2B8A3E;
+    }
+    .card-accent-red {
+        border-top: 4px solid #C92A2A;
     }
 
-    /* Metric Tiles */
+    /* KPI Metrics Hierarchy */
     .metric-value {
-        font-size: 1.8rem;
+        font-size: 1.85rem;
         font-weight: 700;
         color: #000048;
-        line-height: 1.2;
+        line-height: 1.15;
     }
     .metric-label {
-        font-size: 0.82rem;
+        font-size: 0.80rem;
         font-weight: 600;
         color: #5A6B82;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        margin-bottom: 4px;
     }
 
-    /* Badges & Tags */
-    .badge-pill {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 14px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-    }
-    .badge-critical {
-        background-color: #FFEAEA;
-        color: #C92A2A;
-        border: 1px solid #FFA8A8;
-    }
-    .badge-high {
-        background-color: #FFF4E5;
-        color: #D9480F;
-        border: 1px solid #FFC078;
-    }
-    .badge-standard {
-        background-color: #EBFBEE;
-        color: #2B8A3E;
-        border: 1px solid #8CE99A;
-    }
-    .badge-geo {
-        background-color: #E7F5FF;
-        color: #1864AB;
-        border: 1px solid #A5D8FF;
-    }
-
-    /* Sidebar Styling */
+    /* ==========================================================================
+       Sidebar Theming
+       ========================================================================== */
     section[data-testid="stSidebar"] {
         background-color: #000038 !important;
         color: #ffffff !important;
@@ -196,38 +187,38 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
     }
 
-    /* Primary Buttons */
+    /* Button Primary Styling */
     .stButton>button {
         background-color: #0033A0 !important;
         color: #ffffff !important;
         font-weight: 600 !important;
         border-radius: 6px !important;
         border: none !important;
-        padding: 0.45rem 1.2rem !important;
+        padding: 0.48rem 1.4rem !important;
         transition: all 0.2s ease !important;
     }
     .stButton>button:hover {
         background-color: #002277 !important;
-        box-shadow: 0 4px 10px rgba(0, 51, 160, 0.25) !important;
+        box-shadow: 0 4px 12px rgba(0, 51, 160, 0.3) !important;
     }
 
-    /* Tabs Bar */
+    /* Tab Indicators */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+        gap: 6px;
         background-color: transparent;
         border-bottom: 2px solid #E2E8F0;
     }
     .stTabs [data-baseweb="tab"] {
-        height: 48px;
+        height: 46px;
         padding: 0 16px;
         font-weight: 600;
-        font-size: 0.88rem;
+        font-size: 0.86rem;
         color: #5A6B82;
         border-radius: 6px 6px 0 0;
     }
     .stTabs [aria-selected="true"] {
         color: #0033A0 !important;
-        border-bottom: 3px solid #0033A0 !important;
+        border-bottom: 3.5px solid #0033A0 !important;
         background-color: rgba(0, 51, 160, 0.04) !important;
     }
 </style>
@@ -235,7 +226,7 @@ st.markdown("""
 
 
 # -----------------------------------------------------------------------------
-# System Initialization (Cached)
+# System Initialization (Cached Singletons)
 # -----------------------------------------------------------------------------
 @st.cache_resource
 def initialize_system() -> tuple[
@@ -274,23 +265,23 @@ graph_engine, trusted_kernel, planner, rec_engine, rollback_ctrl, missing_gen, e
 impact_agent = ChangeImpactAgent(graph_engine)
 
 # -----------------------------------------------------------------------------
-# Top Navigation Header (OneCognizant Brand Bar)
+# Top Persistent Governance Banner
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div class="one-cognizant-header">
     <div>
         <div class="brand-title">
-            <span style="background-color: #00A3E0; color: #000048; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: 800;">ONE</span>
-            Cognizant <span style="font-weight: 300; opacity: 0.85;">| AI Evergreen™ Control Plane</span>
+            <span style="background-color: #00A3E0; color: #000048; padding: 3px 8px; border-radius: 5px; font-size: 0.82rem; font-weight: 800;">ONE</span>
+            Cognizant <span style="font-weight: 300; opacity: 0.9;">| AI Evergreen™ Control Plane</span>
         </div>
         <div class="brand-subtitle">
-            Enterprise Continuous Qualification, Drift Governance & Invariant Safety for Autonomous AI Estates
+            Enterprise Continuous Qualification, Drift Governance & Non-Bypassable Invariant Safety for Autonomous AI Estates
         </div>
     </div>
-    <div class="user-badge">
-        <span style="font-size: 1rem;">👤</span>
+    <div class="user-pill">
+        <span style="font-size: 0.95rem;">👤</span>
         <span><b>Puneet Saxena</b> (608197)</span>
-        <span style="opacity: 0.6;">|</span>
+        <span style="opacity: 0.5;">|</span>
         <span style="color: #00C2DE; font-weight: 600;">eu-north-1 (Stockholm)</span>
     </div>
 </div>
@@ -303,9 +294,9 @@ st.markdown("""
 with st.sidebar:
     st.markdown("### 🛡️ Kernel Invariants")
     st.markdown("""
-    <div style="background: rgba(0, 163, 224, 0.1); border: 1px solid #00A3E0; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+    <div style="background: rgba(0, 163, 224, 0.12); border: 1px solid #00A3E0; border-radius: 8px; padding: 12px; margin-bottom: 14px;">
         <div style="color: #00C2DE; font-weight: 700; font-size: 0.85rem;">TRUSTED KERNEL: ACTIVE</div>
-        <div style="color: #E2E8F0; font-size: 0.75rem; margin-top: 4px;">Fail-Closed Boundary (Non-Bypassable)</div>
+        <div style="color: #E2E8F0; font-size: 0.74rem; margin-top: 3px;">Fail-Closed Boundary (Non-Bypassable)</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -313,7 +304,7 @@ with st.sidebar:
     st.caption("✓ 100% Deterministic Decision Logic")
     st.caption("✓ Cryptographic SHA-256 Audit Sealing")
     st.caption("✓ Zero Authority for Agents to Promote")
-    st.caption("✓ Invariant Latency & Cost Ceilings")
+    st.caption("✓ Enforced Latency & Cost Ceilings")
 
     st.divider()
     st.markdown("### 🔌 Active Provider")
@@ -341,38 +332,38 @@ with st.sidebar:
 
 
 # -----------------------------------------------------------------------------
-# Primary Tab Navigation (OneCognizant Workplace Style)
+# Primary Stepped Lifecycle Navigation (7 Logical Modules)
 # -----------------------------------------------------------------------------
 tab_connect, tab_estate, tab_event, tab_eval, tab_gate, tab_rollback, tab_missing = st.tabs([
-    "🔌 Enterprise AI Connectors",
-    "🗺️ AI Estate Portfolio",
-    "📡 Change Ingestion & Blast Radius",
-    "🧪 Differential Qualification",
-    "✍️ Human Approval Gate",
-    "🚀 Canary & Auto-Rollback",
-    "🧩 Missing-Test Discovery",
+    "01 🔌 Connect",
+    "02 🗺️ Discover",
+    "03 📡 Ingest",
+    "04 🧪 Qualify",
+    "05 ✍️ Gate",
+    "06 🚀 Canary",
+    "07 🧩 Expand",
 ])
 
 
 # =============================================================================
-# TAB 1: Enterprise AI Connectors & Multi-Geo Landscape
+# MODULE 1: Enterprise AI Estate Connectors & Multi-Geo Sovereignty
 # =============================================================================
 with tab_connect:
     st.markdown("""
     <div class="cognizant-card card-accent-navy">
-        <h4 style="margin: 0; color: #000048;">Enterprise AI Estate Connectivity Architecture</h4>
+        <h4 style="margin: 0; color: #000048;">Enterprise AI Estate Connectivity & Multi-Geo Governance</h4>
         <p style="color: #5A6B82; font-size: 0.88rem; margin-top: 6px;">
-            How AI Evergreen non-invasively discovers, connects, and enforces governance across customer multi-cloud estates without altering application code.
+            How AI Evergreen non-invasively connects, discovers, and enforces governance across customer multi-cloud estates without refactoring application code.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    c_left, c_right = st.columns([3, 2])
+    col_c1, col_c2 = st.columns([3, 2])
 
-    with c_left:
-        st.markdown("##### 1. Select Customer Landscape Connector")
+    with col_c1:
+        st.markdown("##### 1. Select Customer Landscape Foundation")
         platform_choice = st.selectbox(
-            "Enterprise AI Foundation",
+            "Enterprise AI Platform",
             [
                 "AWS Bedrock & SageMaker (Cross-Account IAM AssumeRole)",
                 "Microsoft Azure AI Foundry (Tenant ID & Service Principal)",
@@ -384,11 +375,11 @@ with tab_connect:
             index=0,
         )
 
-        col_p1, col_p2 = st.columns(2)
-        with col_p1:
+        sub_col1, sub_col2 = st.columns(2)
+        with sub_col1:
             st.text_input("Customer Cloud Account / Tenant ID", "339712728310 (CloudBoost Production)")
             st.text_input("Discovery IAM Role ARN", "arn:aws:iam::339712728310:role/Cognizant-AIEvergreen-Sync")
-        with col_p2:
+        with sub_col2:
             st.text_input("VPC / PrivateLink Endpoint", "vpce-04918f6291a.bedrock.eu-north-1.vpce.amazonaws.com")
             st.text_input("KMS Key Alias / Secret Reference", "alias/cognizant-ai-governance-master")
 
@@ -396,87 +387,87 @@ with tab_connect:
         geo_zone = st.radio(
             "Primary Workload Residency",
             [
-                "Nordics & EU — eu-north-1 Stockholm (CloudBoost Host | GDPR & EU AI Act High-Risk Compliant)",
-                "Europe Central — eu-central-1 Frankfurt (GDPR Article 22 & BaFin Banking Cloud)",
-                "Americas — us-east-1 N. Virginia (HIPAA, SOC 2 Type II, FedRAMP Moderate)",
-                "Asia-Pacific — ap-south-1 Mumbai (RBI Cyber Framework & India DPDP Act 2023)",
+                "🇸🇪 Nordics & EU — eu-north-1 Stockholm (CloudBoost Host | GDPR & EU AI Act High-Risk Compliant)",
+                "🇩🇪 Europe Central — eu-central-1 Frankfurt (GDPR Article 22 & BaFin Banking Cloud)",
+                "🇺🇸 Americas — us-east-1 N. Virginia (HIPAA, SOC 2 Type II, FedRAMP Moderate)",
+                "🇮🇳 Asia-Pacific — ap-south-1 Mumbai (RBI Cyber Framework & India DPDP Act 2023)",
             ],
             index=0,
         )
 
-    with c_right:
+    with col_c2:
         st.markdown("##### Enterprise Integration Mechanics")
         st.markdown("""
         <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; font-size: 0.82rem; line-height: 1.6;">
-            <b>Integration Pillars:</b><br/>
-            • <b>Zero Credential Storage:</b> Uses ambient IAM AssumeRole / Workload Identity Federation.<br/>
-            • <b>Automated Discovery:</b> Queries model registries and prompt repositories periodically via read-only APIs.<br/>
-            • <b>Shift-Left CI/CD Gate:</b> GitHub Actions / GitLab CI calls <code>POST /api/v1/events</code> to enforce automated blocking on regression.<br/>
-            • <b>Data Residency Guarantee:</b> Test qualification runs inside the client VPC; zero customer prompts or embeddings leave the region.
+            <b>Core Integration Pillars:</b><br/>
+            • <b>Zero Static Keys:</b> Operates via ambient IAM AssumeRole / Workload Identity.<br/>
+            • <b>Continuous Discovery:</b> Queries model catalogs & prompt repos periodically via read-only APIs.<br/>
+            • <b>Shift-Left CI/CD Gate:</b> GitHub Actions / Azure DevOps calls <code>POST /api/v1/events</code> to fail pull requests on regression.<br/>
+            • <b>Air-Gapped Data Residency:</b> Qualification test suites execute inside the customer VPC; zero customer prompts or embeddings exit the region.
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("##### One-Click Live Estate Discovery")
+        st.markdown("##### Automated Estate Discovery")
         if st.button("🚀 Run Automated Estate Discovery Scan", type="primary", use_container_width=True):
-            with st.spinner("Connecting to enterprise model catalog and building dependency graph..."):
+            with st.spinner("Connecting to enterprise model catalog and constructing dependency graph..."):
                 st.success("✅ Handshake Verified: IAM AssumeRole accepted by `339712728310`.")
                 st.info("📦 Synchronized: 12 Applications, 5 Specialized Agents, 4 Bedrock Base Models, 20 Graph Nodes.")
-                st.caption(f"Estate timestamp sealed at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
+                st.caption(f"Estate snapshot cryptographically timestamped at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
 
 
 # =============================================================================
-# TAB 2: Enterprise AI Estate Portfolio
+# MODULE 2: AI Estate Portfolio & Dependency Navigator
 # =============================================================================
 with tab_estate:
     counts = estate["metadata"]["counts"]
 
-    # Top Metric Banner
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.markdown("""
+    # Top Metric Banner (OneCognizant App Tiles)
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.markdown(f"""
         <div class="cognizant-card card-accent-navy">
             <div class="metric-label">Registered AI Workloads</div>
-            <div class="metric-value">""" + str(counts["applications"]) + """</div>
-            <div style="font-size: 0.78rem; color: #00875A; font-weight: 600; margin-top: 4px;">100% Graph-Mapped</div>
+            <div class="metric-value">{counts['applications']}</div>
+            <div style="font-size: 0.76rem; color: #00875A; font-weight: 600; margin-top: 4px;">100% Graph-Mapped</div>
         </div>
         """, unsafe_allow_html=True)
-    with col2:
-        st.markdown("""
+    with m2:
+        st.markdown(f"""
         <div class="cognizant-card card-accent-blue">
-            <div class="metric-label">Autonomous Agents</div>
-            <div class="metric-value">""" + str(counts["agents"]) + """</div>
-            <div style="font-size: 0.78rem; color: #0033A0; font-weight: 600; margin-top: 4px;">LangGraph & Bedrock</div>
+            <div class="metric-label">Specialized Agents</div>
+            <div class="metric-value">{counts['agents']}</div>
+            <div style="font-size: 0.76rem; color: #0033A0; font-weight: 600; margin-top: 4px;">LangGraph & Bedrock</div>
         </div>
         """, unsafe_allow_html=True)
-    with col3:
-        st.markdown("""
+    with m3:
+        st.markdown(f"""
         <div class="cognizant-card card-accent-cyan">
             <div class="metric-label">Active Test Assets</div>
-            <div class="metric-value">""" + str(counts["tests"]) + """</div>
-            <div style="font-size: 0.78rem; color: #00A3E0; font-weight: 600; margin-top: 4px;">Differential Invariants</div>
+            <div class="metric-value">{counts['tests']}</div>
+            <div style="font-size: 0.76rem; color: #00A3E0; font-weight: 600; margin-top: 4px;">Differential Invariants</div>
         </div>
         """, unsafe_allow_html=True)
-    with col4:
-        st.markdown("""
+    with m4:
+        st.markdown(f"""
         <div class="cognizant-card card-accent-green">
             <div class="metric-label">Seeded Defect Guards</div>
-            <div class="metric-value">""" + str(counts["seeded_defects"]) + """</div>
-            <div style="font-size: 0.78rem; color: #00875A; font-weight: 600; margin-top: 4px;">100% Fail-Closed Recall</div>
+            <div class="metric-value">{counts['seeded_defects']}</div>
+            <div style="font-size: 0.76rem; color: #00875A; font-weight: 600; margin-top: 4px;">100% Recall Interception</div>
         </div>
         """, unsafe_allow_html=True)
 
     # Filter Bar
-    f_col1, f_col2 = st.columns([2, 1])
-    with f_col1:
+    f1, f2 = st.columns([2, 1])
+    with f1:
         filter_tier = st.multiselect(
-            "Filter Criticality Tier",
+            "Filter by Criticality Tier",
             ["CRITICAL_TIER_1", "HIGH_TIER_2", "STANDARD_TIER_3", "LOW_TIER_4"],
             default=["CRITICAL_TIER_1", "HIGH_TIER_2", "STANDARD_TIER_3", "LOW_TIER_4"],
         )
-    with f_col2:
-        search_query = st.text_input("Search Application or Owner", placeholder="e.g., refund, claims, medical")
+    with f2:
+        search_query = st.text_input("Filter by Workload Name or Owner", placeholder="e.g., refund, claims, medical")
 
-    # Table rendering
+    # Table Rendering
     apps_data = []
     for a in estate["applications"]:
         if a["criticality"] in filter_tier and (
@@ -485,30 +476,30 @@ with tab_estate:
             or search_query.lower() in a["owner"].lower()
         ):
             apps_data.append({
-                    "Workload ID": a["application_id"],
-                    "Application Name": a["name"],
-                    "Risk Criticality": a["criticality"],
-                    "Business Process": a["business_process_id"],
-                    "Owner": a["owner"],
-                    "Active Foundation Model": a["active_model_id"],
-                    "Latency SLA": f"{a['contract']['latency_threshold_ms']} ms",
-                    "Cost Ceiling": f"${a['contract']['token_cost_ceiling_usd']:.4f}",
-                    "Requires Human Gate": "Yes (Mandatory)" if a["contract"]["human_approval_requirement"] else "Canary Auto",
-                })
+                "Workload ID": a["application_id"],
+                "Application Name": a["name"],
+                "Criticality Tier": a["criticality"],
+                "Business Process": a["business_process_id"],
+                "Business Owner": a["owner"],
+                "Active Foundation Model": a["active_model_id"],
+                "Latency SLA": f"{a['contract']['latency_threshold_ms']} ms",
+                "Cost Ceiling": f"${a['contract']['token_cost_ceiling_usd']:.4f}",
+                "Requires Human Gate": "Yes (Mandatory)" if a["contract"]["human_approval_requirement"] else "Canary Auto",
+            })
 
-    st.markdown("##### Catalog of Discovered Enterprise AI Workloads")
+    st.markdown("##### Discovered Enterprise AI Workload Catalog")
     st.dataframe(apps_data, use_container_width=True)
 
 
 # =============================================================================
-# TAB 3: Change Ingestion & Blast Radius
+# MODULE 3: Change Signal Ingestion & Deterministic Blast Radius
 # =============================================================================
 with tab_event:
     st.markdown("""
     <div class="cognizant-card card-accent-blue">
-        <h4 style="margin: 0; color: #000048;">Model Evolution & Dependency Ingestion</h4>
+        <h4 style="margin: 0; color: #000048;">Model Evolution & Deterministic Blast Radius</h4>
         <p style="color: #5A6B82; font-size: 0.88rem; margin-top: 6px;">
-            Simulate a model deprecation, provider upgrade, or prompt version change to deterministically trace blast radius through the dependency graph.
+            Simulate or ingest a model deprecation, provider upgrade, or prompt version change to deterministically trace blast radius through the dependency graph.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -531,7 +522,7 @@ with tab_event:
             index=0,
         )
         target_model = st.selectbox(
-            "Upstream Component / Model Being Updated",
+            "Upstream Component / Model Being Evolved",
             [m["model_id"] for m in estate["models"]],
             index=0,
         )
@@ -546,7 +537,7 @@ with tab_event:
         </div>
         """, unsafe_allow_html=True)
 
-    if st.button("Compute Blast Radius & Downstream Dependency Map", type="primary"):
+    if st.button("Compute Blast Radius & Dependency Traversal", type="primary"):
         event = ChangeEvent(
             event_id=f"evt-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
             source=event_source,
@@ -565,9 +556,9 @@ with tab_event:
         st.success(f"Deterministic Blast Radius: {hypothesis.affected_count} enterprise applications impacted.")
 
         c1, c2, c3 = st.columns(3)
-        c1.metric("Directly Impacted Applications", hypothesis.affected_count)
+        c1.metric("Impacted Applications", hypothesis.affected_count)
         c2.metric("Highest Risk Criticality", hypothesis.highest_risk_tier.value)
-        c3.metric("Graph Path Confidence", f"{hypothesis.confidence_score * 100:.0f}%")
+        c3.metric("Graph Traversal Confidence", f"{hypothesis.confidence_score * 100:.0f}%")
 
         st.markdown("##### Directly Impacted Downstream Workloads")
         impacted_summary = [
@@ -585,7 +576,7 @@ with tab_event:
 
 
 # =============================================================================
-# TAB 4: Differential Qualification & Seeded Defect Injection
+# MODULE 4: Differential Qualification & Seeded Defect Injection
 # =============================================================================
 with tab_eval:
     st.markdown("""
@@ -598,7 +589,7 @@ with tab_eval:
     """, unsafe_allow_html=True)
 
     if "current_hypothesis" not in st.session_state:
-        st.info("👉 Please compute blast radius in Tab 3 ('Change Ingestion & Blast Radius') first.")
+        st.info("👉 Please compute blast radius in Tab '03 Ingest' first.")
     else:
         hyp = st.session_state["current_hypothesis"]
         selected_app_id = st.selectbox(
@@ -613,9 +604,9 @@ with tab_eval:
 
         st.markdown(f"**Adaptive Regression Plan:** `{len(workload_tests)} tests scoped` ({plan.critical_tests_included_count} critical invariant tests guaranteed).")
 
-        # Seeded Defect Simulator Options
+        # Seeded Defect Injection Options
         st.markdown("##### Real-World Seeded Defect Injection (12 Categories)")
-        inject_defect = st.checkbox("Inject Seeded Regression to Test Fail-Closed Gate", value=True)
+        inject_defect = st.checkbox("Inject Seeded Regression to Test Fail-Closed Protection", value=True)
         defect_type = st.selectbox(
             "Select Defect Pattern to Simulate in Candidate Model",
             [
@@ -702,7 +693,7 @@ with tab_eval:
 
 
 # =============================================================================
-# TAB 5: Human Approval Gate & Cryptographic Sealing
+# MODULE 5: Tamper-Evident Digital Approval Gate
 # =============================================================================
 with tab_gate:
     st.markdown("""
@@ -715,7 +706,7 @@ with tab_gate:
     """, unsafe_allow_html=True)
 
     if "current_recommendation" not in st.session_state:
-        st.info("👉 Please run qualification in Tab 4 first to generate an evaluation recommendation.")
+        st.info("👉 Please run qualification in Tab '04 Qualify' first to generate an evaluation recommendation.")
     else:
         rec = st.session_state["current_recommendation"]
         pkg = st.session_state["current_evidence_pkg"]
@@ -728,7 +719,7 @@ with tab_gate:
         if rec.treatment == TreatmentOutcome.BLOCK:
             st.error("🚫 Inviolable Security Constraint: Promotion is BLOCKED by the Trusted Kernel. Human sign-off cannot override a deterministic invariant failure.")
         else:
-            st.markdown("#### Digital Approval Form")
+            st.markdown("#### Digital Approval Sign-Off Form")
             with st.form("onecognizant_approval_form"):
                 approver_name = st.text_input("Approver Corporate Email", "puneet.saxena2@cognizant.com")
                 approver_role = st.selectbox(
@@ -769,7 +760,7 @@ with tab_gate:
 
 
 # =============================================================================
-# TAB 6: Canary Telemetry & Auto-Rollback Engine
+# MODULE 6: Live Canary Telemetry & Auto-Rollback Engine
 # =============================================================================
 with tab_rollback:
     st.markdown("""
@@ -825,7 +816,7 @@ with tab_rollback:
 
 
 # =============================================================================
-# TAB 7: Autonomous Missing-Test Discovery
+# MODULE 7: Autonomous Missing-Test Discovery
 # =============================================================================
 with tab_missing:
     st.markdown("""
