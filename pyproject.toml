@@ -91,6 +91,14 @@ max-complexity = 20
 "src/ai_evergreen/discovery/**" = [
     "S311", # deterministic synthetic estate generator
 ]
+"scripts/**" = [
+    "S310", # utility script URL operations
+    "S607", # utility script git invocation
+    "S603", # utility script subprocess execution
+]
+"dashboard/**" = [
+    "S104", # dashboard binding
+]
 
 [tool.mypy]
 python_version = "3.12"
@@ -102,3 +110,20 @@ warn_return_any = true
 warn_unused_ignores = true
 no_implicit_optional = true
 show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "networkx",
+    "networkx.*",
+    "streamlit",
+    "streamlit.*",
+    "pytest",
+    "pytest.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false

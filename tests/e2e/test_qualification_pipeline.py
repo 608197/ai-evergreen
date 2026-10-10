@@ -37,14 +37,17 @@ from ai_evergreen.rollback.controller import RollbackController
 from ai_evergreen.trusted_kernel.kernel import TrustedKernel
 
 
+from typing import Any, cast
+
+
 @pytest.fixture
-def estate_data() -> dict:
+def estate_data() -> dict[str, Any]:
     estate_file = Path("data/synthetic/estate.json")
     with open(estate_file, "r", encoding="utf-8") as f:
-        return json.load(f)
+        return cast(dict[str, Any], json.load(f))
 
 
-def test_full_end_to_end_qualification_and_governance_lifecycle(estate_data: dict) -> None:
+def test_full_end_to_end_qualification_and_governance_lifecycle(estate_data: dict[str, Any]) -> None:
     """Execute complete deterministic pipeline end-to-end."""
     # 1. Initialize Core Engine Components
     graph = DependencyGraphEngine()

@@ -14,12 +14,15 @@ from ai_evergreen.common.schemas import (
 from ai_evergreen.regression.planner import AdaptiveRegressionPlanner
 
 
+from typing import Any, cast
+
+
 @pytest.fixture
-def test_catalog() -> list[dict]:
+def test_catalog() -> list[dict[str, Any]]:
     estate_file = Path("data/synthetic/estate.json")
     with open(estate_file, "r", encoding="utf-8") as f:
         estate_data = json.load(f)
-    return estate_data["tests"]
+    return cast(list[dict[str, Any]], estate_data["tests"])
 
 
 @pytest.fixture
@@ -36,7 +39,7 @@ def affected_workloads() -> list[WorkloadProfile]:
 
 
 def test_planner_includes_100_percent_of_critical_tests(
-    test_catalog: list[dict], affected_workloads: list[WorkloadProfile]
+    test_catalog: list[dict[str, Any]], affected_workloads: list[WorkloadProfile]
 ) -> None:
     """Inviolable rule: All critical invariant tests for affected apps must be included."""
     planner = AdaptiveRegressionPlanner()
@@ -66,7 +69,7 @@ def test_planner_includes_100_percent_of_critical_tests(
 
 
 def test_planner_excludes_unaffected_workloads_with_reason(
-    test_catalog: list[dict], affected_workloads: list[WorkloadProfile]
+    test_catalog: list[dict[str, Any]], affected_workloads: list[WorkloadProfile]
 ) -> None:
     """Out-of-scope tests must be excluded with OUT_OF_AFFECTED_SCOPE reason code."""
     planner = AdaptiveRegressionPlanner()
@@ -88,4 +91,4 @@ def test_planner_excludes_unaffected_workloads_with_reason(
     for item in medical_tests:
         assert item.is_included is False
         assert item.exclusion_reason_code == ExclusionReasonCode.OUT_OF_AFFECTED_SCOPE
-        assert "outside the calculated blast radius" in item.exclusion_rationale
+        assert item.exclusion_rationale is not None and "outside the calculated blast radius" in item.exclusion_rationale

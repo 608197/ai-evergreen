@@ -9,22 +9,20 @@ Streamlit control console providing:
 6. Live canary telemetry monitoring and automated deterministic rollback
 """
 
-from datetime import datetime, timezone
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import streamlit as st
 
-from ai_evergreen.common.exceptions import AIEvergreenError, EvidenceTamperedError, UnauthorizedPromotionError
+from ai_evergreen.common.exceptions import AIEvergreenError
 from ai_evergreen.common.schemas import (
     ApprovalRecord,
     ApprovalStatus,
     ChangeEvent,
     ChangeType,
     EvaluationVerdict,
-    RiskTier,
-    TestSelectionItem,
     TreatmentOutcome,
     WorkloadProfile,
 )
