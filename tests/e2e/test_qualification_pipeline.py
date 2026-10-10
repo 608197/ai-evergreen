@@ -13,6 +13,7 @@ Tests the full 6-phase loop:
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 
@@ -37,14 +38,11 @@ from ai_evergreen.rollback.controller import RollbackController
 from ai_evergreen.trusted_kernel.kernel import TrustedKernel
 
 
-from typing import Any, cast
-
-
 @pytest.fixture
 def estate_data() -> dict[str, Any]:
     estate_file = Path("data/synthetic/estate.json")
     with open(estate_file, "r", encoding="utf-8") as f:
-        return cast(dict[str, Any], json.load(f))
+        return cast("dict[str, Any]", json.load(f))
 
 
 def test_full_end_to_end_qualification_and_governance_lifecycle(estate_data: dict[str, Any]) -> None:

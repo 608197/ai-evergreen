@@ -6,6 +6,7 @@ Critical Defect Detection Recall = 100% (zero tolerance for missed breakages).
 
 import json
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 
@@ -19,14 +20,11 @@ from ai_evergreen.providers.simulator_adapter import SimulatorAdapter
 from ai_evergreen.trusted_kernel.kernel import TrustedKernel
 
 
-from typing import Any, cast
-
-
 @pytest.fixture
 def estate_data() -> dict[str, Any]:
     estate_file = Path("data/synthetic/estate.json")
     with open(estate_file, "r", encoding="utf-8") as f:
-        return cast(dict[str, Any], json.load(f))
+        return cast("dict[str, Any]", json.load(f))
 
 
 @pytest.fixture

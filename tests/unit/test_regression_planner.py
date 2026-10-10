@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 
@@ -14,15 +15,12 @@ from ai_evergreen.common.schemas import (
 from ai_evergreen.regression.planner import AdaptiveRegressionPlanner
 
 
-from typing import Any, cast
-
-
 @pytest.fixture
 def test_catalog() -> list[dict[str, Any]]:
     estate_file = Path("data/synthetic/estate.json")
     with open(estate_file, "r", encoding="utf-8") as f:
         estate_data = json.load(f)
-    return cast(list[dict[str, Any]], estate_data["tests"])
+    return cast("list[dict[str, Any]]", estate_data["tests"])
 
 
 @pytest.fixture
