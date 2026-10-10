@@ -47,7 +47,7 @@ services:
     volumes:
       - ./data:/app/data:ro
       - ./evidence_store:/app/evidence_store:ro
-    command: ["streamlit", "run", "src/ai_evergreen/dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    command: ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
     depends_on:
       api:
         condition: service_healthy

@@ -104,6 +104,7 @@ app.add_middleware(
 )
 
 
+@app.get("/health")
 @app.get("/api/v1/health")
 def get_health() -> dict[str, Any]:
     """Health check endpoint."""

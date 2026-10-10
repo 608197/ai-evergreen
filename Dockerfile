@@ -52,6 +52,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY pyproject.toml README.md ./
 COPY src/ ./src/
 COPY docs/ ./docs/
+COPY dashboard/ ./dashboard/
+COPY data/ ./data/
 
 # Create runtime directories with non-root ownership
 RUN mkdir -p /app/data /app/evidence_store && \
