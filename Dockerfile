@@ -64,6 +64,6 @@ USER appuser
 EXPOSE 8000 8501
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD curl -f http://localhost:8000/health || curl -f http://localhost:8501/_stcore/health || exit 1
 
 CMD ["uvicorn", "ai_evergreen.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -48,6 +48,12 @@ services:
       - ./data:/app/data:ro
       - ./evidence_store:/app/evidence_store:ro
     command: ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
     depends_on:
       api:
         condition: service_healthy
