@@ -11,7 +11,7 @@ services:
     container_name: ai-evergreen-api
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "${API_PORT:-8001}:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - METADATA_DB_URL=sqlite:////app/data/metadata.db
@@ -37,7 +37,7 @@ services:
     container_name: ai-evergreen-dashboard
     restart: unless-stopped
     ports:
-      - "8501:8501"
+      - "${DASHBOARD_PORT:-8501}:8501"
     environment:
       - PYTHONUNBUFFERED=1
       - API_BASE_URL=http://api:8000
