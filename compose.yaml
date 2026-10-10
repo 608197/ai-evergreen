@@ -1,0 +1,57 @@
+# ==============================================================================
+# AI Evergreen — Docker Compose Specification
+# Runs the API Control Plane and Streamlit Enterprise Console
+# ==============================================================================
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-evergreen-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - METADATA_DB_URL=sqlite:////app/data/metadata.db
+      - EVIDENCE_LOCAL_PATH=/app/evidence_store
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/app/data
+      - ./evidence_store:/app/evidence_store
+    command: ["uvicorn", "ai_evergreen.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-evergreen-dashboard
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_BASE_URL=http://api:8000
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/app/data:ro
+      - ./evidence_store:/app/evidence_store:ro
+    command: ["streamlit", "run", "src/ai_evergreen/dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  data:
+  evidence_store:

@@ -1,0 +1,56 @@
+# Secrets and environment
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+uv.lock.bak
+
+# Node (if a UI/tooling package is added)
+node_modules/
+
+# Local data / evidence outputs — never commit synthetic run artifacts
+data/generated/
+evidence_store/
+*.db
+*.sqlite
+*.sqlite3
+
+# Graph store local files
+neo4j_data/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.log
+pip-wheel-metadata/

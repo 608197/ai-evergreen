@@ -1,0 +1,49 @@
+# Codex CLI project configuration — AI Evergreen (Feasibility Spike)
+# This file controls HOW Codex runs. Project conventions/boundaries live in
+# AGENTS.md instead — do not duplicate behavior rules here.
+
+# ---------------------------------------------------------------------------
+# Model
+# ---------------------------------------------------------------------------
+model = "gpt-5.1-codex"          # adjust to the Codex-family model you have access to
+model_reasoning_effort = "high"   # this is an architecture-heavy, multi-component build
+
+# ---------------------------------------------------------------------------
+# Sandbox & approvals
+# ---------------------------------------------------------------------------
+# Default posture: agent can read/write inside the repo, cannot reach the
+# network unless a task explicitly requires it (e.g. installing a locked
+# package, calling a provider API during an approved test run).
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"    # ask before anything outside workspace-write
+
+[sandbox_workspace_write]
+network_access = false            # flip to true only for the session/task that needs it
+exclude_tmpdir_env_var = false
+exclude_slash_tmp = false
+
+# ---------------------------------------------------------------------------
+# Per-folder overrides (optional — uncomment if you want stricter defaults
+# whenever Codex is invoked with its cwd inside these paths)
+# ---------------------------------------------------------------------------
+# [profiles.trusted_kernel]
+# sandbox_mode = "read-only"
+# approval_policy = "untrusted"
+#
+# [profiles.providers]
+# sandbox_mode = "workspace-write"
+# [profiles.providers.sandbox_workspace_write]
+# network_access = true   # provider adapters legitimately need outbound calls
+
+# ---------------------------------------------------------------------------
+# MCP servers (add as needed — none wired by default for the spike)
+# ---------------------------------------------------------------------------
+# [mcp_servers.example]
+# command = "npx"
+# args = ["-y", "@example/mcp-server"]
+
+# ---------------------------------------------------------------------------
+# Notify / logging
+# ---------------------------------------------------------------------------
+[history]
+persistence = "save-all"          # keep full session history for auditability

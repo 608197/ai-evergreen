@@ -1,0 +1,104 @@
+[project]
+name = "ai-evergreen"
+version = "0.1.0"
+description = "AI Evergreen — Enterprise AI Qualification Control Plane"
+requires-python = ">=3.12"
+readme = "README.md"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "boto3>=1.34",
+    "networkx>=3.3",
+    "sqlalchemy>=2.0",
+    "jsonschema>=4.22",
+    "opentelemetry-sdk>=1.26",
+    "opentelemetry-exporter-otlp>=1.26",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=5.0",
+    "httpx>=0.27",
+    "hypothesis>=6.108",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "pip-audit>=2.7",
+]
+dashboard = [
+    "streamlit>=1.39",
+]
+graph-neo4j = [
+    "neo4j>=5.23",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_evergreen"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["src/ai_evergreen"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import ordering)
+    "B",    # flake8-bugbear (design & subtle bugs)
+    "S",    # flake8-bandit (security / SAST)
+    "TCH",  # flake8-type-checking
+    "C90",  # mccabe cyclomatic complexity
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "E501", # line length handled by formatter
+    "S104", # possible binding to all network interfaces (needed for container/uvicorn 0.0.0.0)
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 20
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101", # allow assert in tests
+    "S105", # allow hardcoded mock tokens in tests
+    "S106", # allow mock passwords in tests
+    "S311", # allow pseudo-random in tests
+]
+"src/ai_evergreen/discovery/**" = [
+    "S311", # deterministic synthetic estate generator
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+no_implicit_optional = true
+show_error_codes = true

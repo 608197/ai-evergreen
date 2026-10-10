@@ -1,0 +1,2463 @@
+{
+  "metadata": {
+    "generator": "AI Evergreen Synthetic Estate Generator",
+    "generated_at": "2026-10-10T05:45:09.133817+00:00",
+    "seed": 20261010,
+    "counts": {
+      "applications": 12,
+      "agents": 5,
+      "models": 3,
+      "tests": 120,
+      "incidents": 10,
+      "critical_invariants": 32,
+      "seeded_defects": 12
+    }
+  },
+  "models": [
+    {
+      "model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "provider": "aws_bedrock",
+      "name": "Claude 3 Haiku",
+      "status": "active_baseline",
+      "context_window": 200000,
+      "cost_per_1k_input_usd": 0.00025,
+      "cost_per_1k_output_usd": 0.00125
+    },
+    {
+      "model_id": "anthropic.claude-3-5-haiku-20241022-v1:0",
+      "provider": "aws_bedrock",
+      "name": "Claude 3.5 Haiku",
+      "status": "upgrade_candidate",
+      "context_window": 200000,
+      "cost_per_1k_input_usd": 0.0008,
+      "cost_per_1k_output_usd": 0.004
+    },
+    {
+      "model_id": "simulator.deterministic-v1",
+      "provider": "simulator",
+      "name": "Deterministic Reference Simulator",
+      "status": "reference",
+      "context_window": 128000,
+      "cost_per_1k_input_usd": 0.0,
+      "cost_per_1k_output_usd": 0.0
+    }
+  ],
+  "applications": [
+    {
+      "application_id": "app-refund-agent",
+      "name": "Autonomous Refund Agent",
+      "business_process_id": "bp-order-mgmt",
+      "owner": "payments@client.com",
+      "criticality": "CRITICAL",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Autonomous Refund Agent within established enterprise boundaries.",
+        "approved_model_role": "autonomous_agent",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "AutonomousRefundAgentSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "ledger_txn",
+          "verify_identity"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for CRITICAL tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for CRITICAL tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Autonomous Refund Agent.",
+        "latency_threshold_ms": 1200.0,
+        "token_cost_ceiling_usd": 0.015,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": true,
+        "critical_test_set": [
+          "test_app_refund_agent_invariant_01",
+          "test_app_refund_agent_invariant_02"
+        ],
+        "shadow_canary_requirement": true,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.005
+        },
+        "residual_risk_owner": "payments@client.com"
+      }
+    },
+    {
+      "application_id": "app-medical-triage",
+      "name": "Patient Triage Assistant",
+      "business_process_id": "bp-clinical-ops",
+      "owner": "safety@client.com",
+      "criticality": "CRITICAL",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Patient Triage Assistant within established enterprise boundaries.",
+        "approved_model_role": "autonomous_agent",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "PatientTriageAssistantSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "ledger_txn",
+          "verify_identity"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for CRITICAL tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for CRITICAL tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Patient Triage Assistant.",
+        "latency_threshold_ms": 1000.0,
+        "token_cost_ceiling_usd": 0.02,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": true,
+        "critical_test_set": [
+          "test_app_medical_triage_invariant_01",
+          "test_app_medical_triage_invariant_02"
+        ],
+        "shadow_canary_requirement": true,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.005
+        },
+        "residual_risk_owner": "safety@client.com"
+      }
+    },
+    {
+      "application_id": "app-kyc-aml-screener",
+      "name": "AML & Sanctions Screener",
+      "business_process_id": "bp-compliance",
+      "owner": "compliance@client.com",
+      "criticality": "CRITICAL",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for AML & Sanctions Screener within established enterprise boundaries.",
+        "approved_model_role": "autonomous_agent",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "AML&SanctionsScreenerSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "ledger_txn",
+          "verify_identity"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for CRITICAL tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for CRITICAL tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for AML & Sanctions Screener.",
+        "latency_threshold_ms": 1500.0,
+        "token_cost_ceiling_usd": 0.018,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": true,
+        "critical_test_set": [
+          "test_app_kyc_aml_screener_invariant_01",
+          "test_app_kyc_aml_screener_invariant_02"
+        ],
+        "shadow_canary_requirement": true,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.005
+        },
+        "residual_risk_owner": "compliance@client.com"
+      }
+    },
+    {
+      "application_id": "app-claims-adjuster",
+      "name": "Automated Claims Adjuster",
+      "business_process_id": "bp-insurance-claims",
+      "owner": "claims@client.com",
+      "criticality": "HIGH",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Automated Claims Adjuster within established enterprise boundaries.",
+        "approved_model_role": "autonomous_agent",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "AutomatedClaimsAdjusterSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for HIGH tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for HIGH tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Automated Claims Adjuster.",
+        "latency_threshold_ms": 2000.0,
+        "token_cost_ceiling_usd": 0.025,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": true,
+        "critical_test_set": [
+          "test_app_claims_adjuster_invariant_01",
+          "test_app_claims_adjuster_invariant_02"
+        ],
+        "shadow_canary_requirement": true,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "claims@client.com"
+      }
+    },
+    {
+      "application_id": "app-contract-analyzer",
+      "name": "Contract Clause Analyzer",
+      "business_process_id": "bp-legal-review",
+      "owner": "legal@client.com",
+      "criticality": "HIGH",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Contract Clause Analyzer within established enterprise boundaries.",
+        "approved_model_role": "autonomous_agent",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "ContractClauseAnalyzerSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for HIGH tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for HIGH tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Contract Clause Analyzer.",
+        "latency_threshold_ms": 3000.0,
+        "token_cost_ceiling_usd": 0.035,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": true,
+        "critical_test_set": [
+          "test_app_contract_analyzer_invariant_01",
+          "test_app_contract_analyzer_invariant_02"
+        ],
+        "shadow_canary_requirement": true,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "legal@client.com"
+      }
+    },
+    {
+      "application_id": "app-hr-benefits-bot",
+      "name": "HR Benefits Assistant",
+      "business_process_id": "bp-human-resources",
+      "owner": "hr-ops@client.com",
+      "criticality": "MEDIUM",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for HR Benefits Assistant within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "HRBenefitsAssistantSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for MEDIUM tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for MEDIUM tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for HR Benefits Assistant.",
+        "latency_threshold_ms": 1800.0,
+        "token_cost_ceiling_usd": 0.01,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_hr_benefits_bot_invariant_01",
+          "test_app_hr_benefits_bot_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "hr-ops@client.com"
+      }
+    },
+    {
+      "application_id": "app-it-service-desk",
+      "name": "IT Support Desk Helper",
+      "business_process_id": "bp-it-services",
+      "owner": "it-support@client.com",
+      "criticality": "MEDIUM",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for IT Support Desk Helper within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "ITSupportDeskHelperSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for MEDIUM tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for MEDIUM tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for IT Support Desk Helper.",
+        "latency_threshold_ms": 1200.0,
+        "token_cost_ceiling_usd": 0.008,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_it_service_desk_invariant_01",
+          "test_app_it_service_desk_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "it-support@client.com"
+      }
+    },
+    {
+      "application_id": "app-code-review-bot",
+      "name": "Pull Request Review Assistant",
+      "business_process_id": "bp-engineering",
+      "owner": "eng-ops@client.com",
+      "criticality": "MEDIUM",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Pull Request Review Assistant within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "PullRequestReviewAssistantSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for MEDIUM tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for MEDIUM tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Pull Request Review Assistant.",
+        "latency_threshold_ms": 2500.0,
+        "token_cost_ceiling_usd": 0.02,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_code_review_bot_invariant_01",
+          "test_app_code_review_bot_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "eng-ops@client.com"
+      }
+    },
+    {
+      "application_id": "app-meeting-summarizer",
+      "name": "Meeting Transcript Summarizer",
+      "business_process_id": "bp-knowledge-mgmt",
+      "owner": "collab@client.com",
+      "criticality": "LOW",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Meeting Transcript Summarizer within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "MeetingTranscriptSummarizerSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for LOW tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for LOW tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Meeting Transcript Summarizer.",
+        "latency_threshold_ms": 4000.0,
+        "token_cost_ceiling_usd": 0.012,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_meeting_summarizer_invariant_01",
+          "test_app_meeting_summarizer_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "collab@client.com"
+      }
+    },
+    {
+      "application_id": "app-marketing-copywriter",
+      "name": "Marketing Copy Drafter",
+      "business_process_id": "bp-marketing",
+      "owner": "content@client.com",
+      "criticality": "LOW",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Marketing Copy Drafter within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "MarketingCopyDrafterSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for LOW tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for LOW tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Marketing Copy Drafter.",
+        "latency_threshold_ms": 3500.0,
+        "token_cost_ceiling_usd": 0.015,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_marketing_copywriter_invariant_01",
+          "test_app_marketing_copywriter_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "content@client.com"
+      }
+    },
+    {
+      "application_id": "app-knowledge-faq",
+      "name": "Internal Knowledge Base Bot",
+      "business_process_id": "bp-knowledge-mgmt",
+      "owner": "info@client.com",
+      "criticality": "LOW",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Internal Knowledge Base Bot within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "InternalKnowledgeBaseBotSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for LOW tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for LOW tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Internal Knowledge Base Bot.",
+        "latency_threshold_ms": 2000.0,
+        "token_cost_ceiling_usd": 0.005,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_knowledge_faq_invariant_01",
+          "test_app_knowledge_faq_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "info@client.com"
+      }
+    },
+    {
+      "application_id": "app-release-notes-gen",
+      "name": "Release Notes Generator",
+      "business_process_id": "bp-product-ops",
+      "owner": "pm@client.com",
+      "criticality": "LOW",
+      "environment": "PRODUCTION",
+      "active_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+      "contract": {
+        "intended_purpose": "Automate tasks for Release Notes Generator within established enterprise boundaries.",
+        "approved_model_role": "task_executor",
+        "system_prompt_version": "v2.1.0",
+        "allowed_inputs": [
+          "user_query",
+          "context_documents",
+          "account_id"
+        ],
+        "allowed_outputs": [
+          "response",
+          "status",
+          "metadata"
+        ],
+        "required_schemas": [
+          "ReleaseNotesGeneratorSchemaV1"
+        ],
+        "allowed_tools": [
+          "db_query",
+          "knowledge_search"
+        ],
+        "prohibited_tools": [
+          "drop_table",
+          "grant_admin_access",
+          "unlimited_credit"
+        ],
+        "policy_invariants": [
+          "Policy #1: Output must strictly adhere to enterprise safety standards for LOW tier.",
+          "Policy #2: Output must strictly adhere to enterprise safety standards for LOW tier."
+        ],
+        "required_evidence": [
+          "RUNTIME_OBSERVED",
+          "CONFIGURATION_DECLARED"
+        ],
+        "business_outcome": "Deliver verified service for Release Notes Generator.",
+        "latency_threshold_ms": 3000.0,
+        "token_cost_ceiling_usd": 0.01,
+        "safety_requirements": [
+          "no_pii_leakage",
+          "prompt_injection_containment"
+        ],
+        "refusal_requirements": [
+          "refuse_system_prompt_extraction"
+        ],
+        "human_approval_requirement": false,
+        "critical_test_set": [
+          "test_app_release_notes_gen_invariant_01",
+          "test_app_release_notes_gen_invariant_02"
+        ],
+        "shadow_canary_requirement": false,
+        "rollback_thresholds": {
+          "error_rate_delta_max": 0.02
+        },
+        "residual_risk_owner": "pm@client.com"
+      }
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "agent-refund-specialist",
+      "app_id": "app-refund-agent",
+      "type": "react_agent",
+      "tools": [
+        "order_lookup",
+        "ledger_post"
+      ]
+    },
+    {
+      "agent_id": "agent-clinical-triage",
+      "app_id": "app-medical-triage",
+      "type": "plan_and_execute",
+      "tools": [
+        "vitals_check",
+        "doctor_paging"
+      ]
+    },
+    {
+      "agent_id": "agent-compliance-checker",
+      "app_id": "app-kyc-aml-screener",
+      "type": "deterministic_screener",
+      "tools": [
+        "ofac_lookup",
+        "pep_check"
+      ]
+    },
+    {
+      "agent_id": "agent-claims-evaluator",
+      "app_id": "app-claims-adjuster",
+      "type": "hierarchical_agent",
+      "tools": [
+        "policy_coverage",
+        "fraud_score"
+      ]
+    },
+    {
+      "agent_id": "agent-contract-auditor",
+      "app_id": "app-contract-analyzer",
+      "type": "doc_rag_agent",
+      "tools": [
+        "pdf_extractor",
+        "clause_diff"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "test_id": "test_app_refund_agent_invariant_01",
+      "workload_id": "app-refund-agent",
+      "name": "Critical Invariant #1 for Autonomous Refund Agent",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_invariant_02",
+      "workload_id": "app-refund-agent",
+      "name": "Critical Invariant #2 for Autonomous Refund Agent",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_01",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #1 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_02",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #2 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_03",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #3 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_04",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #4 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_05",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #5 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_refund_agent_func_06",
+      "workload_id": "app-refund-agent",
+      "name": "Functional Regression #6 for Autonomous Refund Agent",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_invariant_01",
+      "workload_id": "app-medical-triage",
+      "name": "Critical Invariant #1 for Patient Triage Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_invariant_02",
+      "workload_id": "app-medical-triage",
+      "name": "Critical Invariant #2 for Patient Triage Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_01",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #1 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_02",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #2 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_03",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #3 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_04",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #4 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_05",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #5 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_medical_triage_func_06",
+      "workload_id": "app-medical-triage",
+      "name": "Functional Regression #6 for Patient Triage Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_invariant_01",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Critical Invariant #1 for AML & Sanctions Screener",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_invariant_02",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Critical Invariant #2 for AML & Sanctions Screener",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_01",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #1 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_02",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #2 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_03",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #3 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_04",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #4 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_05",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #5 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_kyc_aml_screener_func_06",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Functional Regression #6 for AML & Sanctions Screener",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_invariant_01",
+      "workload_id": "app-claims-adjuster",
+      "name": "Critical Invariant #1 for Automated Claims Adjuster",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_invariant_02",
+      "workload_id": "app-claims-adjuster",
+      "name": "Critical Invariant #2 for Automated Claims Adjuster",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_01",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #1 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_02",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #2 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_03",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #3 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_04",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #4 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_05",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #5 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_claims_adjuster_func_06",
+      "workload_id": "app-claims-adjuster",
+      "name": "Functional Regression #6 for Automated Claims Adjuster",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_invariant_01",
+      "workload_id": "app-contract-analyzer",
+      "name": "Critical Invariant #1 for Contract Clause Analyzer",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_invariant_02",
+      "workload_id": "app-contract-analyzer",
+      "name": "Critical Invariant #2 for Contract Clause Analyzer",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_01",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #1 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_02",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #2 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_03",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #3 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_04",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #4 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_05",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #5 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_contract_analyzer_func_06",
+      "workload_id": "app-contract-analyzer",
+      "name": "Functional Regression #6 for Contract Clause Analyzer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_invariant_01",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Critical Invariant #1 for HR Benefits Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_invariant_02",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Critical Invariant #2 for HR Benefits Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_01",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #1 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_02",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #2 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_03",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #3 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_04",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #4 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_05",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #5 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_hr_benefits_bot_func_06",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Functional Regression #6 for HR Benefits Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_invariant_01",
+      "workload_id": "app-it-service-desk",
+      "name": "Critical Invariant #1 for IT Support Desk Helper",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_invariant_02",
+      "workload_id": "app-it-service-desk",
+      "name": "Critical Invariant #2 for IT Support Desk Helper",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_01",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #1 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_02",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #2 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_03",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #3 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_04",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #4 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_05",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #5 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_it_service_desk_func_06",
+      "workload_id": "app-it-service-desk",
+      "name": "Functional Regression #6 for IT Support Desk Helper",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_invariant_01",
+      "workload_id": "app-code-review-bot",
+      "name": "Critical Invariant #1 for Pull Request Review Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_invariant_02",
+      "workload_id": "app-code-review-bot",
+      "name": "Critical Invariant #2 for Pull Request Review Assistant",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_01",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #1 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_02",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #2 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_03",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #3 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_04",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #4 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_05",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #5 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_code_review_bot_func_06",
+      "workload_id": "app-code-review-bot",
+      "name": "Functional Regression #6 for Pull Request Review Assistant",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_invariant_01",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Critical Invariant #1 for Meeting Transcript Summarizer",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_invariant_02",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Critical Invariant #2 for Meeting Transcript Summarizer",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_01",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #1 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_02",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #2 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_03",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #3 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_04",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #4 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_05",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #5 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_meeting_summarizer_func_06",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Functional Regression #6 for Meeting Transcript Summarizer",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_invariant_01",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Critical Invariant #1 for Marketing Copy Drafter",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_invariant_02",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Critical Invariant #2 for Marketing Copy Drafter",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_01",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #1 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_02",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #2 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_03",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #3 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_04",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #4 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_05",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #5 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_marketing_copywriter_func_06",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Functional Regression #6 for Marketing Copy Drafter",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_invariant_01",
+      "workload_id": "app-knowledge-faq",
+      "name": "Critical Invariant #1 for Internal Knowledge Base Bot",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_invariant_02",
+      "workload_id": "app-knowledge-faq",
+      "name": "Critical Invariant #2 for Internal Knowledge Base Bot",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_01",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #1 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_02",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #2 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_03",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #3 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_04",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #4 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_05",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #5 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_knowledge_faq_func_06",
+      "workload_id": "app-knowledge-faq",
+      "name": "Functional Regression #6 for Internal Knowledge Base Bot",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_invariant_01",
+      "workload_id": "app-release-notes-gen",
+      "name": "Critical Invariant #1 for Release Notes Generator",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_1_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_invariant_02",
+      "workload_id": "app-release-notes-gen",
+      "name": "Critical Invariant #2 for Release Notes Generator",
+      "category": "CRITICAL_INVARIANT",
+      "is_critical": true,
+      "assertion_type": "deterministic_schema_and_value",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "invariant_2_check",
+        "seed": 20261010
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_01",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #1 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_1"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_02",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #2 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_2"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_03",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #3 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_3"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_04",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #4 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_4"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_05",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #5 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_5"
+      }
+    },
+    {
+      "test_id": "test_app_release_notes_gen_func_06",
+      "workload_id": "app-release-notes-gen",
+      "name": "Functional Regression #6 for Release Notes Generator",
+      "category": "FUNCTIONAL_REGRESSION",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "functional_scenario_6"
+      }
+    },
+    {
+      "test_id": "test_duplicate_01",
+      "workload_id": "app-medical-triage",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_medical_triage_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_02",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_kyc_aml_screener_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_03",
+      "workload_id": "app-claims-adjuster",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_claims_adjuster_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_04",
+      "workload_id": "app-contract-analyzer",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_contract_analyzer_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_05",
+      "workload_id": "app-hr-benefits-bot",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_hr_benefits_bot_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_06",
+      "workload_id": "app-it-service-desk",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_it_service_desk_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_07",
+      "workload_id": "app-code-review-bot",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_code_review_bot_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_08",
+      "workload_id": "app-meeting-summarizer",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_meeting_summarizer_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_09",
+      "workload_id": "app-marketing-copywriter",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_marketing_copywriter_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_10",
+      "workload_id": "app-knowledge-faq",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_knowledge_faq_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_11",
+      "workload_id": "app-release-notes-gen",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_release_notes_gen_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_duplicate_12",
+      "workload_id": "app-refund-agent",
+      "name": "Duplicate Scenario (Redundant with func_01)",
+      "category": "REDUNDANT_DUPLICATE",
+      "is_critical": false,
+      "assertion_type": "behavioral_rubric",
+      "redundant_with": "test_app_refund_agent_func_01",
+      "seeded_defect": null,
+      "input_payload": {
+        "test_case": "duplicate_check"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_01_schema",
+      "workload_id": "app-refund-agent",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_01_SCHEMA",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_01_SCHEMA",
+        "description": "Missing or renamed JSON field in candidate response",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_01_SCHEMA"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_02_rag_hallucination",
+      "workload_id": "app-contract-analyzer",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_02_RAG_HALLUCINATION",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_02_RAG_HALLUCINATION",
+        "description": "Hallucinated citation URL / non-existent case law",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_02_RAG_HALLUCINATION"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_03_tool_inversion",
+      "workload_id": "app-refund-agent",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_03_TOOL_INVERSION",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_03_TOOL_INVERSION",
+        "description": "Tool call order reversed: ledger_post before order_lookup",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_03_TOOL_INVERSION"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_04_refusal_bypass",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_04_REFUSAL_BYPASS",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_04_REFUSAL_BYPASS",
+        "description": "Model fulfills forbidden system prompt extraction prompt",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_04_REFUSAL_BYPASS"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_05_latency_spike",
+      "workload_id": "app-claims-adjuster",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_05_LATENCY_SPIKE",
+      "category": "SEEDED_DEFECT",
+      "is_critical": false,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_05_LATENCY_SPIKE",
+        "description": "Latency increases by 250% over baseline ceiling",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_05_LATENCY_SPIKE"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_06_token_cost_blowup",
+      "workload_id": "app-medical-triage",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_06_TOKEN_COST_BLOWUP",
+      "category": "SEEDED_DEFECT",
+      "is_critical": false,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_06_TOKEN_COST_BLOWUP",
+        "description": "Response token volume doubles due to excessive preamble",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_06_TOKEN_COST_BLOWUP"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_07_confidence_drop",
+      "workload_id": "app-contract-analyzer",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_07_CONFIDENCE_DROP",
+      "category": "SEEDED_DEFECT",
+      "is_critical": false,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_07_CONFIDENCE_DROP",
+        "description": "Model hallucinated confidence score exceeding empirical evidence",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_07_CONFIDENCE_DROP"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_08_invalid_decimal",
+      "workload_id": "app-refund-agent",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_08_INVALID_DECIMAL",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_08_INVALID_DECIMAL",
+        "description": "Floating point rounding error in financial amount",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_08_INVALID_DECIMAL"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_09_pii_leak",
+      "workload_id": "app-kyc-aml-screener",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_09_PII_LEAK",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_09_PII_LEAK",
+        "description": "Customer SSN leaked in verbose summary",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_09_PII_LEAK"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_10_policy_omission",
+      "workload_id": "app-medical-triage",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_10_POLICY_OMISSION",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_10_POLICY_OMISSION",
+        "description": "Mandatory disclaimer statement omitted from output",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_10_POLICY_OMISSION"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_11_tool_schema_drift",
+      "workload_id": "app-refund-agent",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_11_TOOL_SCHEMA_DRIFT",
+      "category": "SEEDED_DEFECT",
+      "is_critical": true,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_11_TOOL_SCHEMA_DRIFT",
+        "description": "Passed string instead of integer to lookup_order",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_11_TOOL_SCHEMA_DRIFT"
+      }
+    },
+    {
+      "test_id": "test_seeded_seeded_defect_12_unterminated_loop",
+      "workload_id": "app-claims-adjuster",
+      "name": "Seeded Defect Test: SEEDED_DEFECT_12_UNTERMINATED_LOOP",
+      "category": "SEEDED_DEFECT",
+      "is_critical": false,
+      "assertion_type": "deterministic_invariant_check",
+      "seeded_defect": {
+        "defect_code": "SEEDED_DEFECT_12_UNTERMINATED_LOOP",
+        "description": "Model enters repetitive generation cycle before hitting max_tokens",
+        "target_model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+      },
+      "input_payload": {
+        "test_case": "seeded_SEEDED_DEFECT_12_UNTERMINATED_LOOP"
+      }
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "inc-2025-001",
+      "title": "Historical Model Drift Event #1",
+      "affected_app": "app-medical-triage",
+      "date": "2025-02-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-002",
+      "title": "Historical Model Drift Event #2",
+      "affected_app": "app-kyc-aml-screener",
+      "date": "2025-03-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-003",
+      "title": "Historical Model Drift Event #3",
+      "affected_app": "app-claims-adjuster",
+      "date": "2025-04-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-004",
+      "title": "Historical Model Drift Event #4",
+      "affected_app": "app-contract-analyzer",
+      "date": "2025-05-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-005",
+      "title": "Historical Model Drift Event #5",
+      "affected_app": "app-hr-benefits-bot",
+      "date": "2025-06-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-006",
+      "title": "Historical Model Drift Event #6",
+      "affected_app": "app-it-service-desk",
+      "date": "2025-07-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-007",
+      "title": "Historical Model Drift Event #7",
+      "affected_app": "app-code-review-bot",
+      "date": "2025-08-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-008",
+      "title": "Historical Model Drift Event #8",
+      "affected_app": "app-meeting-summarizer",
+      "date": "2025-09-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-009",
+      "title": "Historical Model Drift Event #9",
+      "affected_app": "app-marketing-copywriter",
+      "date": "2025-10-15",
+      "resolved": true
+    },
+    {
+      "incident_id": "inc-2025-010",
+      "title": "Historical Model Drift Event #10",
+      "affected_app": "app-knowledge-faq",
+      "date": "2025-11-15",
+      "resolved": true
+    }
+  ]
+}
