@@ -18,6 +18,16 @@ Newest entry at the top.
 - **Created Committed Demo Walkthrough Guide (`docs/demo_walkthrough_guide.md`)**:
   - Moved the 10-minute end-to-end presentation and verification walkthrough script from the local artifact scratchpad directly into tracked repository version control.
   - Contains step-by-step table mapping 12 presentation steps to screen URLs, presenter script, exact user clicks, and system invariant verification checks.
+- **Built & Integrated Python Retention Auditor (`scripts/audit_retention.py`)**:
+  - Deterministic audit suite executing 7 automated checks:
+    1. Memory File Completeness (`system_state.md`, `memory.md`, `lessons-learned.md`, `demo_walkthrough_guide.md`, `AGENTS.md`).
+    2. Route Drift Check: Asserts all routes in `web/src/App.tsx` are documented in `docs/system_state.md`.
+    3. Persona Drift Check: Asserts all 8 synthetic evaluator personas in `seedData.ts` match `docs/system_state.md`.
+    4. Enterprise Connector Drift Check: Asserts all 6 enterprise connectors are accounted for.
+    5. Token Density Check: Asserts `system_state.md` remains lean (<500 lines, <35KB) for fast LLM context ingestion.
+    6. Secret Scanner: Verifies no raw credentials in `.env` or code.
+    7. Git Freshness Gate: Validates that code modifications are accompanied by documentation updates.
+  - Directly integrated into `scripts/push_to_github.py` as an automated pre-push gate to block any undocumented drift from being pushed to remote `origin/main`.
 - **Populated Lessons Learned Log (`docs/lessons-learned.md`)**:
   - Replaced empty template with 5 concrete mistake-to-correction operational records:
     1. Zscaler 403 on standard Git push -> Bypassed via `scripts/push_to_github.py`.

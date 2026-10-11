@@ -224,4 +224,19 @@ if __name__ == "__main__":
 
     print(f"[*] Target repository: {owner}/{repo}")
     print(f"[*] Commit message: {msg}")
+
+    # Deterministic Pre-Push Retention Audit: Ensures code-to-doc alignment before upload
+    try:
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from audit_retention import run_audit
+        print("[*] Running pre-push Python Retention Audit...")
+        audit_passed = run_audit(strict=False)
+        if not audit_passed:
+            print("\n[ERROR] Retention audit failed! Push aborted to prevent undocumented drift.")
+            sys.exit(1)
+    except Exception as e:
+        print(f"[WARN] Retention audit check skipped due to error: {e}")
+
     push_via_api(owner, repo, token, msg)

@@ -133,11 +133,26 @@
 
 ---
 
-## 7. Instructions for Future Sessions
+## 7. Python Retention Auditor (`scripts/audit_retention.py`)
+
+A deterministic validation engine that runs locally and pre-push to enforce memory retention and prevent drift:
+- **Memory Integrity**: Validates presence of `docs/system_state.md`, `docs/memory.md`, `docs/lessons-learned.md`, and `docs/demo_walkthrough_guide.md`.
+- **Route Drift**: Extracts routes from `web/src/App.tsx` and asserts they are documented in `docs/system_state.md`.
+- **Persona Drift**: Extracts persona IDs from `web/src/store/seedData.ts` and asserts they exist in `docs/system_state.md`.
+- **Connector Drift**: Asserts all 6 enterprise connectors are accounted for.
+- **Token Density**: Asserts `docs/system_state.md` remains lean (<500 lines, <35KB) for fast agent context ingestion.
+- **Secret & Invariant Scanner**: Confirms no raw credentials or forbidden bypasses.
+- **Git Freshness**: Warns or blocks if code changes are made without updating documentation.
+- **Automated Gate**: Directly invoked inside `scripts/push_to_github.py` before any upload.
+
+---
+
+## 8. Instructions for Future Sessions
 
 When starting any new session:
 1. **Read this file (`docs/system_state.md`)** to instantly inherit all system architecture, deployment facts, and user directives.
 2. **Read the latest entry in `docs/memory.md`** for immediate context on what was changed in the previous turn.
-3. **Always use `python scripts/push_to_github.py "<message>"`** to push commits.
-4. **Always run `npm run build` in `web/`** to verify clean compilation before pushing.
-5. **Update this file and `docs/memory.md`** whenever any architectural change or user directive is added.
+3. **Always run `python scripts/audit_retention.py`** to confirm memory health and zero drift.
+4. **Always use `python scripts/push_to_github.py "<message>"`** to push commits.
+5. **Always run `npm run build` in `web/`** to verify clean compilation before pushing.
+6. **Update this file and `docs/memory.md`** whenever any architectural change or user directive is added.
