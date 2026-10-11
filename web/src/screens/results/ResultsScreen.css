@@ -1,0 +1,460 @@
+.results-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.results-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.breadcrumb-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  color: var(--color-brand);
+}
+
+.breadcrumb-sep {
+  color: var(--color-border-subtle);
+}
+
+.breadcrumb-current {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.results-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.results-tag-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.results-status-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #15803d;
+  background-color: #dcfce7;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.results-manifest-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #4338ca;
+  background-color: #e0e7ff;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.results-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.results-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.results-reproduce-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #334155;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.results-reproduce-btn:hover:not(:disabled) {
+  background-color: var(--color-surface-subtle);
+  border-color: #cbd5e1;
+}
+
+.results-reproduce-btn.is-spinning svg {
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.results-continue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--color-brand);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.results-continue-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.results-stat-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.625rem 1rem;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stat-icon {
+  color: var(--color-text-muted);
+}
+
+.stat-val {
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.stat-label {
+  color: var(--color-text-muted);
+}
+
+.manifest-hash-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #1e40af;
+  background-color: #eff6ff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+}
+
+.stat-divider {
+  color: var(--color-border);
+}
+
+.results-gate-container {
+  margin-bottom: 0.25rem;
+}
+
+/* Heatmap Section */
+.results-heatmap-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.section-desc {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.heatmap-guide-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Inspection Grid: 8 col / 4 col */
+.results-inspection-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+/* Main Column: Case inspection */
+.inspection-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.inspection-card-header {
+  padding: 1rem 1.25rem;
+  background-color: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inspection-case-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.case-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-brand);
+}
+
+.case-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.inspection-card-body {
+  padding: 1.25rem;
+}
+
+/* Side Column: Judges & Manifest */
+.inspection-side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.side-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-card-header {
+  padding: 0.875rem 1rem;
+  background-color: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.side-icon {
+  color: #475569;
+}
+
+.side-card-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.side-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Judge Disagreement Card */
+.judge-disagreement-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.disagreement-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #b45309;
+}
+
+.disagreement-desc {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #78350f;
+}
+
+.judge-scores-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.score-label {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.score-val {
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.score-val.pass {
+  color: #15803d;
+}
+
+.score-val.warn {
+  color: #b45309;
+}
+
+.disagreement-drawer-btn {
+  margin-top: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--color-brand);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.disagreement-drawer-btn:hover {
+  text-decoration: underline;
+}
+
+/* Judge Consensus Card */
+.judge-consensus-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.consensus-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.consensus-desc {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+/* Manifest Card */
+.manifest-fields-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.manifest-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.m-field-name {
+  color: var(--color-text-muted);
+}
+
+.m-field-val {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.m-field-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #334155;
+  background-color: #f1f5f9;
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+}
+
+.m-field-hash {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: #1e40af;
+}
+
+.manifest-replay-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}

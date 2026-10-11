@@ -1,0 +1,139 @@
+/* ==============================================================================
+   AI Evergreen — Design System Tokens (§5)
+   Strict Token Definitions (No hard-coded hex in components)
+   ============================================================================== */
+
+:root {
+  /* 5.1 Colour Tokens */
+  --ev-navy: #12304A;           /* 13.6:1 contrast on white - Primary text, headings, buttons */
+  --ev-navy-deep: #0B2036;      /* 16.5:1 contrast on white - Hard-stop, dark surfaces */
+  --ev-teal: #2B6F77;           /* 5.8:1 contrast on white - Links, active nav, Migrate chip */
+  --ev-teal-light: #E4EFEF;     /* Selected rows, card tint, info callout bg */
+  --ev-slate: #49575F;          /* 7.5:1 contrast on white - Body text, secondary labels */
+  --ev-slate-muted: #5B6870;    /* 5.7:1 contrast on white - Captions, metadata, placeholders */
+  --ev-slate-soft: #8A97A0;     /* 3.0:1 - Chart gridlines, disabled icons ONLY. Never text. */
+  --ev-border-strong: #6B7983;  /* 4.5:1 - Control borders, checkboxes (meets 3:1 non-text) */
+  --ev-line-soft: #D9DEDF;      /* 1.4:1 - Decorative dividers and card outlines */
+  --ev-red: #B42318;            /* 6.6:1 - RESERVED: Block, Hard Stop, Rollback triggered */
+  --ev-red-tint: #FBE9E7;       /* Background of Block cards and hard-stop banners */
+  --ev-gold: #A8791A;           /* 3.9:1 - Graphics and large text only. Canary/Investigate icons */
+  --ev-gold-text: #7A5710;      /* 6.6:1 - Any gold-family text (passes AA) */
+  --ev-gold-tint: #FBF1DC;      /* Background of Canary, Investigate, and warning banners */
+  --ev-cream: #F7F6F2;          /* Page background */
+  --ev-white: #FFFFFF;          /* Cards, tables, inputs, modal backgrounds */
+  --ev-focus: #1F6FEB;          /* 4.6:1 - Focus ring (2px with 2px white offset) */
+
+  /* 5.3 Typography Stacks */
+  --ev-font-heading: Cambria, "Source Serif 4", Georgia, serif;
+  --ev-font-ui: Calibri, Carlito, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ev-font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Typography Scale */
+  --ev-text-title: 28px;
+  --ev-leading-title: 36px;
+  --ev-text-section: 20px;
+  --ev-leading-section: 28px;
+  --ev-text-subtitle: 16px;
+  --ev-leading-subtitle: 24px;
+  --ev-text-body: 14px;
+  --ev-leading-body: 20px;
+  --ev-text-table: 13px;
+  --ev-leading-table: 18px;
+  --ev-text-caption: 12px;
+  --ev-leading-caption: 16px;
+  --ev-text-overline: 11px;
+  --ev-leading-overline: 16px;
+  --ev-text-stat: 32px;
+  --ev-leading-stat: 36px;
+  --ev-text-mono: 12.5px;
+  --ev-leading-mono: 18px;
+
+  /* 5.4 Spacing Scale (4px base) */
+  --ev-space-1: 4px;
+  --ev-space-2: 8px;
+  --ev-space-3: 12px;
+  --ev-space-4: 16px;
+  --ev-space-6: 24px;
+  --ev-space-8: 32px;
+  --ev-space-12: 48px;
+  --ev-space-16: 64px;
+
+  /* Layout Dimensions */
+  --ev-topbar-height: 56px;
+  --ev-rail-width-expanded: 232px;
+  --ev-rail-width-collapsed: 56px;
+  --ev-header-height: 64px;
+  --ev-stepper-height: 48px;
+  --ev-drawer-width: 440px;
+  --ev-sidepanel-width: 360px;
+  --ev-modal-confirm-width: 560px;
+  --ev-modal-form-width: 720px;
+
+  /* Corner Radii */
+  --ev-radius-control: 6px;
+  --ev-radius-card: 8px;
+  --ev-radius-modal: 12px;
+  --ev-radius-chip: 9999px;
+
+  /* Elevations */
+  --ev-shadow-flat: none;
+  --ev-shadow-card: 0 1px 3px rgba(11, 32, 54, 0.08), 0 1px 2px rgba(11, 32, 54, 0.04);
+  --ev-shadow-popover: 0 4px 12px rgba(11, 32, 54, 0.12), 0 2px 4px rgba(11, 32, 54, 0.08);
+  --ev-shadow-modal: 0 12px 32px rgba(11, 32, 54, 0.24);
+
+  /* Motion */
+  --ev-duration-micro: 120ms;
+  --ev-duration-standard: 200ms;
+  --ev-duration-large: 320ms;
+  --ev-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ev-ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ev-duration-micro: 0ms;
+    --ev-duration-standard: 0ms;
+    --ev-duration-large: 0ms;
+  }
+}
+
+/* Global Reset & Base Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--ev-cream);
+  color: var(--ev-navy);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-body);
+  line-height: var(--ev-leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible Focus Ring Rule (§5.1) */
+:focus-visible {
+  outline: 2px solid var(--ev-focus);
+  outline-offset: 2px;
+}
+
+/* Tabular figures rule for all numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

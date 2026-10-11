@@ -1,0 +1,49 @@
+/* ==============================================================================
+   ProvenanceTag Component Styles (§5.2, §6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-provenance-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-1);
+  padding: 2px var(--ev-space-2);
+  border-radius: var(--ev-radius-control);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-overline);
+  font-weight: 600;
+  cursor: help;
+  line-height: 1.2;
+  transition: all var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-provenance-icon {
+  flex-shrink: 0;
+}
+
+/* Rule-based: Navy outline */
+.ev-provenance-rule-based {
+  background-color: var(--ev-white);
+  color: var(--ev-navy);
+  border: 1px solid var(--ev-navy);
+}
+
+/* AI-proposed: Teal tint with sparkle */
+.ev-provenance-ai-proposed {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1px solid var(--ev-teal);
+}
+
+/* Human-entered: Slate outline with person */
+.ev-provenance-human-entered {
+  background-color: var(--ev-white);
+  color: var(--ev-slate);
+  border: 1px solid var(--ev-border-strong);
+}
+
+.ev-provenance-source {
+  font-family: var(--ev-font-mono);
+  font-weight: 400;
+  opacity: 0.85;
+}

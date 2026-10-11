@@ -1,0 +1,92 @@
+/* ==============================================================================
+   ConfidenceMeter Component Styles (§6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-confidence-meter {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ev-space-1);
+  font-family: var(--ev-font-ui);
+  min-width: 110px;
+}
+
+.ev-confidence-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ev-space-2);
+}
+
+.ev-confidence-score {
+  font-size: var(--ev-text-body);
+  font-weight: 700;
+  color: var(--ev-navy);
+}
+
+.ev-confidence-band {
+  font-size: var(--ev-text-caption);
+  font-weight: 600;
+}
+
+.ev-confidence-band.band-high {
+  color: var(--ev-teal);
+}
+
+.ev-confidence-band.band-moderate {
+  color: var(--ev-slate);
+}
+
+.ev-confidence-band.band-low {
+  color: var(--ev-gold-text);
+}
+
+.ev-confidence-band.band-very-low {
+  color: var(--ev-red);
+}
+
+.ev-confidence-bar-container {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background-color: var(--ev-line-soft);
+  border-radius: var(--ev-radius-chip);
+  overflow: hidden;
+}
+
+.ev-confidence-fill {
+  height: 100%;
+  transition: width var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-confidence-fill.band-high {
+  background-color: var(--ev-teal);
+}
+
+.ev-confidence-fill.band-moderate {
+  background-color: var(--ev-slate-muted);
+}
+
+.ev-confidence-fill.band-low {
+  background-color: var(--ev-gold);
+}
+
+.ev-confidence-fill.band-very-low {
+  background-color: var(--ev-red);
+}
+
+.ev-confidence-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background-color: var(--ev-white);
+  z-index: 2;
+}
+
+.ev-confidence-warning {
+  font-size: var(--ev-text-overline);
+  color: var(--ev-gold-text);
+  font-weight: 600;
+  white-space: nowrap;
+}

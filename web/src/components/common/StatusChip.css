@@ -1,0 +1,164 @@
+/* ==============================================================================
+   StatusChip Component Styles (§5.2, §6.1)
+   No hardcoded hex values - CSS Custom Properties strictly enforced.
+   ============================================================================== */
+
+.ev-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-1);
+  font-family: var(--ev-font-ui);
+  font-weight: 600;
+  border-radius: var(--ev-radius-chip);
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.ev-size-medium {
+  height: 24px;
+  padding: 0 var(--ev-space-2);
+  font-size: var(--ev-text-caption);
+}
+
+.ev-size-small {
+  height: 20px;
+  padding: 0 var(--ev-space-1);
+  font-size: var(--ev-text-overline);
+}
+
+.ev-status-icon {
+  flex-shrink: 0;
+}
+
+/* Migrate: Solid teal, white text */
+.ev-status-migrate {
+  background-color: var(--ev-teal);
+  color: var(--ev-white);
+  border: 1px solid var(--ev-teal);
+}
+
+/* Canary: gold-tint, gold-text text, gold icon */
+.ev-status-canary {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+}
+.ev-status-canary .ev-status-icon {
+  color: var(--ev-gold);
+}
+
+/* Investigate: gold-tint with dashed border, gold-text */
+.ev-status-investigate {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1.5px dashed var(--ev-gold);
+}
+.ev-status-investigate .ev-status-icon {
+  color: var(--ev-gold);
+}
+
+/* Block: Solid red chip, white text */
+.ev-status-block {
+  background-color: var(--ev-red);
+  color: var(--ev-white);
+  border: 1px solid var(--ev-red);
+}
+
+/* Kernel: Permit (Outlined teal chip) */
+.ev-status-permit {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1.5px solid var(--ev-teal);
+}
+
+/* Kernel: Deny (Outlined red chip on red-tint) */
+.ev-status-deny {
+  background-color: var(--ev-red-tint);
+  color: var(--ev-red);
+  border: 1.5px solid var(--ev-red);
+}
+
+/* Pass (Teal check on light bg) */
+.ev-status-pass {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1px solid var(--ev-teal);
+}
+
+/* Warn (Gold on gold-tint) */
+.ev-status-warn {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+}
+
+/* Fail (Red on red-tint) */
+.ev-status-fail {
+  background-color: var(--ev-red-tint);
+  color: var(--ev-red);
+  border: 1px solid var(--ev-red);
+}
+
+/* N/A (Muted slate) */
+.ev-status-na {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate-muted);
+  border: 1px solid var(--ev-line-soft);
+}
+
+/* Inconclusive (Grey question mark) */
+.ev-status-inconclusive {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate);
+  border: 1px dashed var(--ev-border-strong);
+}
+
+/* Stale (Gold tint) */
+.ev-status-stale {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+}
+
+/* Unresolved */
+.ev-status-unresolved {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+}
+
+/* Conflict */
+.ev-status-conflict {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+}
+
+/* Confirmed: Crisp teal */
+.ev-status-confirmed {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1px solid var(--ev-teal);
+}
+
+/* Proposed: Gold tint */
+.ev-status-proposed {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px dashed var(--ev-gold);
+}
+
+/* Overridden: Slate outline with warning indicator */
+.ev-status-overridden {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate);
+  border: 1px solid var(--ev-border-strong);
+}
+
+/* Unaffected / Connected */
+.ev-status-unaffected {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate-muted);
+  border: 1px dashed var(--ev-line-soft);
+}

@@ -1,0 +1,32 @@
+/* ==============================================================================
+   SkeletonBlock Component Styles (§6.1, §12)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-skeleton-block {
+  background: linear-gradient(
+    90deg,
+    var(--ev-line-soft) 25%,
+    var(--ev-cream) 50%,
+    var(--ev-line-soft) 75%
+  );
+  background-size: 200% 100%;
+  animation: ev-skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes ev-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Shimmer disabled under reduced motion (§6.1) */
+@media (prefers-reduced-motion: reduce) {
+  .ev-skeleton-block {
+    animation: none;
+    background: var(--ev-line-soft);
+  }
+}

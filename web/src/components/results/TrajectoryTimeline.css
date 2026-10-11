@@ -1,0 +1,175 @@
+.trajectory-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trajectory-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.trajectory-col {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.trajectory-col-header {
+  padding: 0.625rem 0.875rem;
+  background-color: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trajectory-col-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.trajectory-col-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.125rem 0.45rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trajectory-col-badge.pass {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.trajectory-col-badge.fail {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.trajectory-steps {
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.trajectory-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+}
+
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #334155;
+  font-weight: 700;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.step-code code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: #0f172a;
+  background-color: #f1f5f9;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  border: 1px solid #e2e8f0;
+}
+
+.step-result-hint {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+/* Skipped Step Highlights */
+.trajectory-step.skipped-step {
+  padding: 0.625rem 0.75rem;
+  background-color: #fef2f2;
+  border: 1.5px dashed #ef4444;
+  border-radius: var(--radius-sm);
+}
+
+.step-num.skipped-num {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.skipped-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #dc2626;
+  text-transform: uppercase;
+}
+
+.skipped-note {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+/* Verdict Banner */
+.trajectory-verdict-banner {
+  padding: 0.875rem 1rem;
+  background-color: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-left: 4px solid #e11d48;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.verdict-banner-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #be123c;
+  text-transform: uppercase;
+}
+
+.verdict-banner-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #881337;
+}
+
+.verdict-banner-text code {
+  font-family: var(--font-mono);
+  background-color: #ffe4e6;
+  padding: 0.125rem 0.35rem;
+  border-radius: var(--radius-sm);
+  color: #9f1239;
+}

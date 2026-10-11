@@ -1,0 +1,21 @@
+.ev-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ev-cream);
+}
+
+.ev-shell__body {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 56px);
+}
+
+.ev-shell__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  background-color: var(--ev-cream);
+}

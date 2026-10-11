@@ -1,0 +1,29 @@
+/* ==============================================================================
+   RiskBadgeRow Component Styles (§6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-risk-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  flex-wrap: wrap;
+}
+
+.ev-risk-badge-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--ev-radius-chip);
+  transition: transform var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-risk-badge-btn:hover {
+  transform: translateY(-1px);
+}
+
+.ev-badge-selected {
+  outline: 2px solid var(--ev-focus);
+  outline-offset: 2px;
+}

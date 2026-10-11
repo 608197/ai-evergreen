@@ -1,0 +1,112 @@
+/* ==============================================================================
+   Toast Component Styles (§6.1, §12)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ev-space-4);
+  padding: var(--ev-space-3) var(--ev-space-4);
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-card);
+  box-shadow: var(--ev-shadow-popover);
+  font-family: var(--ev-font-ui);
+  min-width: 320px;
+  max-width: 440px;
+  animation: ev-toast-slide-in var(--ev-duration-standard) var(--ev-ease-out);
+}
+
+@keyframes ev-toast-slide-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ev-toast-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ev-space-3);
+}
+
+.ev-toast-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ev-toast-icon-success {
+  color: var(--ev-teal);
+}
+
+.ev-toast-icon-warn {
+  color: var(--ev-gold);
+}
+
+.ev-toast-icon-error {
+  color: var(--ev-red);
+}
+
+.ev-toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ev-toast-msg {
+  font-size: var(--ev-text-body);
+  font-weight: 600;
+  color: var(--ev-navy);
+}
+
+.ev-toast-subtext {
+  font-size: var(--ev-text-caption);
+  color: var(--ev-slate-muted);
+}
+
+.ev-toast-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+}
+
+.ev-toast-undo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background-color: var(--ev-cream);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-control);
+  padding: 3px var(--ev-space-2);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-caption);
+  font-weight: 700;
+  color: var(--ev-navy);
+  cursor: pointer;
+}
+
+.ev-toast-undo-btn:hover {
+  background-color: var(--ev-line-soft);
+}
+
+.ev-toast-close-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--ev-slate-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ev-radius-control);
+}
+
+.ev-toast-close-btn:hover {
+  color: var(--ev-navy);
+}

@@ -1,0 +1,126 @@
+/* ==============================================================================
+   StageStepper Component Styles (§6.1, §9.6)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-stage-stepper {
+  display: flex;
+  align-items: center;
+  background-color: var(--ev-white);
+  border-bottom: 1px solid var(--ev-line-soft);
+  height: var(--ev-stepper-height);
+  padding: 0 var(--ev-space-4);
+  font-family: var(--ev-font-ui);
+}
+
+.ev-stepper-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  gap: var(--ev-space-2);
+}
+
+.ev-stepper-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.ev-stepper-connector {
+  flex: 1;
+  height: 2px;
+  background-color: var(--ev-line-soft);
+  margin: 0 var(--ev-space-2);
+}
+
+.ev-step-complete .ev-stepper-connector {
+  background-color: var(--ev-teal);
+}
+
+.ev-step-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  background: none;
+  border: none;
+  padding: var(--ev-space-1) var(--ev-space-2);
+  border-radius: var(--ev-radius-control);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--ev-font-ui);
+  transition: all var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-step-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ev-step-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: var(--ev-text-caption);
+  font-weight: 700;
+  background-color: var(--ev-cream);
+  color: var(--ev-slate);
+  border: 1.5px solid var(--ev-border-strong);
+}
+
+.ev-step-name {
+  font-size: var(--ev-text-caption);
+  font-weight: 600;
+  color: var(--ev-slate);
+}
+
+/* Active / Current State */
+.ev-step-active .ev-step-indicator {
+  background-color: var(--ev-navy);
+  color: var(--ev-white);
+  border-color: var(--ev-navy);
+}
+
+.ev-step-active .ev-step-name {
+  color: var(--ev-navy);
+  font-weight: 700;
+}
+
+/* Complete State */
+.ev-step-complete .ev-step-indicator {
+  background-color: var(--ev-teal);
+  color: var(--ev-white);
+  border-color: var(--ev-teal);
+}
+
+.ev-step-complete .ev-step-name {
+  color: var(--ev-teal);
+}
+
+/* Locked State */
+.ev-step-locked .ev-step-indicator {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate-soft);
+  border-color: var(--ev-line-soft);
+}
+
+.ev-step-locked .ev-step-name {
+  color: var(--ev-slate-muted);
+}
+
+/* Open item badge */
+.ev-step-badge {
+  background-color: var(--ev-gold-tint);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+  border-radius: var(--ev-radius-chip);
+  padding: 1px var(--ev-space-2);
+  font-size: var(--ev-text-overline);
+  font-weight: 700;
+}

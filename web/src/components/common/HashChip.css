@@ -1,0 +1,74 @@
+/* ==============================================================================
+   HashChip Component Styles (§6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-hash-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-1);
+  padding: 2px var(--ev-space-2);
+  border-radius: var(--ev-radius-chip);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-caption);
+  line-height: 1.2;
+}
+
+.ev-hash-verified {
+  background-color: var(--ev-teal-light);
+  border: 1px solid var(--ev-teal);
+  color: var(--ev-teal);
+}
+
+.ev-hash-broken {
+  background-color: var(--ev-red-tint);
+  border: 1.5px solid var(--ev-red);
+  color: var(--ev-red);
+  cursor: pointer;
+}
+
+.ev-hash-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-1);
+}
+
+.ev-icon-verified {
+  color: var(--ev-teal);
+}
+
+.ev-icon-broken {
+  color: var(--ev-red);
+}
+
+.ev-hash-label {
+  font-weight: 600;
+  font-size: var(--ev-text-overline);
+}
+
+.ev-hash-code {
+  font-family: var(--ev-font-mono);
+  font-size: var(--ev-text-mono);
+  font-weight: 600;
+}
+
+.ev-hash-copy-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
+  border-radius: var(--ev-radius-control);
+  transition: opacity var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-hash-copy-btn:hover {
+  opacity: 0.7;
+}
+
+.ev-icon-copied {
+  color: var(--ev-teal);
+}

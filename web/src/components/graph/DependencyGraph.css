@@ -1,0 +1,235 @@
+.ev-graph-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--ev-space-4);
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--ev-shadow-sm);
+}
+
+@media (max-width: 1050px) {
+  .ev-graph-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ev-graph-canvas-wrap {
+  overflow-x: auto;
+  padding: var(--ev-space-4);
+  background-color: #FAFCFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.ev-graph-svg {
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  min-height: 460px;
+}
+
+.ev-graph-col-label {
+  font-family: var(--ev-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--ev-slate-muted);
+  letter-spacing: 0.08em;
+}
+
+/* Edge paths */
+.ev-graph-edge-path {
+  fill: none;
+  stroke-width: 2px;
+  transition: stroke-width var(--ev-duration-fast);
+}
+
+.ev-graph-edge-path--navy {
+  stroke: var(--ev-navy);
+}
+
+.ev-graph-edge-path--gold {
+  stroke: var(--ev-gold);
+  stroke-dasharray: 6 4;
+  stroke-width: 2.5px;
+}
+
+.ev-graph-edge-path--slate {
+  stroke: var(--ev-slate-soft);
+  stroke-dasharray: 3 3;
+}
+
+.ev-graph-edge-group {
+  cursor: pointer;
+}
+
+.ev-graph-edge-group:hover .ev-graph-edge-path {
+  stroke-width: 3.5px;
+}
+
+/* Edge Badges */
+.ev-graph-badge-rect--gold {
+  fill: var(--ev-gold-tint);
+  stroke: var(--ev-gold);
+  stroke-width: 1px;
+}
+
+.ev-graph-badge-text {
+  font-family: var(--ev-font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--ev-gold-text);
+}
+
+.ev-graph-edge-rel-text {
+  font-family: var(--ev-font-mono);
+  font-size: 9px;
+  fill: var(--ev-slate-muted);
+  background-color: var(--ev-white);
+}
+
+/* Node styles */
+.ev-graph-node-group {
+  cursor: pointer;
+  transition: transform var(--ev-duration-fast);
+}
+
+.ev-graph-node-group:hover {
+  transform: scale(1.02);
+}
+
+.ev-graph-node-rect {
+  fill: var(--ev-white);
+  stroke: var(--ev-border-strong);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 1px 2px rgba(18, 48, 74, 0.06));
+  transition: all var(--ev-duration-fast);
+}
+
+.ev-graph-node-group--selected .ev-graph-node-rect {
+  stroke: var(--ev-teal);
+  stroke-width: 2.5px;
+  fill: var(--ev-teal-light);
+}
+
+.ev-graph-node-rect--critical {
+  border-left: 4px solid var(--ev-gold);
+  stroke: var(--ev-navy);
+}
+
+.ev-graph-node-rect--model {
+  fill: var(--ev-navy);
+  stroke: var(--ev-navy-deep);
+}
+
+.ev-graph-node-group--model .ev-graph-node-title {
+  fill: var(--ev-white);
+  font-weight: 700;
+}
+
+.ev-graph-node-group--model .ev-graph-node-sub {
+  fill: var(--ev-teal-light);
+}
+
+.ev-graph-node-rect--tool {
+  fill: var(--ev-cream);
+  stroke: var(--ev-teal);
+}
+
+.ev-graph-node-rect--hollow {
+  fill: var(--ev-white);
+  stroke: var(--ev-slate-soft);
+  stroke-dasharray: 4 3;
+}
+
+.ev-graph-node-title {
+  font-family: var(--ev-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ev-navy);
+}
+
+.ev-graph-node-sub {
+  font-family: var(--ev-font-sans);
+  font-size: 10px;
+  fill: var(--ev-slate-muted);
+}
+
+/* Inspector sidebar */
+.ev-graph-inspector {
+  padding: var(--ev-space-4);
+  border-left: 1px solid var(--ev-line-soft);
+  background-color: var(--ev-white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-4);
+}
+
+.ev-graph-inspector__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--ev-space-2);
+  border-bottom: 1px solid var(--ev-line-soft);
+  padding-bottom: var(--ev-space-3);
+}
+
+.ev-graph-inspector__title {
+  margin: 0;
+  font-size: var(--ev-font-size-md);
+  font-weight: 600;
+  color: var(--ev-navy);
+}
+
+.ev-graph-inspector__type {
+  font-size: 11px;
+  color: var(--ev-slate-muted);
+}
+
+.ev-graph-inspector__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-3);
+}
+
+.ev-graph-inspector__field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ev-graph-inspector__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ev-slate-muted);
+}
+
+.ev-graph-inspector__val-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+}
+
+.ev-graph-inspector__tier-text {
+  font-size: var(--ev-font-size-xs);
+  font-weight: 600;
+  color: var(--ev-navy);
+}
+
+.ev-graph-inspector__desc {
+  margin: 0;
+  font-size: var(--ev-font-size-xs);
+  color: var(--ev-slate);
+  line-height: 1.4;
+}
+
+.ev-graph-inspector__val {
+  font-size: var(--ev-font-size-xs);
+  color: var(--ev-navy);
+  font-weight: 500;
+}

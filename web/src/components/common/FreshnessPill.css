@@ -1,0 +1,44 @@
+/* ==============================================================================
+   FreshnessPill Component Styles (§6.1, §8.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-freshness-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  padding: 4px var(--ev-space-3);
+  border-radius: var(--ev-radius-chip);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-caption);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-freshness-fresh {
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  color: var(--ev-slate);
+}
+
+.ev-freshness-fresh .ev-freshness-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--ev-teal);
+}
+
+.ev-freshness-fresh .ev-freshness-icon {
+  color: var(--ev-teal);
+}
+
+.ev-freshness-stale {
+  background-color: var(--ev-gold-tint);
+  border: 1px solid var(--ev-gold);
+  color: var(--ev-gold-text);
+}
+
+.ev-freshness-stale .ev-freshness-icon {
+  color: var(--ev-gold);
+}

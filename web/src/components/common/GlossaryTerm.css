@@ -1,0 +1,101 @@
+/* ==============================================================================
+   GlossaryTerm Component Styles (§6.1, §14)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-glossary-container {
+  position: relative;
+  display: inline-block;
+}
+
+.ev-glossary-term-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--ev-navy);
+  border-bottom: 1.5px dotted var(--ev-teal);
+  cursor: help;
+  text-decoration: none;
+  transition: color var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-glossary-term-trigger:hover {
+  color: var(--ev-teal);
+}
+
+.ev-glossary-popover {
+  position: absolute;
+  bottom: calc(100% + var(--ev-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-card);
+  box-shadow: var(--ev-shadow-popover);
+  padding: var(--ev-space-3);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-2);
+  font-family: var(--ev-font-ui);
+  text-align: left;
+}
+
+.ev-glossary-popover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--ev-white) transparent transparent transparent;
+}
+
+.ev-glossary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ev-space-2);
+}
+
+.ev-glossary-title {
+  font-weight: 700;
+  font-size: var(--ev-text-caption);
+  color: var(--ev-navy);
+}
+
+.ev-glossary-tag {
+  font-size: var(--ev-text-overline);
+  color: var(--ev-slate-muted);
+  font-weight: 600;
+}
+
+.ev-glossary-definition {
+  font-size: var(--ev-text-caption);
+  color: var(--ev-slate);
+  line-height: var(--ev-leading-caption);
+}
+
+.ev-glossary-open-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-overline);
+  font-weight: 700;
+  color: var(--ev-teal);
+  cursor: pointer;
+  margin-top: var(--ev-space-1);
+}
+
+.ev-glossary-open-link:hover {
+  text-decoration: underline;
+}

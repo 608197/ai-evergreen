@@ -1,0 +1,82 @@
+/* ==============================================================================
+   StatTile Component Styles (§5.3, §6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-2);
+  padding: var(--ev-space-4);
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-card);
+  box-shadow: var(--ev-shadow-card);
+  font-family: var(--ev-font-ui);
+}
+
+.ev-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ev-space-2);
+}
+
+.ev-stat-label {
+  font-size: var(--ev-text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ev-slate);
+}
+
+.ev-stat-proof-tag {
+  font-size: var(--ev-text-overline);
+  font-weight: 600;
+  text-transform: lowercase;
+  padding: 1px var(--ev-space-1);
+  border-radius: var(--ev-radius-control);
+}
+
+.ev-proof-illustrative {
+  background-color: var(--ev-cream);
+  color: var(--ev-slate-muted);
+  border: 1px dashed var(--ev-line-soft);
+}
+
+.ev-proof-measured {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1px solid var(--ev-teal);
+}
+
+.ev-stat-value {
+  font-family: var(--ev-font-heading);
+  font-size: var(--ev-text-stat);
+  line-height: var(--ev-leading-stat);
+  font-weight: 700;
+  color: var(--ev-navy);
+}
+
+.ev-stat-footer {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ev-space-2);
+  font-size: var(--ev-text-caption);
+}
+
+.ev-stat-delta {
+  font-weight: 700;
+}
+
+.ev-delta-positive {
+  color: var(--ev-teal);
+}
+
+.ev-delta-negative {
+  color: var(--ev-red);
+}
+
+.ev-stat-subtext {
+  color: var(--ev-slate-muted);
+}

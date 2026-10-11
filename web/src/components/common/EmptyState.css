@@ -1,0 +1,65 @@
+/* ==============================================================================
+   EmptyState Component Styles (§6.1, §12)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--ev-space-12) var(--ev-space-6);
+  background-color: var(--ev-white);
+  border: 1px dashed var(--ev-line-soft);
+  border-radius: var(--ev-radius-card);
+  font-family: var(--ev-font-ui);
+}
+
+.ev-empty-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--ev-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--ev-space-3);
+}
+
+.ev-empty-icon {
+  color: var(--ev-slate);
+}
+
+.ev-empty-title {
+  font-family: var(--ev-font-heading);
+  font-size: var(--ev-text-section);
+  font-weight: 700;
+  color: var(--ev-navy);
+  margin: 0 0 var(--ev-space-1) 0;
+}
+
+.ev-empty-desc {
+  font-size: var(--ev-text-body);
+  color: var(--ev-slate);
+  max-width: 420px;
+  margin: 0 0 var(--ev-space-4) 0;
+  line-height: var(--ev-leading-body);
+}
+
+.ev-empty-action-btn {
+  background-color: var(--ev-navy);
+  color: var(--ev-white);
+  border: none;
+  border-radius: var(--ev-radius-control);
+  padding: var(--ev-space-2) var(--ev-space-4);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-body);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-empty-action-btn:hover {
+  background-color: var(--ev-navy-deep);
+}

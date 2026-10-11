@@ -1,0 +1,40 @@
+/* ==============================================================================
+   RiskMeter Component Styles (§5.2, §6.1)
+   Rule: Risk tier is NOT a colour. Never red. Four navy segments.
+   ============================================================================== */
+
+.ev-risk-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  font-family: var(--ev-font-ui);
+}
+
+.ev-risk-segments {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.ev-risk-segment {
+  width: 5px;
+  height: 12px;
+  border-radius: 1px;
+  background-color: var(--ev-line-soft);
+  transition: background-color var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+/* Active segments use navy (§5.2) */
+.ev-segment-active {
+  background-color: var(--ev-navy);
+}
+
+.ev-risk-label {
+  font-size: var(--ev-text-caption);
+  font-weight: 600;
+  color: var(--ev-navy);
+  white-space: nowrap;
+}
+
+.ev-risk-compact .ev-risk-label {
+  display: none;
+}

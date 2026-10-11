@@ -1,0 +1,42 @@
+/* ==============================================================================
+   SandboxBadge Component Styles (§6.1, §8.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-sandbox-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  padding: 4px var(--ev-space-3);
+  background-color: var(--ev-cream);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-chip);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-caption);
+  color: var(--ev-slate);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ev-sandbox-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--ev-teal);
+}
+
+.ev-sandbox-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ev-space-2);
+  height: 24px;
+  background-color: var(--ev-cream);
+  border-top: 1px solid var(--ev-line-soft);
+  color: var(--ev-slate-muted);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-overline);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

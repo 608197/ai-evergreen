@@ -1,0 +1,68 @@
+/* ==============================================================================
+   GateBanner Component Styles (§6.1)
+   No hardcoded hex - variables only
+   ============================================================================== */
+
+.ev-gate-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ev-space-4);
+  padding: var(--ev-space-3) var(--ev-space-4);
+  background-color: var(--ev-gold-tint);
+  border: 1px solid var(--ev-gold);
+  border-left: 4px solid var(--ev-gold);
+  border-radius: var(--ev-radius-control);
+  margin-bottom: var(--ev-space-4);
+}
+
+.ev-gate-banner-left {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-3);
+}
+
+.ev-gate-banner-icon {
+  color: var(--ev-gold);
+  flex-shrink: 0;
+}
+
+.ev-gate-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ev-gate-tag {
+  font-size: var(--ev-text-overline);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ev-gold-text);
+}
+
+.ev-gate-message {
+  font-size: var(--ev-text-body);
+  color: var(--ev-navy);
+}
+
+.ev-gate-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-1);
+  background-color: var(--ev-white);
+  color: var(--ev-gold-text);
+  border: 1px solid var(--ev-gold);
+  border-radius: var(--ev-radius-control);
+  padding: var(--ev-space-1) var(--ev-space-3);
+  font-family: var(--ev-font-ui);
+  font-size: var(--ev-text-caption);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--ev-duration-micro) var(--ev-ease-out);
+}
+
+.ev-gate-action-btn:hover {
+  background-color: var(--ev-gold-tint);
+}
