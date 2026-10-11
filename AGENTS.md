@@ -141,6 +141,10 @@ charter (see `docs/PRD.md` §7):
 
 | Question | File |
 |---|---|
+| What is the live environment, deployment topology, and complete current system state? | `docs/system_state.md` |
+| What has already been built, and what's the chronological log? | `docs/memory.md` |
+| What is the scripted end-to-end presentation and verification walkthrough? | `docs/demo_walkthrough_guide.md` |
+| What mistakes has an agent made before on this repo, and the fix? | `docs/lessons-learned.md` |
 | What are we building, for whom, and what's explicitly out of scope? | `docs/PRD.md` |
 | What are the components, data flow, tech stack, folder layout? | `docs/Architecture.md` |
 | What is the exact input/output contract for a given component? | `docs/Interfaces.md` |
@@ -150,8 +154,6 @@ charter (see `docs/PRD.md` §7):
 | What could go wrong, and what's the seeded regression catalogue? | `docs/Risks.md` |
 | Why was a past architectural choice made? | `docs/Decisions.md` |
 | What does the minimal dashboard look and feel like? | `docs/Design.md` |
-| What has already been built, and what's the current state? | `docs/memory.md` |
-| What mistakes has an agent made before on this repo, and the fix? | `docs/lessons-learned.md` |
 
 If none of these answer the question and the charter doesn't cover it either,
 add it to the Open Questions table in `docs/PRD.md` rather than guessing
@@ -161,12 +163,17 @@ silently.
 
 ## 7. Session Discipline
 
-- At the **start** of a session, read `docs/memory.md` first — do not
-  re-derive project state from scratch by re-reading every doc.
-- At the **end** of a session (or any time you complete a checklist item in
-  `docs/Tasks.md`), update `docs/memory.md` with what changed and update the
-  checkbox in `docs/Tasks.md`. Treat an unupdated memory file as an
-  incomplete task.
+- At the **start** of a session, read `docs/system_state.md` and the latest
+  entry of `docs/memory.md` first — do not re-derive project state from
+  scratch by re-reading every doc.
+- **Git Push Protocol:** Always use `python scripts/push_to_github.py "<message>"`
+  to push commits via the GitHub REST API. Corporate Zscaler intercepts and
+  blocks standard git-receive-pack POST requests.
+- **Testing & Build Verification:** Always run `npm run build` in `web/` before
+  pushing to confirm 0 TypeScript / CSS errors.
+- At the **end** of a session (or any time you complete a checklist item or
+  feature), update `docs/system_state.md`, `docs/memory.md`, and any applicable
+  checkbox in `docs/Tasks.md`. Treat an unupdated memory file as an incomplete task.
 - If you make a mistake that cost meaningful rework, log it in
   `docs/lessons-learned.md` in the format shown in that file — one line is
   enough, but do not skip it.

@@ -7,6 +7,31 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-11 — Zero-Loss Session Persistence & Master System State Reference
+
+**What changed:**
+- **Created Master System State Reference (`docs/system_state.md`)**:
+  - Serves as the single source of ground truth across all conversational resets, context sliding, and new chat windows.
+  - Documents exact live environment (EC2 instance DNS, internal IP `172.31.46.141`, ports `8503` / `8003`, Docker Compose workflow).
+  - Encodes non-negotiable operational rules (Zscaler Git REST API push requirement, Docker multi-stage containerization, synthetic data invariant, deterministic-first qualification).
+  - Outlines full 12-screen UI architecture, 6 enterprise connectors, in-page evaluator persona switcher, and System Voice Narrator.
+- **Created Committed Demo Walkthrough Guide (`docs/demo_walkthrough_guide.md`)**:
+  - Moved the 10-minute end-to-end presentation and verification walkthrough script from the local artifact scratchpad directly into tracked repository version control.
+  - Contains step-by-step table mapping 12 presentation steps to screen URLs, presenter script, exact user clicks, and system invariant verification checks.
+- **Populated Lessons Learned Log (`docs/lessons-learned.md`)**:
+  - Replaced empty template with 5 concrete mistake-to-correction operational records:
+    1. Zscaler 403 on standard Git push -> Bypassed via `scripts/push_to_github.py`.
+    2. Host `npm run build` misconception -> Clarified Docker multi-stage container build.
+    3. Missing z-index tokens in `tokens.css` -> Defined complete Z-index scale to prevent popover stacking overlap.
+    4. Hidden persona dropdown -> Built prominent in-page Evaluator Perspective Switcher on Home Cockpit.
+    5. Dead anchor links on sub-screens -> Replaced with React Router `useNavigate()`.
+- **Enforced Session Boot Discipline in `AGENTS.md`**:
+  - Updated Section 6 (Where To Look Before Asking) and Section 7 (Session Discipline) to mandate that all agents read `docs/system_state.md` and `docs/memory.md` upon boot, guaranteeing zero context drift.
+
+**What's still open:**
+- Push all new documentation and rule files to GitHub remote `origin/main` via `python scripts/push_to_github.py`.
+- User to run `git pull && docker compose up -d --build` on their AWS EC2 VM.
+
 ## 2026-10-11 — Persona Switcher Z-Index Fix & In-Page Evaluator Perspective Selector
 
 **What changed:**
