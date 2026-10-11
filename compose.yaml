@@ -37,7 +37,7 @@ services:
     container_name: ai-evergreen-ui
     restart: unless-stopped
     ports:
-      - "${UI_PORT:-8501}:80"
+      - "${UI_PORT:-8503}:80"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/healthz"]
       interval: 15s
