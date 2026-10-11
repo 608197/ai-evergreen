@@ -9,6 +9,9 @@ import {
   Hash,
   Clock,
   Sparkles,
+  AlertOctagon,
+  ShieldCheck,
+  XCircle,
 } from 'lucide-react';
 import { StageStepper } from '../../components/common/StageStepper';
 
@@ -190,6 +193,54 @@ export const ResultsScreen: React.FC = () => {
         </div>
       )}
 
+
+      {/* Item-Level Deterioration Tracker Banner (Sept 2026 TestMu AI Benchmark) */}
+      <div className="item-deterioration-banner">
+        <div className="idb-top">
+          <div className="idb-title-wrap">
+            <AlertOctagon size={18} className="idb-alert-icon" />
+            <div className="idb-title-group">
+              <span className="idb-title">Item-Level Deterioration Tracking (September 2026 Research Benchmark)</span>
+              <span className="idb-subtext">
+                Headline benchmark accuracy rose by <strong>+3.2%</strong> (91.4% → 94.6%) — <em>aggregate gains routinely mask item-level regressions</em>
+              </span>
+            </div>
+          </div>
+          <span className="idb-policy-badge">
+            <ShieldCheck size={13} /> ZERO CRITICAL DEGRADATIONS POLICY ENFORCED
+          </span>
+        </div>
+
+        <div className="idb-metrics-grid">
+          <div className="idb-metric-card">
+            <span className="idb-card-label">Total Test Items</span>
+            <span className="idb-card-val">134 Items</span>
+            <span className="idb-card-sub">Executed scope</span>
+          </div>
+          <div className="idb-metric-card">
+            <span className="idb-card-label">Maintained Pass</span>
+            <span className="idb-card-val text-emerald">118 Items (88%)</span>
+            <span className="idb-card-sub">Zero drift</span>
+          </div>
+          <div className="idb-metric-card">
+            <span className="idb-card-label">Improved Items</span>
+            <span className="idb-card-val text-cyan">15 Items (+11%)</span>
+            <span className="idb-card-sub">Faster / higher semantic</span>
+          </div>
+          <div className="idb-metric-card critical-alert">
+            <span className="idb-card-label">Critical Deterioration</span>
+            <span className="idb-card-val text-rose font-bold">1 Seeded Defect</span>
+            <span className="idb-card-sub text-rose-sub">DEFECT-008: Tool Inversion on APP-05</span>
+          </div>
+          <div className="idb-metric-card verdict-card">
+            <span className="idb-card-label">Kernel Safety Gate</span>
+            <span className="idb-verdict-tag blocked">
+              <XCircle size={14} /> BLOCKED BY KERNEL
+            </span>
+            <span className="idb-card-sub">Hard Stop K-014 triggered</span>
+          </div>
+        </div>
+      </div>
 
       {/* 12-Column Main Heatmap Section */}
       <div className="results-heatmap-section">

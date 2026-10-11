@@ -75,7 +75,7 @@ const DEMO_STEPS: DemoStepInfo[] = [
     screenId: 'S4',
     screenName: 'Results Matrix',
     route: '/events/E-2026-001/results',
-    presenterSays: 'The candidate’s final answer is identical, but it skipped the policy check. Trajectory fails.',
+    presenterSays: 'Headline accuracy rose +3.2%, but Sept 2026 research shows aggregate gains hide regressions. Evergreen isolates item deterioration and blocks on critical defect DEFECT-008.',
     action: 'Select Refund Agent; click the Trajectory dimension cell to open differential diff.',
     expectedResult: 'Side-by-side agent workflow diff highlights dashed missing policy check step.',
   },
@@ -129,9 +129,9 @@ const DEMO_STEPS: DemoStepInfo[] = [
     screenId: 'S11 & S12',
     screenName: 'Controls & Portfolio',
     route: '/controls',
-    presenterSays: 'Evergreen governs itself, and this is where it goes next.',
-    action: 'Inspect Self-Governance panel; navigate to Portfolio screen for roadmap preview.',
-    expectedResult: 'Self-governance invariants verified; strategic enterprise roadmap visualized.',
+    presenterSays: 'Evergreen governs itself, passes all 12 H1–H12 safety gates, and maintains an explicit Build-vs-Integrate boundary with ServiceNow and Cognizant AI Gateway.',
+    action: 'Inspect H1–H12 Verification Matrix and Build-vs-Integrate Boundary; view self-governance safeguards.',
+    expectedResult: 'All 12 hypotheses passed (100% safety); architectural enterprise integration verified.',
   },
 ];
 
