@@ -114,7 +114,9 @@ export const ManualEventModal: React.FC = () => {
         {/* Header */}
         <div className="manual-event-header">
           <div className="manual-event-title-group">
-            <Sparkles className="manual-event-icon" size={20} />
+            <div className="manual-event-icon-badge">
+              <Sparkles className="manual-event-icon" size={18} />
+            </div>
             <div>
               <h2 id="manual-event-title" className="manual-event-title">
                 Log Model Change Event
@@ -293,13 +295,13 @@ export const ManualEventModal: React.FC = () => {
           <div className="manual-event-footer">
             <button
               type="button"
-              className="btn-secondary"
+              className="manual-event-cancel-btn btn-secondary"
               onClick={() => setManualEventModalOpen(false)}
             >
               Cancel
             </button>
-            <button type="submit" className="btn-primary">
-              Log Event & Start Blast Radius <ArrowRight size={14} />
+            <button type="submit" className="manual-event-submit-btn btn-primary">
+              Log Event & Start Blast Radius <ArrowRight size={15} />
             </button>
           </div>
         </form>
