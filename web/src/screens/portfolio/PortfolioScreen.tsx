@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
 import {
   TrendingUp,
@@ -10,6 +11,7 @@ import {
 import './PortfolioScreen.css';
 
 export const PortfolioScreen: React.FC = () => {
+  const navigate = useNavigate();
   const {
     modelLifecycle,
     techDebt,
@@ -55,7 +57,7 @@ export const PortfolioScreen: React.FC = () => {
               <span className="metric-illustrative">illustrative</span>
               <span className="metric-label">Deprecated Models in Use</span>
               <span className="metric-number warn">{techDebt.deprecatedModelsInUse}</span>
-              <span className="metric-subtext">3 production workloads impacted</span>
+              <span className="metric-subtext">6 production workloads impacted (Atlas-1 active)</span>
             </div>
 
             <div className="metric-tile-card">
@@ -132,21 +134,28 @@ export const PortfolioScreen: React.FC = () => {
                   <span className="apps-title">Affected Workloads:</span>
                   <div className="apps-tags">
                     {item.dependentAppIds.map((app) => (
-                      <a
+                      <button
                         key={app}
-                        href="#/estate"
+                        type="button"
+                        onClick={() => navigate('/estate')}
                         className="app-pill-link"
+                        style={{ border: 'none', cursor: 'pointer', textAlign: 'left' }}
                       >
                         {app}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </div>
 
                 <div className="lifecycle-action">
-                  <a href="#/events/E-2026-001/blast-radius" className="btn-secondary btn-sm full-width">
+                  <button
+                    type="button"
+                    onClick={() => navigate('/events/E-2026-001/blast-radius')}
+                    className="btn-secondary btn-sm full-width"
+                    style={{ cursor: 'pointer' }}
+                  >
                     View Qualification Blast Radius <ArrowRight size={13} />
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}

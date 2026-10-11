@@ -165,7 +165,7 @@ export const PlanScreen: React.FC = () => {
       <div className="plan-header">
         <div className="plan-header-main">
           <div className="plan-breadcrumbs">
-            <Link to="/events" className="breadcrumb-link">Events</Link>
+            <Link to="/" className="breadcrumb-link">Home</Link>
             <span className="breadcrumb-sep">/</span>
             <span className="breadcrumb-current">{id}</span>
             <span className="breadcrumb-sep">/</span>

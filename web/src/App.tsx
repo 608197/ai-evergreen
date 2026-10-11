@@ -14,6 +14,7 @@ import { WorkloadScreen } from './screens/workload/WorkloadScreen';
 import { MemoryScreen } from './screens/memory/MemoryScreen';
 import { ControlsScreen } from './screens/controls/ControlsScreen';
 import { PortfolioScreen } from './screens/portfolio/PortfolioScreen';
+import { IntegrationsScreen } from './screens/integrations/IntegrationsScreen';
 import { Gallery } from './pages/Gallery';
 
 export const App: React.FC = () => {
@@ -50,6 +51,8 @@ export const App: React.FC = () => {
           <Route path="/memory" element={<MemoryScreen />} />
           <Route path="/controls" element={<ControlsScreen />} />
           <Route path="/portfolio" element={<PortfolioScreen />} />
+          <Route path="/integrations" element={<IntegrationsScreen />} />
+          <Route path="/connectors" element={<IntegrationsScreen />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

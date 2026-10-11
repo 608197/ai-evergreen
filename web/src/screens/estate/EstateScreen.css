@@ -49,6 +49,69 @@
   gap: var(--ev-space-2);
 }
 
+.estate-active-event-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--ev-radius-md);
+  font-size: 12px;
+}
+
+.active-event-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #f87171;
+  white-space: nowrap;
+}
+
+.event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.35);
+  animation: narratorPulse 1.8s infinite;
+}
+
+.active-event-text {
+  color: #cbd5e1;
+  flex: 1;
+}
+
+.active-event-text code {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.12);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.active-event-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.active-event-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
 .estate-toast {
   display: flex;
   align-items: center;

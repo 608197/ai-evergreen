@@ -155,15 +155,16 @@ export const TopBar: React.FC = () => {
           <BookOpen size={18} aria-hidden="true" />
         </button>
 
-        {/* Demo Director Launcher */}
+        {/* System Narrator Launcher */}
         <button
           type="button"
-          className="ev-topbar__tool-btn"
+          className="ev-topbar__narrator-btn"
           onClick={() => setDemoDirectorOpen(true)}
-          title="Demo Director Mode (Ctrl+Alt+D)"
-          aria-label="Open Demo Director mode"
+          title="Open System Narrator & Interactive Enterprise Guide (Ctrl+Alt+D)"
+          aria-label="Open System Narrator"
         >
-          <Sparkles size={17} style={{ color: '#38BDF8' }} aria-hidden="true" />
+          <Sparkles size={14} style={{ color: '#38BDF8' }} aria-hidden="true" />
+          <span>System Narrator</span>
         </button>
 
         {/* Notifications */}

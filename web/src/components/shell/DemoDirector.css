@@ -1,5 +1,58 @@
-/* DemoDirector.css — AI Evergreen Phase 6 Presenter & Demo Director Mode */
+/* DemoDirector.css — AI Evergreen System Narrator & Interactive Enterprise Guide */
 
+.ev-narrator-pill-launcher {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #0f172a;
+  color: #38bdf8;
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ev-narrator-pill-launcher:hover {
+  background: #1e293b;
+  color: #7dd3fc;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.35);
+}
+
+.narrator-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+  animation: narratorPulse 2s infinite;
+}
+
+@keyframes narratorPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.narrator-icon {
+  color: #38bdf8;
+}
+
+.narrator-pill-text {
+  letter-spacing: -0.01em;
+}
+
+/* Legacy edge launcher fallback */
 .ev-demo-tab-launcher {
   position: fixed;
   right: 0;
@@ -63,6 +116,166 @@
   padding: 14px 16px;
   background: #0D1527;
   border-bottom: 1px solid #1E293B;
+}
+
+.ev-narrator-drawer {
+  width: 380px;
+}
+
+.ev-narrator-subtitle {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.ev-narrator-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ev-narrator-tabs {
+  display: flex;
+  align-items: center;
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  padding: 4px 8px;
+  gap: 4px;
+}
+
+.narrator-tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.narrator-tab:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.narrator-tab--active {
+  color: #38bdf8;
+  background: #1e293b;
+}
+
+.ev-narrator-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ev-narrator-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ev-narrator-chapter-chip {
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.ev-narrator-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ev-narrator-audio-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.ev-narrator-audio-btn--active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  animation: narratorPulse 1.5s infinite;
+}
+
+.ev-narrator-headline {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.35;
+}
+
+.narrator-section-block {
+  background: #0d1527;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.narrator-block-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.narrator-block-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+.narrator-section-block--roi {
+  border-left: 3px solid #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.narrator-block-label--roi {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #34d399;
+}
+
+.narrator-section-block--next {
+  border-left: 3px solid #38bdf8;
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.narrator-block-label--next {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #38bdf8;
 }
 
 .ev-demo-title-group {

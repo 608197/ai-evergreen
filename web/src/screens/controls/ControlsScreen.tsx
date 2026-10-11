@@ -21,7 +21,7 @@ const SPIKE_HYPOTHESES = [
   { id: 'H2', name: 'Direct vs Transitive Split', target: '100% Concordance', measured: '3 Direct / 3 Transitive', status: 'PASS', notes: 'Correctly partitions agent-mediated blast paths' },
   { id: 'H3', name: 'Risk Rubric Concordance', target: '6/6 Workload Tiers Matched', measured: '6/6 Correctly Classified', status: 'PASS', notes: 'Tier 1 to 4 with deterministic overrides active' },
   { id: 'H4', name: 'Critical Regressions Missed', target: 'Strictly 0 (Zero Tolerance)', measured: '0 Missed (12/12 Defect Catalog)', status: 'PASS', notes: '100% detection of seeded critical defects' },
-  { id: 'H5', name: 'Test Suite Optimization', target: '≥40% Compute Reduction', measured: '58% Reduction (134 of 480 Tests)', status: 'PASS', notes: 'Proportionate test selection without safety loss' },
+  { id: 'H5', name: 'Test Suite Optimization', target: '≥40% Compute Reduction', measured: '72% Reduction (134 of 480 Tests)', status: 'PASS', notes: 'Proportionate test selection without safety loss' },
   { id: 'H6', name: 'Machine-Readable Exclusions', target: '100% Explained', measured: '100% Attached Reason Codes', status: 'PASS', notes: 'Zero unreasoned test exclusions in audit log' },
   { id: 'H7', name: 'Planted Gap Discovery', target: 'Detected before Promotion', measured: 'Found (GEN-01 Parallel Tool Invariant)', status: 'PASS', notes: 'Autonomous missing-evidence proposal verified' },
   { id: 'H8', name: 'Treatment Concordance', target: '6/6 Match Expert Panel', measured: '6/6 Matched Decisions', status: 'PASS', notes: '2 Migrate, 2 Canary, 1 Investigate, 1 Block' },

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
 import { StatTile } from '../../components/common/StatTile';
 import { StatusChip } from '../../components/common/StatusChip';
@@ -11,6 +12,7 @@ import {
 import './MemoryScreen.css';
 
 export const MemoryScreen: React.FC = () => {
+  const navigate = useNavigate();
   const {
     memoryPatterns,
     memoryReuseLog,
@@ -104,9 +106,14 @@ export const MemoryScreen: React.FC = () => {
                 </div>
 
                 <div className="pattern-actions">
-                  <a href="#/estate" className="pattern-action-link">
+                  <button
+                    type="button"
+                    onClick={() => navigate('/estate')}
+                    className="pattern-action-link"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  >
                     View affected workloads <ArrowRight size={13} />
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -175,12 +182,14 @@ export const MemoryScreen: React.FC = () => {
                   </div>
                   <div className="prop-q-field">Field: <code>{prop.fieldLabel}</code></div>
                   <p className="prop-q-reason">{prop.reason}</p>
-                  <a
-                    href={`#/estate/workloads/${prop.workloadId}`}
+                  <button
+                    type="button"
+                    onClick={() => navigate('/estate')}
                     className="prop-q-link"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                   >
                     Review in Workload Profile <ExternalLink size={12} />
-                  </a>
+                  </button>
                 </div>
               ))}
             </div>

@@ -96,7 +96,7 @@ export const ResultsScreen: React.FC = () => {
       <div className="results-header">
         <div className="results-header-main">
           <div className="results-breadcrumbs">
-            <Link to="/events" className="breadcrumb-link">Events</Link>
+            <Link to="/" className="breadcrumb-link">Home</Link>
             <span className="breadcrumb-sep">/</span>
             <span className="breadcrumb-current">{id}</span>
             <span className="breadcrumb-sep">/</span>

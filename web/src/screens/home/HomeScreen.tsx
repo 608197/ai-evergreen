@@ -12,9 +12,12 @@ import {
   Activity,
   Calendar,
   CheckCircle,
-  X,
   ExternalLink,
   Plus,
+  Cloud,
+  Database,
+  ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 import './HomeScreen.css';
 
@@ -51,8 +54,6 @@ export const HomeScreen: React.FC = () => {
   }, [events, statusFilter, searchQuery]);
 
   const openEvents = events.filter((e) => e.status === 'open');
-
-  // Stale edges count
   const staleEdges = edges.filter((e) => e.state === 'stale');
 
   // Stage step dots renderer
@@ -77,12 +78,434 @@ export const HomeScreen: React.FC = () => {
     );
   };
 
-  // Determine top zone ordering based on role per §8.2
-  const isSRE = currentUser.role === 'sre';
+  // Helper for persona-specific content
+  const role = currentUser.role;
+
+  const renderPersonaHero = () => {
+    switch (role) {
+      case 'app_owner':
+        return (
+          <article className="ev-persona-hero ev-persona-hero--urgent">
+            <div className="ev-persona-hero__header">
+              <div className="ev-persona-hero__tag-group">
+                <span className="ev-persona-hero__role-badge">APPLICATION OWNER COCKPIT</span>
+                <span className="ev-persona-hero__time-tag">
+                  <Clock size={13} /> 14 Days Until Deprecation
+                </span>
+              </div>
+              <RiskMeter tier="critical" compact />
+            </div>
+
+            <h2 className="ev-persona-hero__title">
+              Action Required: AWS Bedrock Retiring Atlas-1
+            </h2>
+            <p className="ev-persona-hero__summary">
+              Your tier-1 workload <strong>Refund Agent</strong> is directly in the blast radius. Comprehensive qualification discovered a fatal tool-inversion failure on the Atlas-1b candidate. Automated promotion is <strong>blocked by Safety Invariant K-014</strong>.
+            </p>
+
+            <div className="ev-persona-hero__impact-strip">
+              <div className="impact-item">
+                <span className="impact-label">Impacted Workload:</span>
+                <span className="impact-val">Refund Agent (Tier 1 P1)</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Evaluation Finding:</span>
+                <span className="impact-val impact-val--alert">1 Critical Tool Inversion Defect</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Kernel Action:</span>
+                <span className="impact-val impact-val--alert">Blocked (K-014 Invariant)</span>
+              </div>
+            </div>
+
+            <div className="ev-persona-hero__footer">
+              <span className="ev-persona-hero__meta">Active Qualification Event: E-2026-001</span>
+              <div className="ev-persona-hero__actions">
+                <button
+                  type="button"
+                  className="ev-persona-hero__primary-btn"
+                  onClick={() => navigate('/events/E-2026-001/blast-radius')}
+                >
+                  <span>Review Impact on My Applications</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+
+      case 'qa_lead':
+        return (
+          <article className="ev-persona-hero ev-persona-hero--info">
+            <div className="ev-persona-hero__header">
+              <div className="ev-persona-hero__tag-group">
+                <span className="ev-persona-hero__role-badge">QA & TEST LEAD COCKPIT</span>
+                <span className="ev-persona-hero__time-tag">
+                  <Clock size={13} /> 72% Scope Pruning
+                </span>
+              </div>
+              <RiskMeter tier="high" compact />
+            </div>
+
+            <h2 className="ev-persona-hero__title">
+              Adaptive Regression Plan Generated & Optimized
+            </h2>
+            <p className="ev-persona-hero__summary">
+              Adaptive Planner selected <strong>134 targeted tests</strong> out of 480 total Jira/Xray suites, safely excluding 346 with machine-readable rationales. <strong>1 missing test gap was synthesized (GEN-01)</strong>. All 8 seeded defect regressions were successfully isolated.
+            </p>
+
+            <div className="ev-persona-hero__impact-strip">
+              <div className="impact-item">
+                <span className="impact-label">Jira Tests Indexed:</span>
+                <span className="impact-val">480 Total Test Cases</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Selective Qualification:</span>
+                <span className="impact-val">134 Selected (72% Savings)</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Seeded Defect Catch:</span>
+                <span className="impact-val impact-val--success">100% (8/8 Defect Seeds Caught)</span>
+              </div>
+            </div>
+
+            <div className="ev-persona-hero__footer">
+              <span className="ev-persona-hero__meta">Awaiting Test Lead Approval on Plan</span>
+              <div className="ev-persona-hero__actions">
+                <button
+                  type="button"
+                  className="ev-persona-hero__primary-btn"
+                  onClick={() => navigate('/events/E-2026-001/plan')}
+                >
+                  <span>Inspect Test Plan & Exclusions</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+
+      case 'risk_approver':
+        return (
+          <article className="ev-persona-hero ev-persona-hero--alert">
+            <div className="ev-persona-hero__header">
+              <div className="ev-persona-hero__tag-group">
+                <span className="ev-persona-hero__role-badge">RISK & COMPLIANCE COCKPIT</span>
+                <span className="ev-persona-hero__time-tag">
+                  <ShieldCheck size={13} /> Trusted Kernel Gate
+                </span>
+              </div>
+              <RiskMeter tier="critical" compact />
+            </div>
+
+            <h2 className="ev-persona-hero__title">
+              Promotion Blocked by Safety Invariant K-014
+            </h2>
+            <p className="ev-persona-hero__summary">
+              Candidate Model Atlas-1b was deterministically blocked from automated deployment due to tool-inversion failure on regulated workloads. <strong>Deterministic policy overrides all LLM advisories.</strong> A dual-signed human approval record is required to advance.
+            </p>
+
+            <div className="ev-persona-hero__impact-strip">
+              <div className="impact-item">
+                <span className="impact-label">Deterministic Check:</span>
+                <span className="impact-val impact-val--alert">FAIL (K-014 Violation)</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Audit Evidence:</span>
+                <span className="impact-val">Merkle Chain Sealed (SHA-256)</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Promotion Authority:</span>
+                <span className="impact-val">Priya Menon (Risk Approver)</span>
+              </div>
+            </div>
+
+            <div className="ev-persona-hero__footer">
+              <span className="ev-persona-hero__meta">Event: E-2026-001 · Decision Pending</span>
+              <div className="ev-persona-hero__actions">
+                <button
+                  type="button"
+                  className="ev-persona-hero__primary-btn"
+                  onClick={() => navigate('/events/E-2026-001/decision')}
+                >
+                  <span>Review Block Rationale & Evidence</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+
+      case 'sre':
+        return (
+          <article className="ev-persona-hero ev-persona-hero--success">
+            <div className="ev-persona-hero__header">
+              <div className="ev-persona-hero__tag-group">
+                <span className="ev-persona-hero__role-badge">SRE & OPERATIONS COCKPIT</span>
+                <span className="ev-persona-hero__time-tag">
+                  <Activity size={13} /> Live AI Gateway Traffic
+                </span>
+              </div>
+              <RiskMeter tier="low" compact />
+            </div>
+
+            <h2 className="ev-persona-hero__title">
+              Active Gateway Canary in Progress: Ticket Summariser
+            </h2>
+            <p className="ev-persona-hero__summary">
+              Cognizant AI Gateway is routing <strong>5% live traffic</strong> to Atlas-1b candidate. Live telemetry indicates <strong>P95 latency of 412ms</strong> (within 850ms threshold) and 0.02% error rate. Autonomous sub-second rollback controller is armed.
+            </p>
+
+            <div className="ev-persona-hero__impact-strip">
+              <div className="impact-item">
+                <span className="impact-label">Canary Route:</span>
+                <span className="impact-val">5% Candidate / 95% Production</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Live P95 Latency:</span>
+                <span className="impact-val impact-val--success">412ms (SLA &lt;850ms)</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Rollback Controller:</span>
+                <span className="impact-val impact-val--success">Armed & Autonomous</span>
+              </div>
+            </div>
+
+            <div className="ev-persona-hero__footer">
+              <span className="ev-persona-hero__meta">Gateway Telemetry Streaming</span>
+              <div className="ev-persona-hero__actions">
+                <button
+                  type="button"
+                  className="ev-persona-hero__primary-btn"
+                  onClick={() => navigate('/events/E-2026-001/rollout')}
+                >
+                  <span>View Live Canary Telemetry</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+
+      default:
+        // Platform Engineer / Ravi Kulkarni (Default view for evaluators)
+        return (
+          <article className="ev-persona-hero ev-persona-hero--primary">
+            <div className="ev-persona-hero__header">
+              <div className="ev-persona-hero__tag-group">
+                <span className="ev-persona-hero__role-badge">ENTERPRISE AI PLATFORM COCKPIT</span>
+                <span className="ev-persona-hero__time-tag">
+                  <Clock size={13} /> 14 Days Remaining in Window
+                </span>
+              </div>
+              <RiskMeter tier="critical" compact />
+            </div>
+
+            <h2 className="ev-persona-hero__title">
+              Upstream Event: AWS Bedrock Retiring Atlas-1
+            </h2>
+            <p className="ev-persona-hero__summary">
+              Provider A announced retirement of Atlas-1 v1. Blast radius discovery identified <strong>6 enterprise applications</strong> and 24 dependency edges affected, with 1 unconfirmed critical edge on Refund Agent blocking the G1 gate.
+            </p>
+
+            <div className="ev-persona-hero__impact-strip">
+              <div className="impact-item">
+                <span className="impact-label">Blast Radius Scope:</span>
+                <span className="impact-val">6 Applications · 24 Edges</span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">G1 Gate Pre-requisite:</span>
+                <span className="impact-val impact-val--alert">
+                  {!g1State.passed ? '1 Edge Blocks G1 (Refund Agent)' : 'Passed'}
+                </span>
+              </div>
+              <div className="impact-item">
+                <span className="impact-label">Candidate Model:</span>
+                <span className="impact-val">Atlas-1b (Fine-tuned adapter)</span>
+              </div>
+            </div>
+
+            <div className="ev-persona-hero__footer">
+              <span className="ev-persona-hero__meta">Event ID: E-2026-001 · 6 apps affected</span>
+              <div className="ev-persona-hero__actions">
+                <button
+                  type="button"
+                  className="ev-persona-hero__primary-btn"
+                  onClick={() => navigate('/events/E-2026-001/blast-radius')}
+                >
+                  <span>Start Qualification & Review Blast Radius</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+    }
+  };
+
+  // Render role-specific KPI dials
+  const renderPersonaKPIs = () => {
+    switch (role) {
+      case 'app_owner':
+        return (
+          <>
+            <StatTile
+              label="My Monitored Apps"
+              value="4 Apps"
+              proofType="measured"
+              delta={{ value: '2 Tier-1 Critical (Refund, Claims)', positive: true }}
+            />
+            <StatTile
+              label="Active Threats"
+              value="1 Deprecation"
+              proofType="measured"
+              delta={{ value: 'Atlas-1 EOL in 14 days', positive: false }}
+            />
+            <StatTile
+              label="Production Gate"
+              value="Blocked"
+              proofType="measured"
+              delta={{ value: 'K-014 Safety Invariant Violation', positive: false }}
+            />
+          </>
+        );
+
+      case 'qa_lead':
+        return (
+          <>
+            <StatTile
+              label="Test Optimization"
+              value="134 / 480"
+              proofType="measured"
+              delta={{ value: '72% runtime saved via pruning', positive: true }}
+            />
+            <StatTile
+              label="Defect Detection Rate"
+              value="100%"
+              proofType="measured"
+              delta={{ value: '8 of 8 planted seeds isolated', positive: true }}
+            />
+            <StatTile
+              label="Synthesized Test Gaps"
+              value="1 Generated"
+              proofType="illustrative"
+              delta={{ value: 'GEN-01 claims assertion', positive: true }}
+            />
+          </>
+        );
+
+      case 'risk_approver':
+        return (
+          <>
+            <StatTile
+              label="Deterministic Invariants"
+              value="12 / 12 Verified"
+              proofType="measured"
+              delta={{ value: 'Hypotheses H1–H12 audited', positive: true }}
+            />
+            <StatTile
+              label="Active Hard Stops"
+              value="1 Blocked"
+              proofType="measured"
+              delta={{ value: 'Rule K-014: Tool Inversion on P1', positive: false }}
+            />
+            <StatTile
+              label="Audit Ledger Integrity"
+              value="100% Sealed"
+              proofType="measured"
+              delta={{ value: '0 unapproved promotions allowed', positive: true }}
+            />
+          </>
+        );
+
+      case 'sre':
+        return (
+          <>
+            <StatTile
+              label="Active Canary Traffic"
+              value="5% Candidate"
+              proofType="measured"
+              delta={{ value: 'Ticket Summariser route active', positive: true }}
+            />
+            <StatTile
+              label="Gateway P95 Latency"
+              value="412 ms"
+              proofType="measured"
+              delta={{ value: 'Within 850ms enterprise SLA', positive: true }}
+            />
+            <StatTile
+              label="Rollback Controller"
+              value="Armed"
+              proofType="measured"
+              delta={{ value: 'Sub-850ms automated tripwire', positive: true }}
+            />
+          </>
+        );
+
+      default:
+        return (
+          <>
+            <StatTile
+              label="Enterprise Estate"
+              value="14 Models · 6 Apps"
+              proofType="measured"
+              delta={{ value: '24 dependency edges active', positive: true }}
+            />
+            <StatTile
+              label="Qualification Scope"
+              value="134 / 480 Tests"
+              proofType="illustrative"
+              delta={{ value: '72% scope reduction', positive: true }}
+            />
+            <StatTile
+              label="Graph Attestation"
+              value={isGraphStale ? 'Degraded' : '98.2%'}
+              proofType="measured"
+              delta={{
+                value: !g1State.passed ? '1 critical edge unconfirmed' : 'All paths attested',
+                positive: g1State.passed,
+              }}
+            />
+          </>
+        );
+    }
+  };
 
   return (
     <div className="ev-home">
-      {/* Zone 1: Greeting & Role Context Banner */}
+      {/* Layer 1: Enterprise Connected Estate Bar */}
+      <section className="ev-home-connectors-bar" aria-label="Connected Enterprise Sources">
+        <div className="connectors-bar-left">
+          <span className="connectors-bar-badge">
+            <span className="connectors-live-dot" /> CONNECTED ESTATE
+          </span>
+          <div className="connectors-chips">
+            <span className="conn-chip" title="AWS Bedrock connected in us-east-1">
+              <Cloud size={13} className="conn-icon" /> AWS Bedrock (4 Models)
+            </span>
+            <span className="conn-chip" title="ServiceNow CMDB synced 12m ago">
+              <Database size={13} className="conn-icon" /> ServiceNow CMDB (6 Apps)
+            </span>
+            <span className="conn-chip" title="Jira and Xray indexed 480 test cases">
+              <ShieldCheck size={13} className="conn-icon" /> Jira / Xray (480 Tests)
+            </span>
+            <span className="conn-chip conn-chip--gateway" title="Cognizant AI Gateway live routing">
+              <Activity size={13} className="conn-icon" /> AI Gateway (&lt;850ms Rollback)
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="connectors-bar-action"
+          onClick={() => navigate('/integrations')}
+        >
+          <span>Manage Integrations & Sources</span>
+          <ArrowRight size={14} />
+        </button>
+      </section>
+
+      {/* Layer 2: Hero Section & Greeting */}
       <section className="ev-home__hero">
         <div className="ev-home__hero-content">
           <div className="ev-home__greeting-row">
@@ -96,148 +519,104 @@ export const HomeScreen: React.FC = () => {
               type="button"
               className="ev-home__log-event-btn"
               onClick={() => setManualEventModalOpen(true)}
-              title="Log ad-hoc model change event (Overlay O3)"
+              title="Log ad-hoc model change event"
             >
               <Plus size={16} />
               <span>Log event</span>
             </button>
           </div>
           <p className="ev-home__subtitle">
-            {openEvents.length} qualification decisions waiting across {workloads.length} enterprise applications.
+            {openEvents.length} active qualification event waiting across {workloads.length} enterprise applications.
           </p>
         </div>
 
-        {/* Headline KPI Stat Tiles */}
+        {/* Persona-Specific Dynamic Hero Card */}
+        {renderPersonaHero()}
+
+        {/* Persona-Specific Dynamic KPI Dials */}
         <div className="ev-home__stats-row">
-          <StatTile
-            label="Pending Events"
-            value={openEvents.length}
-            proofType="measured"
-            delta={{ value: '2 require review', positive: false }}
-          />
-          <StatTile
-            label="Tests Selected"
-            value="134 / 480"
-            proofType="illustrative"
-            delta={{ value: '72% scope reduction', positive: true }}
-          />
-          <StatTile
-            label="Graph Health"
-            value={isGraphStale ? 'Degraded' : '98.2%'}
-            proofType="measured"
-            delta={{
-              value: !g1State.passed ? '1 critical edge unconfirmed' : 'All critical paths attested',
-              positive: g1State.passed,
-            }}
-          />
+          {renderPersonaKPIs()}
         </div>
       </section>
 
-      {/* Zone 2: Priority Cards & Operational Sidebars */}
+      {/* Layer 3: Fast-Track Techathon Interactive Scenarios (For Evaluators & Judges) */}
+      <section className="ev-home-scenarios" aria-labelledby="scenarios-heading">
+        <div className="scenarios-header">
+          <div className="scenarios-title-group">
+            <Sparkles size={18} className="scenarios-sparkle-icon" />
+            <h2 id="scenarios-heading" className="scenarios-title">
+              Fast-Track Qualification Scenarios (Interactive Walkthroughs)
+            </h2>
+          </div>
+          <span className="scenarios-caption">
+            Click any scenario to see how AI Evergreen automates qualification end-to-end:
+          </span>
+        </div>
+
+        <div className="scenarios-grid">
+          {/* Scenario 1: Deprecation with Seeded Failure */}
+          <div
+            className="scenario-card scenario-card--critical"
+            onClick={() => navigate('/events/E-2026-001/blast-radius')}
+          >
+            <div className="scenario-card-top">
+              <span className="scenario-number-tag">SCENARIO 1</span>
+              <span className="scenario-type-badge scenario-type-badge--red">Urgent Deprecation</span>
+            </div>
+            <h3 className="scenario-card-title">Model EOL & Seeded Defect Catch</h3>
+            <p className="scenario-card-desc">
+              AWS Bedrock retires Atlas-1. Graph discovers 6 apps. Eval isolates a fatal tool inversion defect on Refund Agent. Kernel blocks promotion.
+            </p>
+            <div className="scenario-card-action">
+              <span>Run Scenario 1 (Full 6-Stage Pipeline)</span>
+              <ArrowRight size={14} />
+            </div>
+          </div>
+
+          {/* Scenario 2: Minor Checkpoint Canary */}
+          <div
+            className="scenario-card scenario-card--success"
+            onClick={() => navigate('/events/E-2026-001/rollout')}
+          >
+            <div className="scenario-card-top">
+              <span className="scenario-number-tag">SCENARIO 2</span>
+              <span className="scenario-type-badge scenario-type-badge--green">Routine Upgrade</span>
+            </div>
+            <h3 className="scenario-card-title">Routine Upgrade & Canary Deploy</h3>
+            <p className="scenario-card-desc">
+              Minor model version upgrade. 100% of regression tests pass with zero regressions. Cognizant AI Gateway deploys a 5% canary route.
+            </p>
+            <div className="scenario-card-action">
+              <span>Inspect Canary Telemetry & Rollback</span>
+              <ArrowRight size={14} />
+            </div>
+          </div>
+
+          {/* Scenario 3: Pricing & Adaptive Test Pruning */}
+          <div
+            className="scenario-card scenario-card--warning"
+            onClick={() => navigate('/events/E-2026-001/plan')}
+          >
+            <div className="scenario-card-top">
+              <span className="scenario-number-tag">SCENARIO 3</span>
+              <span className="scenario-type-badge scenario-type-badge--amber">Commercial Terms</span>
+            </div>
+            <h3 className="scenario-card-title">Price Change & Test Pruning</h3>
+            <p className="scenario-card-desc">
+              Provider B adjusts token pricing. Adaptive Planner prunes 72% redundant test cases, saving 18.5 test hours while preserving 100% safety.
+            </p>
+            <div className="scenario-card-action">
+              <span>Inspect Test Optimization Plan</span>
+              <ArrowRight size={14} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Layer 4: Events Table & Operational Sidebar Grid */}
       <div className="ev-home__grid">
         {/* Main Column */}
         <div className="ev-home__main-col">
-          {/* SRE Banner (if SRE) */}
-          {isSRE && (
-            <div className="ev-home__sre-strip">
-              <div className="ev-home__sre-header">
-                <Activity size={18} className="ev-home__sre-icon" aria-hidden="true" />
-                <span className="ev-home__sre-title">Active Rollouts</span>
-              </div>
-              <p className="ev-home__sre-body">
-                No active canaries running. Rollouts start automatically after approval on the Decision screen.
-              </p>
-            </div>
-          )}
-
-          {/* Needs your decision section */}
-          <section className="ev-home__decisions-section" aria-labelledby="needs-decision-heading">
-            <div className="ev-home__section-header">
-              <h2 id="needs-decision-heading" className="ev-home__section-title">
-                Needs your decision
-              </h2>
-              <span className="ev-home__badge-count">{openEvents.length}</span>
-            </div>
-
-            <div className="ev-home__decision-cards">
-              {/* Card 1: Atlas-1 Retirement */}
-              <article className="ev-decision-card ev-decision-card--critical">
-                <div className="ev-decision-card__header">
-                  <div className="ev-decision-card__tags">
-                    <span className="ev-decision-card__kind-tag">Retirement</span>
-                    <span className="ev-decision-card__urgency">
-                      <Clock size={12} aria-hidden="true" /> 3h remaining in window
-                    </span>
-                  </div>
-                  <RiskMeter tier="critical" compact />
-                </div>
-
-                <h3 className="ev-decision-card__title">Model Atlas-1 retirement</h3>
-                <p className="ev-decision-card__summary">
-                  Provider A is retiring Atlas-1 v1. Blast radius discovered 6 enterprise applications affected with 1 critical tool-calling agent.
-                </p>
-
-                <div className="ev-decision-card__outcomes">
-                  <RiskBadgeRow
-                    counts={{ migrate: 2, canary: 2, investigate: 1, block: 1 }}
-                  />
-                  <div className="ev-decision-card__kernel-note">
-                    <ShieldAlert size={14} className="ev-decision-card__kernel-icon" aria-hidden="true" />
-                    <span>Kernel: 1 Deny (K-014 on Refund Agent)</span>
-                  </div>
-                </div>
-
-                <div className="ev-decision-card__footer">
-                  <span className="ev-decision-card__meta">Event ID: E-2026-001 · 6 apps</span>
-                  <button
-                    type="button"
-                    className="ev-decision-card__action-btn"
-                    onClick={() => navigate('/events/E-2026-001/blast-radius')}
-                  >
-                    <span>Review and decide</span>
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </button>
-                </div>
-              </article>
-
-              {/* Card 2: Orion-2 Price Change */}
-              <article className="ev-decision-card">
-                <div className="ev-decision-card__header">
-                  <div className="ev-decision-card__tags">
-                    <span className="ev-decision-card__kind-tag">Price Change</span>
-                    <span className="ev-decision-card__urgency">
-                      <Clock size={12} aria-hidden="true" /> 1d remaining
-                    </span>
-                  </div>
-                  <RiskMeter tier="high" compact />
-                </div>
-
-                <h3 className="ev-decision-card__title">Orion-2 price & token policy change</h3>
-                <p className="ev-decision-card__summary">
-                  Provider B commercial terms change in 9 days. 3 applications affected. Awaiting regression plan sign-off from Test Lead.
-                </p>
-
-                <div className="ev-decision-card__outcomes">
-                  <span className="ev-decision-card__stage-info">
-                    Stage: <strong>Regression Plan</strong> (Awaiting sign-off)
-                  </span>
-                </div>
-
-                <div className="ev-decision-card__footer">
-                  <span className="ev-decision-card__meta">Event ID: E-2026-013 · 3 apps</span>
-                  <button
-                    type="button"
-                    className="ev-decision-card__action-btn ev-decision-card__action-btn--secondary"
-                    onClick={() => navigate('/events/E-2026-001/blast-radius')}
-                  >
-                    <span>Open event</span>
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </button>
-                </div>
-              </article>
-            </div>
-          </section>
-
           {/* Change Events Table Section */}
           <section className="ev-home__table-section" aria-labelledby="all-events-heading">
             <div className="ev-home__table-header-row">
@@ -246,7 +625,7 @@ export const HomeScreen: React.FC = () => {
                   All Qualification Events
                 </h2>
                 <span className="ev-home__table-subtitle">
-                  Showing {filteredEvents.length} of {events.length} events
+                  Showing {filteredEvents.length} of {events.length} enterprise change events
                 </span>
               </div>
 
@@ -258,7 +637,7 @@ export const HomeScreen: React.FC = () => {
                     className={`ev-home__filter-btn ${statusFilter === 'all' ? 'ev-home__filter-btn--active' : ''}`}
                     onClick={() => setStatusFilter('all')}
                   >
-                    All
+                    All ({events.length})
                   </button>
                   <button
                     type="button"
@@ -272,17 +651,18 @@ export const HomeScreen: React.FC = () => {
                     className={`ev-home__filter-btn ${statusFilter === 'closed' ? 'ev-home__filter-btn--active' : ''}`}
                     onClick={() => setStatusFilter('closed')}
                   >
-                    Closed (2)
+                    Closed ({events.length - openEvents.length})
                   </button>
                 </div>
 
                 <div className="ev-home__search-box">
                   <input
-                    type="text"
-                    className="ev-home__search-input"
-                    placeholder="Filter events..."
+                    type="search"
+                    placeholder="Search events..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    className="ev-home__search-input"
+                    aria-label="Search events by name or ID"
                   />
                   {searchQuery && (
                     <button
@@ -291,27 +671,24 @@ export const HomeScreen: React.FC = () => {
                       onClick={() => setSearchQuery('')}
                       aria-label="Clear search"
                     >
-                      <X size={14} />
+                      ✕
                     </button>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Table */}
+            {/* Events Table */}
             <div className="ev-home__table-wrapper">
-              <table className="ev-home__table" aria-label="Change Events">
+              <table className="ev-home__table" aria-label="Change Events Table">
                 <thead>
                   <tr>
-                    <th scope="col">Event ID & Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Current Stage</th>
-                    <th scope="col">Apps</th>
-                    <th scope="col">Highest Risk</th>
+                    <th scope="col" className="ev-home__th-id">Event ID</th>
+                    <th scope="col">Event Details</th>
+                    <th scope="col">Severity</th>
+                    <th scope="col">Pipeline Stage</th>
                     <th scope="col">Outcomes</th>
-                    <th scope="col" className="ev-home__th-action">
-                      Action
-                    </th>
+                    <th scope="col" className="ev-home__th-action">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -319,24 +696,33 @@ export const HomeScreen: React.FC = () => {
                     <tr
                       key={evt.id}
                       className="ev-home__table-row"
-                      onClick={() => navigate(`/events/${evt.id}/blast-radius`)}
+                      onClick={() => navigate('/events/E-2026-001/blast-radius')}
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') navigate('/events/E-2026-001/blast-radius');
+                      }}
                     >
-                      <td className="ev-home__td-main">
+                      <td className="ev-home__td-id">
                         <span className="ev-home__event-id">{evt.id}</span>
-                        <strong className="ev-home__event-title">{evt.title}</strong>
+                      </td>
+                      <td className="ev-home__td-title">
+                        <div className="ev-home__title-cell">
+                          <strong className="ev-home__event-title">{evt.title}</strong>
+                          <span className="ev-home__event-meta">
+                            {evt.source} · {evt.appCount} apps · Detected {evt.detectedAt}
+                          </span>
+                        </div>
                       </td>
                       <td>
-                        <span className="ev-home__kind-badge">{evt.kind}</span>
-                      </td>
-                      <td>{renderStageIndicator(evt.stage)}</td>
-                      <td>
-                        <span className="ev-home__app-count">{evt.appCount} apps</span>
+                        <span className={`ev-home__severity-badge ev-home__severity-badge--${evt.highestRisk.toLowerCase()}`}>
+                          {evt.highestRisk}
+                        </span>
                       </td>
                       <td>
-                        <RiskMeter tier={evt.highestRisk.toLowerCase() as any} compact />
+                        {renderStageIndicator(evt.stage)}
                       </td>
                       <td>
-                        {evt.status === 'open' && evt.outcomes.migrate > 0 ? (
+                        {evt.outcomes ? (
                           <RiskBadgeRow counts={evt.outcomes} />
                         ) : evt.status === 'closed' ? (
                           <span className="ev-home__closed-tag">
@@ -347,31 +733,13 @@ export const HomeScreen: React.FC = () => {
                         )}
                       </td>
                       <td className="ev-home__td-action" onClick={(e) => e.stopPropagation()}>
-                        {evt.id === 'E-2026-001' ? (
-                          <button
-                            type="button"
-                            className="ev-home__row-action-btn"
-                            onClick={() => navigate('/events/E-2026-001/blast-radius')}
-                          >
-                            Review & decide
-                          </button>
-                        ) : evt.id === 'E-2026-013' ? (
-                          <button
-                            type="button"
-                            className="ev-home__row-action-btn ev-home__row-action-btn--secondary"
-                            onClick={() => navigate('/events/E-2026-001/blast-radius')}
-                          >
-                            Approve plan
-                          </button>
-                        ) : (
-                          <button
-                            type="button"
-                            className="ev-home__row-action-btn ev-home__row-action-btn--ghost"
-                            onClick={() => navigate('/events/E-2026-001/blast-radius')}
-                          >
-                            View record
-                          </button>
-                        )}
+                        <button
+                          type="button"
+                          className="ev-home__row-action-btn"
+                          onClick={() => navigate('/events/E-2026-001/blast-radius')}
+                        >
+                          Review & decide
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -394,7 +762,7 @@ export const HomeScreen: React.FC = () => {
               <li className="ev-side-card__item ev-side-card__item--urgent">
                 <div className="ev-side-card__item-main">
                   <strong>Atlas-1 v1</strong>
-                  <span>Provider A (Current)</span>
+                  <span>AWS Bedrock (Current)</span>
                 </div>
                 <span className="ev-side-card__item-badge ev-side-card__item-badge--red">
                   Retires in 14d
@@ -412,7 +780,7 @@ export const HomeScreen: React.FC = () => {
               <li className="ev-side-card__item">
                 <div className="ev-side-card__item-main">
                   <strong>Nova-3</strong>
-                  <span>Provider C</span>
+                  <span>AWS Bedrock</span>
                 </div>
                 <span className="ev-side-card__item-badge">Supported</span>
               </li>
@@ -423,7 +791,7 @@ export const HomeScreen: React.FC = () => {
           <div className="ev-side-card">
             <div className="ev-side-card__header">
               <ShieldAlert size={18} className="ev-side-card__icon" aria-hidden="true" />
-              <h2 className="ev-side-card__title">Graph Health</h2>
+              <h2 className="ev-side-card__title">Estate Graph Health</h2>
             </div>
             <div className="ev-side-card__health-status">
               <div className="ev-side-card__status-row">

@@ -8,6 +8,415 @@
   width: 100%;
 }
 
+/* ==============================================================================
+   Layer 1: Enterprise Connected Estate Bar
+   ============================================================================== */
+.ev-home-connectors-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  box-shadow: 0 1px 2px rgba(11, 32, 54, 0.04);
+}
+
+.connectors-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.connectors-bar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #0f172a;
+  background-color: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.connectors-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+.connectors-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.conn-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.775rem;
+  font-weight: 500;
+  color: #334155;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.conn-chip--gateway {
+  color: #0284c7;
+  border-color: #bae6fd;
+  background-color: #f0f9ff;
+  font-weight: 600;
+}
+
+.conn-icon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.connectors-bar-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #0284c7;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.connectors-bar-action:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+/* ==============================================================================
+   Layer 2: Persona-Specific Hero Action Card
+   ============================================================================== */
+.ev-persona-hero {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(11, 32, 54, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.ev-persona-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+}
+
+.ev-persona-hero--urgent::before {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+}
+
+.ev-persona-hero--info::before {
+  background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+}
+
+.ev-persona-hero--alert::before {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+}
+
+.ev-persona-hero--success::before {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+}
+
+.ev-persona-hero--primary::before {
+  background: linear-gradient(180deg, #0284c7 0%, #0d9488 100%);
+}
+
+.ev-persona-hero__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ev-persona-hero__tag-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ev-persona-hero__role-badge {
+  font-size: 0.725rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #475569;
+  background-color: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.ev-persona-hero__time-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.ev-persona-hero__title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.ev-persona-hero__summary {
+  margin: 0;
+  font-size: 0.925rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.ev-persona-hero__impact-strip {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  flex-wrap: wrap;
+}
+
+.impact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.impact-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.04em;
+}
+
+.impact-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.impact-val--alert {
+  color: #dc2626;
+}
+
+.impact-val--success {
+  color: #16a34a;
+}
+
+.ev-persona-hero__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ev-persona-hero__meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ev-persona-hero__primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #0284c7;
+  color: #ffffff;
+  border: 1px solid #0369a1;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+  transition: all 0.15s;
+}
+
+.ev-persona-hero__primary-btn:hover {
+  background-color: #0369a1;
+  transform: translateY(-1px);
+}
+
+/* ==============================================================================
+   Layer 3: Fast-Track Techathon Interactive Scenarios
+   ============================================================================== */
+.ev-home-scenarios {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(11, 32, 54, 0.04);
+}
+
+.scenarios-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scenarios-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scenarios-sparkle-icon {
+  color: #0284c7;
+}
+
+.scenarios-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.scenarios-caption {
+  font-size: 0.825rem;
+  color: #64748b;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 960px) {
+  .scenarios-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-card {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.scenario-card:hover {
+  background-color: #ffffff;
+  border-color: #0284c7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(11, 32, 54, 0.08);
+}
+
+.scenario-card--critical {
+  border-top: 3px solid #ef4444;
+}
+
+.scenario-card--success {
+  border-top: 3px solid #10b981;
+}
+
+.scenario-card--warning {
+  border-top: 3px solid #f59e0b;
+}
+
+.scenario-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scenario-number-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.scenario-type-badge {
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.scenario-type-badge--red {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.scenario-type-badge--green {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.scenario-type-badge--amber {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.scenario-card-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.scenario-card-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.scenario-card-action {
+  margin-top: auto;
+  padding-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.scenario-card:hover .scenario-card-action {
+  text-decoration: underline;
+}
+
 /* Zone 1: Hero & Greeting */
 .ev-home__hero {
   display: flex;

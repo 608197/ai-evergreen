@@ -138,6 +138,30 @@
   outline-offset: 2px;
 }
 
+.ev-topbar__narrator-btn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--ev-radius-md);
+  border: 1px solid #1e293b;
+  background-color: #0f172a;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.ev-topbar__narrator-btn:hover {
+  background-color: #1e293b;
+  color: #7dd3fc;
+  border-color: #38bdf8;
+  transform: translateY(-1px);
+}
+
 .ev-topbar__notif-badge {
   position: absolute;
   top: -4px;

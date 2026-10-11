@@ -11,6 +11,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Sparkles,
+  Plug,
 } from 'lucide-react';
 import './LeftRail.css';
 
@@ -71,6 +72,17 @@ export const LeftRail: React.FC = () => {
         </NavLink>
 
         <NavLink
+          to="/integrations"
+          className={({ isActive }) =>
+            `ev-rail__item ${isActive ? 'ev-rail__item--active' : ''}`
+          }
+          title={railCollapsed ? 'Connectors & Integrations' : undefined}
+        >
+          <Plug size={18} className="ev-rail__icon" aria-hidden="true" />
+          {!railCollapsed && <span className="ev-rail__label">Integrations</span>}
+        </NavLink>
+
+        <NavLink
           to="/memory"
           className={({ isActive }) =>
             `ev-rail__item ${isActive ? 'ev-rail__item--active' : ''}`
@@ -119,10 +131,10 @@ export const LeftRail: React.FC = () => {
           className={({ isActive }) =>
             `ev-rail__item ${isActive ? 'ev-rail__item--active' : ''}`
           }
-          title={railCollapsed ? 'Component Gallery' : undefined}
+          title={railCollapsed ? 'Design Patterns & Component Gallery' : undefined}
         >
           <Sparkles size={18} className="ev-rail__icon" aria-hidden="true" />
-          {!railCollapsed && <span className="ev-rail__label">Design System</span>}
+          {!railCollapsed && <span className="ev-rail__label">Design Patterns</span>}
         </NavLink>
       </div>
 

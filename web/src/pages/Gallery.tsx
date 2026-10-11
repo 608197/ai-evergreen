@@ -59,9 +59,9 @@ export const Gallery: React.FC = () => {
       <header className="ev-gallery-header">
         <div className="ev-gallery-title-wrap">
           <SandboxBadge />
-          <h1 className="ev-gallery-title">AI Evergreen Component Foundation Gallery</h1>
+          <h1 className="ev-gallery-title">AI Evergreen Design Patterns & Component Gallery</h1>
           <p className="ev-gallery-subtitle">
-            Specification §6 Component Library & Design System Tokens Verification
+            Deterministic design patterns, safety primitives, confidence gauges, and evidence visualizers used across the 6-stage qualification lifecycle.
           </p>
         </div>
         <div className="ev-gallery-header-meta">

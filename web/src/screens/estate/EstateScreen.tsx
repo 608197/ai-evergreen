@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
 import { StatusChip } from '../../components/common/StatusChip';
 import {
@@ -24,6 +25,7 @@ import type { EstateEntityType } from '../../types/domain';
 import './EstateScreen.css';
 
 export const EstateScreen: React.FC = () => {
+  const navigate = useNavigate();
   const {
     estateEntities,
     edges,
@@ -98,7 +100,7 @@ export const EstateScreen: React.FC = () => {
   };
 
   const handleForceSync = () => {
-    setSyncToast('Syncing with Kong API Gateway & Bedrock telemetry...');
+    setSyncToast('Syncing with Cognizant AI Gateway, AWS Bedrock & ServiceNow CMDB...');
     setTimeout(() => {
       setSyncToast('Estate graph synced. 18 entities and 14 edges verified fresh.');
       setTimeout(() => setSyncToast(null), 3500);
@@ -142,6 +144,24 @@ export const EstateScreen: React.FC = () => {
               <RefreshCw size={14} /> Force sync
             </button>
           </div>
+        </div>
+
+        {/* Active Event Context Banner */}
+        <div className="estate-active-event-banner">
+          <div className="active-event-pill">
+            <span className="event-dot" />
+            <strong>ACTIVE EVENT E-2026-001:</strong> AWS Bedrock Atlas-1 Deprecation
+          </div>
+          <span className="active-event-text">
+            Touches 6 enterprise workloads below. 1 unconfirmed edge (<code>Refund Agent &rarr; Atlas-1</code>) blocks Gate G1.
+          </span>
+          <button
+            type="button"
+            className="active-event-btn"
+            onClick={() => navigate('/events/E-2026-001/blast-radius')}
+          >
+            Review Blast Radius &rarr;
+          </button>
         </div>
 
         {syncToast && (
