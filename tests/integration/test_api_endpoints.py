@@ -129,3 +129,44 @@ def test_api_canary_evaluation_and_rollback() -> None:
     breach_data = res_breach.json()
     assert breach_data["action"] == "ROLLBACK_TO_LAST_KNOWN_GOOD"
     assert breach_data["status"] == "RESTORED"
+
+
+def test_api_estate_and_graph_endpoints() -> None:
+    """Verify estate catalog and NetworkX graph serialization endpoint."""
+    res = client.get("/api/v1/estate")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["status"] == "LOADED"
+    assert data["summary"]["workloads_count"] > 0
+    assert len(data["graph"]["nodes"]) > 0
+    assert len(data["graph"]["edges"]) > 0
+
+
+def test_api_events_and_memory_endpoints() -> None:
+    """Verify events, behavioural memory, and evidence endpoints."""
+    # 1. Events list
+    res_events = client.get("/api/v1/events")
+    assert res_events.status_code == 200
+    events_data = res_events.json()
+    assert events_data["total"] >= 1
+    event_id = events_data["events"][0]["event_id"]
+
+    # Single event
+    res_single = client.get(f"/api/v1/events/{event_id}")
+    assert res_single.status_code == 200
+
+    # 2. Memory & seeded invariants catalog
+    res_mem = client.get("/api/v1/memory")
+    assert res_mem.status_code == 200
+    mem_data = res_mem.json()
+    assert mem_data["total_invariants"] > 0
+    assert mem_data["critical_invariants_count"] > 0
+
+    # 3. Demo failure injection
+    res_inj = client.post(
+        "/api/v1/demo/inject-failure",
+        json={"failure_type": "canary_degrades", "target_workload_id": "app-refund-agent"},
+    )
+    assert res_inj.status_code == 200
+    assert res_inj.json()["audit"]["injected_for_demo"] is True
+

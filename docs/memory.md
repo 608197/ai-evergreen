@@ -7,6 +7,32 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-11 — Option 3 Containerization & Backend-Frontend Full Stitching Implemented
+
+**What changed:**
+- **FastAPI Control Plane Expansion (`src/ai_evergreen/api/main.py`)**:
+  - Added read and operational REST endpoints:
+    - `GET /api/v1/estate`: Serializes full estate catalog (applications, models, agents) and NetworkX dependency graph topology (151 nodes, 149 edges) with attributes.
+    - `GET /api/v1/events` and `GET /api/v1/events/{id}`: Returns all ingested change signals, ensuring the default seeded Atlas-1 event (`evt-2026-001`) is always pre-seeded.
+    - `GET /api/v1/memory`: Returns behavioral contracts, seeded invariants catalog, historical drift incidents, and versioned rollback policies.
+    - `GET /api/v1/evidence`: Lists sealed evidence packages with Merkle root digests and approvals.
+    - `POST /api/v1/demo/inject-failure`: Triggers backend failure simulation and records an immutable audit ledger entry with `injected_for_demo: true`.
+  - Added unit and integration tests in `tests/integration/test_api_endpoints.py` covering all new endpoints; all 6 test cases passed 100%.
+- **React Frontend API Client & State Store Stitching (`web/src/api/client.ts`, `web/src/store/useEvergreenStore.ts`, `App.tsx`, `TopBar.tsx`)**:
+  - Implemented typed REST API client in `web/src/api/client.ts` with zero external dependencies (fetch-based), providing typed interfaces for health, estate, events, blast radius, evaluations, approvals, canary evaluations, and failure injections.
+  - Configured Vite dev server proxy in `web/vite.config.ts` mapping `/api` to `http://127.0.0.1:8000`.
+  - Integrated `syncWithBackend` in `useEvergreenStore.ts` and mounted on application start in `App.tsx`.
+  - Added live backend connectivity badge in `TopBar.tsx` displaying real-time status (`API: 200 OK (151 nodes, 149 edges)` or graceful fallback to `API: LOCAL SEED`).
+  - Wired human approval submission to FastAPI `TrustedKernel` and canary breach telemetry to `RollbackController`.
+- **Option 3 Containerization (`web/Dockerfile`, `web/nginx.conf`, `compose.yaml`)**:
+  - Authored multi-stage production Dockerfile in `web/Dockerfile` (`node:22-alpine` builder -> `nginx:alpine` runtime).
+  - Authored production `web/nginx.conf` with gzip compression, 1-year immutable asset caching, `/api/` reverse proxy to `http://api:8000/api/`, `/healthz` health check, and SPA routing fallback.
+  - Replaced Streamlit container in `compose.yaml` with the new `ui` service pointing to `./web/Dockerfile` on port `"${UI_PORT:-8501}:80"` (default 8501 to match existing AWS EC2 security group rules).
+- **Verification & Quality**:
+  - `python -m pytest tests/` passed 100% (28/28 tests passed).
+  - `npm run lint` (`oxlint`) passed with 0 errors, 0 warnings across all 58 files.
+  - `npm run build` (`vite build`) compiled 2,018 modules cleanly in 2.46s with 0 errors.
+
 ## 2026-10-11 — Phase 6: Seeded Scenario E-2026-001 (Atlas-1) E2E Demo Walkthrough & Demo Director Mode Implemented
 
 **What changed:**

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { apiClient } from '../api/client';
 import type {
   UserIdentity,
   ChangeEvent,
@@ -207,6 +208,11 @@ interface EvergreenState {
   demoStep: number;
   setDemoStep: (step: number) => void;
   injectFailure: (type: 'stale_graph' | 'connector_outage' | 'judge_disagreement' | 'approval_expires' | 'canary_degrades' | 'rollback_fails' | 'evidence_integrity_fails' | 'kernel_unavailable') => void;
+
+  // Backend Integration
+  backendStatus: 'checking' | 'online' | 'offline';
+  backendInfo?: { nodes: number; edges: number; environment: string };
+  syncWithBackend: () => Promise<void>;
 }
 
 
@@ -1570,6 +1576,39 @@ export const useEvergreenStore = create<EvergreenState>((set, get) => ({
       evidenceChain: [...s.evidenceChain, injectedEntry],
       notifications: [notif, ...s.notifications],
     }));
+
+    // Notify backend
+    apiClient.injectDemoFailure(type).catch((err) => {
+      console.warn('[Evergreen] Backend injection notification:', err);
+    });
+  },
+
+  backendStatus: 'checking',
+  backendInfo: undefined,
+  syncWithBackend: async () => {
+    try {
+      const health = await apiClient.checkHealth();
+      if (health && health.status === 'HEALTHY') {
+        set({
+          backendStatus: 'online',
+          backendInfo: {
+            nodes: health.graph_nodes,
+            edges: health.graph_edges,
+            environment: health.environment,
+          },
+        });
+        const estate = await apiClient.fetchEstate();
+        if (estate && estate.summary) {
+          console.info(
+            `[Evergreen] Synced ${estate.summary.workloads_count} workloads & ${estate.summary.graph_edges} edges from FastAPI backend.`
+          );
+        }
+      } else {
+        set({ backendStatus: 'offline' });
+      }
+    } catch {
+      set({ backendStatus: 'offline' });
+    }
   },
 
   resetScenario: () => {

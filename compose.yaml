@@ -1,6 +1,6 @@
 # ==============================================================================
 # AI Evergreen — Docker Compose Specification
-# Runs the API Control Plane and Streamlit Enterprise Console
+# Runs the API Control Plane (FastAPI) and Enterprise React UI (Nginx)
 # ==============================================================================
 
 services:
@@ -30,31 +30,20 @@ services:
       retries: 3
       start_period: 10s
 
-  dashboard:
+  ui:
     build:
-      context: .
+      context: ./web
       dockerfile: Dockerfile
-    container_name: ai-evergreen-dashboard
+    container_name: ai-evergreen-ui
     restart: unless-stopped
     ports:
-      - "${DASHBOARD_PORT:-8501}:8501"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - API_BASE_URL=http://api:8000
-    env_file:
-      - path: .env
-        required: false
-    volumes:
-      - ./data:/app/data:ro
-      - ./evidence_store:/app/evidence_store:ro
-      - ./dashboard:/app/dashboard:ro
-    command: ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+      - "${UI_PORT:-8501}:80"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/healthz"]
       interval: 15s
       timeout: 5s
       retries: 3
-      start_period: 15s
+      start_period: 10s
     depends_on:
       api:
         condition: service_healthy

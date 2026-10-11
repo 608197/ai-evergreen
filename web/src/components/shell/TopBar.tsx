@@ -19,6 +19,8 @@ export const TopBar: React.FC = () => {
     setCommandPaletteOpen,
     setGlossaryPanelOpen,
     setDemoDirectorOpen,
+    backendStatus,
+    backendInfo,
   } = useEvergreenStore();
 
   const [identityOpen, setIdentityOpen] = useState(false);
@@ -80,6 +82,67 @@ export const TopBar: React.FC = () => {
           isStale={isGraphStale}
           lastUpdatedText={isGraphStale ? 'Stale · Fallback active' : graphFreshnessLabel}
         />
+
+        {/* Backend Connectivity Status */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '3px 9px',
+            borderRadius: 12,
+            fontSize: '0.72rem',
+            fontFamily: 'monospace',
+            backgroundColor:
+              backendStatus === 'online'
+                ? 'rgba(16, 185, 129, 0.12)'
+                : backendStatus === 'checking'
+                ? 'rgba(245, 158, 11, 0.12)'
+                : 'rgba(148, 163, 184, 0.12)',
+            color:
+              backendStatus === 'online'
+                ? '#10B981'
+                : backendStatus === 'checking'
+                ? '#F59E0B'
+                : '#94A3B8',
+            border: `1px solid ${
+              backendStatus === 'online'
+                ? 'rgba(16, 185, 129, 0.3)'
+                : backendStatus === 'checking'
+                ? 'rgba(245, 158, 11, 0.3)'
+                : 'rgba(148, 163, 184, 0.3)'
+            }`,
+          }}
+          title={
+            backendStatus === 'online'
+              ? `FastAPI Control Plane: Online (${backendInfo?.nodes ?? 151} nodes, ${backendInfo?.edges ?? 149} edges)`
+              : backendStatus === 'checking'
+              ? 'Checking connection to FastAPI backend...'
+              : 'FastAPI Offline · Local Seed Engine Active'
+          }
+        >
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              backgroundColor:
+                backendStatus === 'online'
+                  ? '#10B981'
+                  : backendStatus === 'checking'
+                  ? '#F59E0B'
+                  : '#94A3B8',
+              boxShadow: backendStatus === 'online' ? '0 0 6px #10B981' : undefined,
+            }}
+          />
+          <span>
+            {backendStatus === 'online'
+              ? 'API: 200 OK'
+              : backendStatus === 'checking'
+              ? 'API: CONNECTING'
+              : 'API: LOCAL SEED'}
+          </span>
+        </div>
 
         {/* Charter Glossary (Overlay O5) */}
         <button

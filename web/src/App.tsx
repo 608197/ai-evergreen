@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEvergreenStore } from './store/useEvergreenStore';
 import { ShellLayout } from './components/shell/ShellLayout';
 import { HomeScreen } from './screens/home/HomeScreen';
 import { BlastRadiusScreen } from './screens/blast-radius/BlastRadiusScreen';
@@ -16,6 +17,12 @@ import { PortfolioScreen } from './screens/portfolio/PortfolioScreen';
 import { Gallery } from './pages/Gallery';
 
 export const App: React.FC = () => {
+  const syncWithBackend = useEvergreenStore((s) => s.syncWithBackend);
+
+  useEffect(() => {
+    syncWithBackend();
+  }, [syncWithBackend]);
+
   return (
     <HashRouter>
       <Routes>

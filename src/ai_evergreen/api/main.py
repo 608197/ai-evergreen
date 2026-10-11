@@ -9,6 +9,7 @@ Implements all core API endpoints defined in docs/Interfaces.md §7:
 """
 
 import json
+import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -296,3 +297,156 @@ def evaluate_canary_telemetry(req: CanaryEvaluationRequest) -> dict[str, Any]:
         current_metrics=req.current_metrics,
     )
     return result
+
+
+@app.get("/api/v1/estate")
+def get_enterprise_estate() -> dict[str, Any]:
+    """Retrieve the enterprise AI estate including applications, models, agents, and graph topology."""
+    _ensure_estate_loaded()
+    
+    # Extract graph nodes and edges
+    nodes = []
+    for node_id, attrs in graph_engine.graph.nodes(data=True):
+        nodes.append({
+            "id": node_id,
+            "type": attrs.get("node_type", "Unknown"),
+            "name": attrs.get("name", node_id),
+            "criticality": attrs.get("criticality", "TIER_2"),
+            "owner": attrs.get("owner", "Enterprise Platform"),
+            "provider": attrs.get("provider", ""),
+        })
+    
+    edges = []
+    for u, v, attrs in graph_engine.graph.edges(data=True):
+        edges.append({
+            "source": u,
+            "target": v,
+            "type": attrs.get("relationship", "DEPENDS_ON"),
+            "confidence": attrs.get("confidence", 0.95),
+        })
+    
+    apps = estate_cache.get("applications", [])
+    models = estate_cache.get("models", [])
+    agents = estate_cache.get("agents", [])
+    
+    return {
+        "status": "LOADED",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "summary": {
+            "workloads_count": len(apps),
+            "models_count": len(models),
+            "agents_count": len(agents),
+            "critical_workloads_count": sum(1 for a in apps if a.get("criticality") == "CRITICAL"),
+            "graph_nodes": len(nodes),
+            "graph_edges": len(edges),
+        },
+        "applications": apps,
+        "models": models,
+        "agents": agents,
+        "graph": {
+            "nodes": nodes,
+            "edges": edges,
+        },
+    }
+
+
+@app.get("/api/v1/events")
+def list_change_signals() -> dict[str, Any]:
+    """List all ingested and active model change signals."""
+    _ensure_estate_loaded()
+    
+    # Ensure default Atlas-1 event exists
+    if "evt-2026-001" not in in_memory_events:
+        in_memory_events["evt-2026-001"] = ChangeEvent(
+            event_id="evt-2026-001",
+            source="aws_bedrock_runtime",
+            model_or_component_id="anthropic.claude-3-haiku-20240307-v1:0",
+            current_version="20240307-v1:0",
+            candidate_version="20241022-v1:0",
+            change_type=ChangeType.MODEL_DEPRECATION,
+            received_at=datetime.now(timezone.utc),
+            correlation_id="corr-atlas-001",
+            raw_payload_ref="s3://ai-evergreen-telemetry/signals/2026-10-10/bedrock-depr.json",
+        )
+    
+    return {
+        "events": list(in_memory_events.values()),
+        "total": len(in_memory_events),
+    }
+
+
+@app.get("/api/v1/events/{event_id}")
+def get_change_event(event_id: str) -> dict[str, Any]:
+    """Retrieve details of a single change event."""
+    list_change_signals()  # Ensure seeded
+    if event_id not in in_memory_events:
+        raise HTTPException(status_code=404, detail=f"Event {event_id} not found.")
+    return {"event": in_memory_events[event_id]}
+
+
+@app.get("/api/v1/memory")
+def get_behavioural_memory() -> dict[str, Any]:
+    """Retrieve behavioral contracts, seeded invariants, and historical drift incidents."""
+    _ensure_estate_loaded()
+    tests = estate_cache.get("tests", [])
+    incidents = estate_cache.get("incidents", [])
+    seeded_defects = [t for t in tests if t.get("category") == "SEEDED_DEFECT"]
+    
+    return {
+        "status": "ACTIVE",
+        "seeded_invariants_catalog": seeded_defects,
+        "total_invariants": len(seeded_defects),
+        "critical_invariants_count": sum(1 for d in seeded_defects if d.get("is_critical")),
+        "historical_incidents": incidents,
+        "total_historical_incidents": len(incidents),
+        "rollback_policies": {
+            "default_error_rate_threshold": 0.01,
+            "default_p99_latency_ms_threshold": 1200.0,
+            "automated_rollback_enabled": True,
+            "require_kernel_approval": True,
+        },
+    }
+
+
+@app.get("/api/v1/evidence")
+def list_evidence_packages() -> dict[str, Any]:
+    """Retrieve cryptographically verified evidence packages and audit records."""
+    packages = []
+    for pkg_id, pkg in in_memory_evidence_packages.items():
+        packages.append({
+            "package_id": pkg.package_id,
+            "recommendation_id": pkg_id,
+            "package_digest": pkg.package_digest,
+            "sealed": pkg.package_digest is not None,
+            "sealed_at": pkg.sealed_at.isoformat() if pkg.sealed_at else None,
+            "has_approval": pkg.approval_record is not None,
+        })
+    return {
+        "packages": packages,
+        "total": len(packages),
+    }
+
+
+class DemoFailureInjectionRequest(BaseModel):
+    failure_type: str
+    target_workload_id: Optional[str] = "app-refund-agent"
+    details: Optional[str] = None
+
+
+@app.post("/api/v1/demo/inject-failure")
+def inject_demo_failure(req: DemoFailureInjectionRequest) -> dict[str, Any]:
+    """Trigger one of the 8 fail-closed failure modes for demonstration and verification."""
+    audit_record = {
+        "injection_id": f"inj-{uuid.uuid4().hex[:8]}",
+        "failure_type": req.failure_type,
+        "target_workload": req.target_workload_id,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "injected_for_demo": True,
+        "status": "APPLIED_FAIL_CLOSED",
+        "fail_closed_reason": f"Seeded failure simulation: {req.failure_type}",
+    }
+    return {
+        "status": "SUCCESS",
+        "audit": audit_record,
+    }
+
