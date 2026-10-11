@@ -7,6 +7,28 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-11 — Market Analysis Research Integration: H1–H12 Safety Matrix, Build-vs-Integrate Boundary, and Item-Level Deterioration Tracking
+
+**What changed:**
+- **Market Analysis Deep Ingestion (`AI_Evergreen_Market_Analysis_and_Research_Updated 1 (1).docx`, 10 October 2026)**:
+  - Extracted full 23KB text and integrated its core defensible positioning into the solution, live UI, and pitch narrative.
+  - Formulated the exact Whitespace Moat: External model-change signal → Portfolio blast radius → Minimum-sufficient qualification with machine-readable exclusions → Proactive missing-test synthesis (`GEN-01`) → Deterministic Trusted Kernel → Accountable human promotion gate → Outcome-linked Institutional Memory.
+- **Controls & Trusted Kernel Screen 11 Enhancement (`ControlsScreen.tsx`, `ControlsScreen.css`)**:
+  - **Section 0: 12 Qualification Safety Gates (H1–H12 Spiked Verification Matrix)**: Added interactive card grid showing 100% verified results across all 12 formal hypotheses (H1 blast-radius recall 100%, H4 zero critical regressions missed, H6 100% explained exclusions, H7 `GEN-01` planted gap detected, H9 zero unapproved promotions, H10 100% Merkle chain integrity, H11 42% repeat-event acceleration) with an "UNCONDITIONAL GO (12/12 PASS)" badge.
+  - **Section 5: Build vs. Integrate vs. Out-of-Scope Boundary Matrix**: Added 3-column architectural comparison card detailing:
+    1. *BUILD (Proprietary Whitespace)*: Change Ingestor, Qualification Graph, Contracts, Risk Classifier, Adaptive Planner, Missing-Test Synthesizer, Trusted Kernel, Merkle Evidence Ledger, Institutional Memory.
+    2. *INTEGRATE (Industry Standard Systems)*: ServiceNow AI Control Tower / IBM watsonx (CMDB assets), Wiz AI-SPM / Prisma (Security posture & attack paths), Cognizant AI Gateway / LiteLLM (Canary routing & <850ms rollback), Microsoft Foundry / Bedrock (Eval execution), Jira / Xray (Test suites & approvals).
+    3. *DO NOT BUILD (Out of Scope)*: Model hosting, generic routing, generic security scanners, token metering, standalone CMDB.
+- **Evaluation Results Screen 5 Enhancement (`ResultsScreen.tsx`, `ResultsScreen.css`)**:
+  - Added **Item-Level Deterioration Tracker Banner** directly above the Differential Evaluation Matrix.
+  - Grounds evaluation in **September 2026 TestMu AI research**: shows that while headline accuracy rose +3.2% (91.4% → 94.6%), item-level inspection isolated 1 critical seeded defect (`DEFECT-008: Tool Inversion`), enforcing the charter policy that critical degradations must be strictly held at ZERO and justifying why the Trusted Kernel blocked promotion.
+- **Demo Director Presenter Script Updates (`DemoDirector.tsx`)**:
+  - Updated Step 6 presenter cue to cite Sept 2026 item-level deterioration research.
+  - Updated Step 12 presenter cue to reference the H1–H12 Verification Matrix and Build-vs-Integrate Boundary with ServiceNow and Cognizant AI Gateway.
+- **Build & Publication**:
+  - React frontend compiled cleanly (`vite build`, 2,018 modules, 0 errors).
+  - Pushed commit `31e34e4` directly to GitHub `origin/main` via the GitHub REST API.
+
 ## 2026-10-11 — Option 3 Containerization & Backend-Frontend Full Stitching Implemented
 
 **What changed:**
