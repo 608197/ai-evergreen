@@ -7,6 +7,23 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-11 — Visual & Layout Fix for Overlay O3: Manual Event Entry Modal (`ManualEventModal`)
+
+**What changed:**
+- **Identified Root Causes**:
+  - `ManualEventModal.css` used undefined CSS custom properties (`var(--bg-surface)`, `var(--bg-subtle)`, `var(--text-main)`), causing the browser to render the modal container, header, inputs, and footer completely transparent (`transparent`), which overlapped and clashed with the background content of `HomeScreen`.
+  - Missing `overflow-x: hidden` and unconstrained grid widths caused an unwanted horizontal scrollbar with arrow steppers at the bottom of the modal.
+  - Action buttons (`Cancel` and `Log Event & Start Blast Radius`) lacked dedicated class styles, defaulting to raw browser button styling.
+- **Implemented Fixes (`ManualEventModal.css`, `ManualEventModal.tsx`)**:
+  - Enforced solid opaque white surface (`background-color: #ffffff !important`) with 12px rounded borders, subtle drop shadow, and crisp dark enterprise typography (`#0f172a`).
+  - Added dedicated styling for form inputs, dropdowns, date picker, range slider, warning badges, and error states with clear `#CBD5E1` borders and `#0284C7` teal-blue focus rings.
+  - Eliminated horizontal scrollbar: applied `overflow-x: hidden`, `width: 100%`, `box-sizing: border-box`, and responsive single-column collapse on narrow screens.
+  - Styled footer action buttons with high-contrast `.manual-event-cancel-btn` (neutral slate) and `.manual-event-submit-btn` (primary teal-blue with icon and hover effects).
+  - Added an icon badge wrapper for the header spark icon (`.manual-event-icon-badge`).
+- **Build & Verification**:
+  - `npm run build` compiled cleanly (2,018 modules, 0 errors).
+  - Pushed to GitHub `origin/main` via the GitHub REST API (commit `784dee6`).
+
 ## 2026-10-11 — Market Analysis Research Integration: H1–H12 Safety Matrix, Build-vs-Integrate Boundary, and Item-Level Deterioration Tracking
 
 **What changed:**
