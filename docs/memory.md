@@ -7,7 +7,71 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
-## 2026-10-11 — Visual & Layout Fix for Overlay O3: Manual Event Entry Modal (`ManualEventModal`)
+## 2026-10-11 — Persona Switcher Z-Index Fix & In-Page Evaluator Perspective Selector
+
+**What changed:**
+- **Resolved Popover Stacking / Clipping Bug**:
+  - Identified root cause of persona dropdown getting hidden: `--ev-z-sticky` and `--ev-z-popover` tokens were missing from `tokens.css`, causing `.ev-topbar` to evaluate to `z-index: auto`.
+  - Positioned elements on the page (such as `.ev-persona-hero` with `position: relative`) painted *on top* of the open `.ev-topbar__popover`, obscuring the role switcher list behind the Canary Hero card.
+  - Added comprehensive Z-Index Scale tokens to `tokens.css` (`--ev-z-sticky: 100`, `--ev-z-drawer: 500`, `--ev-z-popover: 1000`, `--ev-z-modal: 2000`, `--ev-z-toast: 3000`).
+  - Updated `TopBar.css` with explicit `z-index: 100` on `.ev-topbar`, `z-index: 1000` on `.ev-topbar__popover`, shadow enhancement, and `flex-shrink: 0` on `.ev-topbar__identity-wrapper` and `.ev-topbar__identity-btn` to prevent edge clipping on narrow viewports.
+  - Made `.ev-topbar__search-area` responsive (`max-width: 380px`, `min-width: 140px`) and increased `.ev-topbar__role-list` max-height to 280px.
+- **Added Prominent In-Page Evaluator Perspective Switcher (`HomeScreen.tsx`, `.HomeScreen.css`)**:
+  - Implemented dedicated **"SWITCH PERSPECTIVE:"** tab strip directly on the Home Cockpit above the hero card.
+  - Features 6 instant one-click evaluator perspective pills with avatars and titles:
+    - `[AR] Asha (Application Owner)`
+    - `[ML] Marcus (QA / Test Lead)`
+    - `[PM] Priya (Risk and Compliance)`
+    - `[SA] Sofia (SRE / Operations)`
+    - `[RK] Ravi (AI Platform Engineer)`
+    - `[JW] Jonas (Executive CIO)`
+  - Clicking any persona instantly updates the active user, re-rendering the persona hero card, KPI dials, and topbar identity in real time without having to hunt for the dropdown menu.
+- **Verification & Build**:
+  - `npm run build` executed and passed cleanly (2,020 modules transformed, 0 errors).
+
+**What's still open:**
+- Push updates to GitHub repository via GitHub REST API script `python scripts/push_to_github.py`.
+- User to run `git pull && docker compose up -d --build` on their AWS EC2 VM.
+
+## 2026-10-11 — Enterprise Connectors UI, Persona-Adaptive Cockpit, System Voice Narrator & Full Menu Consistency Pass
+
+**What changed:**
+- **Enterprise Integrations & Connectors Screen (`IntegrationsScreen.tsx`, `.css`)**:
+  - Built full enterprise integration management view mapping 6 core connectors:
+    1. AWS Bedrock Model Registry (Active, 18 models tracked, polling 15m)
+    2. Azure OpenAI & AI Foundry (Active, 8 deployments)
+    3. ServiceNow CMDB & AI Control Tower (Active, syncs tiering & ownership)
+    4. GitHub AST Dependency Scanner (Active, code AST parser)
+    5. Jira & Xray Test Management (Active, 480 test cases indexed)
+    6. Cognizant AI Gateway & LiteLLM Proxy (Active, 5% canary routing & <850ms rollback)
+  - Added real-time health badges, sync timers, credential security chips, interactive toggle switches, manual sync triggers, and webhook audit log feed.
+  - Linked to LeftRail with `Plug` icon and route `/integrations` in `App.tsx`.
+- **Persona-Adaptive Home Cockpit (`HomeScreen.tsx`, `.css`)**:
+  - Re-engineered Home Cockpit into 5 intuitive layers:
+    1. Connected Enterprise Estate status bar with live sync timestamp and active event count.
+    2. Adaptive Persona Switcher (VP Engineering, App Owner, QA Lead, Model Risk Officer, Platform Engineer) with tailored hero message and direct actionable CTAs.
+    3. Persona-specific KPI gauges (e.g. Test Reduction %, Seeded Defect Recall %, Unreasoned Exclusions, ROI).
+    4. Active Qualification Event Spotlight (Atlas-1 Deprecation `E-2026-001`, 6 affected workloads, 1 unconfirmed edge blocking Gate G1).
+    5. Fast-Track Evaluation Scenarios (Happy path, Seeded defect block, Canary p99 breach & rollback).
+- **Interactive System Narrator & Audio Guide (`DemoDirector.tsx`, `.css`, `TopBar.tsx`, `.css`)**:
+  - Elevated Demo Director into a primary **"✦ System Narrator"** guide.
+  - Added high-contrast launcher pill in TopBar and floating bottom-right launcher with pulsating status indicator.
+  - Added synthesized Web Speech API audio narration (`Audio Narration: Play / Stop`) with active speaking waves.
+  - Structured content across 12 chapters with: Executive elevator pitch, Evaluator Cheat Sheet (Why We Win), Persona takeaways, ROI proof, and Fail-Safe Failure Injections.
+- **Cross-Menu Data & Narrative Consistency Pass**:
+  - **Estate Screen (`EstateScreen.tsx`, `.css`)**: Added active qualification event banner highlighting event `E-2026-001` (touches 6 workloads, 1 unconfirmed edge blocking Gate G1) with direct jump to Blast Radius. Updated sync notification to cite Cognizant AI Gateway, AWS Bedrock & ServiceNow CMDB.
+  - **Portfolio Screen (`PortfolioScreen.tsx`)**: Fixed deprecated models subtext to reflect `6 production workloads impacted (Atlas-1 active)`. Replaced legacy `#/...` anchor tags with `useNavigate()` buttons.
+  - **Memory Screen (`MemoryScreen.tsx`)**: Replaced dead hash links with React Router `navigate()`.
+  - **Controls Screen (`ControlsScreen.tsx`)**: Aligned Hypothesis H5 test reduction metric to `72% Reduction (134 of 480 Tests)`.
+  - **Design Patterns (`LeftRail.tsx`, `Gallery.tsx`)**: Renamed menu item from "Design System" to "Design Patterns" and aligned gallery title.
+  - **Current Event Breadcrumbs (`PlanScreen.tsx`, `ResultsScreen.tsx`)**: Aligned breadcrumbs to point cleanly to `/` (Home).
+- **Build & Cloud Push**:
+  - `npm run build` executed and passed cleanly (2,020 modules transformed, 0 errors).
+  - Pushed commit `ec2ca26` to GitHub `origin/main` via GitHub REST API script `python scripts/push_to_github.py`.
+
+**What's still open:**
+- User to pull latest changes on EC2 VM (`git pull` or clone).
+- Final review of all demo scripts and screen presentations ahead of the techathon evaluation.
 
 **What changed:**
 - **Identified Root Causes**:

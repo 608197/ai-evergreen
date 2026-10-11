@@ -81,6 +81,14 @@
   --ev-shadow-popover: 0 4px 12px rgba(11, 32, 54, 0.12), 0 2px 4px rgba(11, 32, 54, 0.08);
   --ev-shadow-modal: 0 12px 32px rgba(11, 32, 54, 0.24);
 
+  /* Stacking Contexts (Z-Index Scale) */
+  --ev-z-base: 0;
+  --ev-z-sticky: 100;
+  --ev-z-drawer: 500;
+  --ev-z-popover: 1000;
+  --ev-z-modal: 2000;
+  --ev-z-toast: 3000;
+
   /* Motion */
   --ev-duration-micro: 120ms;
   --ev-duration-standard: 200ms;

@@ -459,6 +459,121 @@
   border-radius: var(--ev-radius-full);
 }
 
+/* ==============================================================================
+   Layer 2a: Evaluator Perspective Switcher Strip
+   ============================================================================== */
+.ev-home-persona-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.persona-selector-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.725rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.persona-selector-icon {
+  color: #0284c7;
+}
+
+.persona-selector-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.persona-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 5px 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.persona-chip:hover {
+  border-color: #0284c7;
+  background: #f0f9ff;
+}
+
+.persona-chip--active {
+  background: #0B2036 !important;
+  border-color: #0B2036 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 5px rgba(11, 32, 54, 0.2);
+}
+
+.persona-chip-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #0f172a;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.persona-chip--active .persona-chip-avatar {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.persona-chip-text {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.persona-chip-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.persona-chip--active .persona-chip-name {
+  color: #ffffff !important;
+}
+
+.persona-chip-role {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.persona-chip--active .persona-chip-role {
+  color: #94a3b8 !important;
+}
+
+.persona-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #38bdf8;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
 .ev-home__log-event-btn {
   display: inline-flex;
   align-items: center;

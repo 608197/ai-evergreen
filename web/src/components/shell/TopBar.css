@@ -8,8 +8,8 @@
   padding: 0 var(--ev-space-4);
   position: sticky;
   top: 0;
-  z-index: var(--ev-z-sticky);
-  gap: var(--ev-space-4);
+  z-index: 100;
+  gap: var(--ev-space-3);
 }
 
 .ev-topbar__brand-area {
@@ -55,7 +55,8 @@
 /* Search bar / Command palette trigger */
 .ev-topbar__search-area {
   flex: 1;
-  max-width: 520px;
+  max-width: 380px;
+  min-width: 140px;
 }
 
 .ev-topbar__search-trigger {
@@ -105,7 +106,7 @@
 .ev-topbar__tools-area {
   display: flex;
   align-items: center;
-  gap: var(--ev-space-3);
+  gap: var(--ev-space-2);
   flex-shrink: 0;
 }
 
@@ -180,8 +181,13 @@
 }
 
 /* Identity button */
+.ev-topbar__identity-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .ev-topbar__identity-btn {
-  height: 40px;
+  height: 38px;
   display: flex;
   align-items: center;
   gap: var(--ev-space-2);
@@ -191,6 +197,7 @@
   background-color: var(--ev-white);
   cursor: pointer;
   transition: background-color var(--ev-duration-fast);
+  flex-shrink: 0;
 }
 
 .ev-topbar__identity-btn:hover {
@@ -246,10 +253,11 @@
   background-color: var(--ev-white);
   border: 1px solid var(--ev-border-strong);
   border-radius: var(--ev-radius-lg);
-  box-shadow: var(--ev-shadow-lg);
-  z-index: var(--ev-z-popover);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
   overflow: hidden;
   animation: ev-fade-in var(--ev-duration-fast) ease-out;
+  max-width: calc(100vw - 32px);
 }
 
 @keyframes ev-fade-in {
@@ -357,7 +365,7 @@
 }
 
 .ev-topbar__role-list {
-  max-height: 240px;
+  max-height: 280px;
   overflow-y: auto;
 }
 

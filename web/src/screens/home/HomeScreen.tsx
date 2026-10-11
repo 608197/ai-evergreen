@@ -18,6 +18,7 @@ import {
   Database,
   ShieldCheck,
   Sparkles,
+  Users,
 } from 'lucide-react';
 import './HomeScreen.css';
 
@@ -25,6 +26,8 @@ export const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const {
     currentUser,
+    identities,
+    setCurrentUser,
     events,
     workloads,
     edges,
@@ -528,6 +531,37 @@ export const HomeScreen: React.FC = () => {
           <p className="ev-home__subtitle">
             {openEvents.length} active qualification event waiting across {workloads.length} enterprise applications.
           </p>
+
+          {/* Layer 2a: Evaluator Perspective Switcher Strip */}
+          <div className="ev-home-persona-selector" aria-label="Switch Persona Perspective">
+            <div className="persona-selector-label">
+              <Users size={14} className="persona-selector-icon" />
+              <span>SWITCH PERSPECTIVE:</span>
+            </div>
+            <div className="persona-selector-chips" role="tablist">
+              {identities.filter(u => ['user-asha', 'user-marcus', 'user-priya', 'user-sofia', 'user-ravi', 'user-jonas'].includes(u.id)).map((id) => {
+                const isActive = id.id === currentUser.id;
+                return (
+                  <button
+                    key={id.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`persona-chip ${isActive ? 'persona-chip--active' : ''}`}
+                    onClick={() => setCurrentUser(id.id)}
+                    title={`Switch view to ${id.name} (${id.roleTitle})`}
+                  >
+                    <span className="persona-chip-avatar">{id.initials}</span>
+                    <div className="persona-chip-text">
+                      <span className="persona-chip-name">{id.name.split(' ')[0]}</span>
+                      <span className="persona-chip-role">({id.roleTitle.split('/')[0].trim()})</span>
+                    </div>
+                    {isActive && <span className="persona-chip-dot" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Persona-Specific Dynamic Hero Card */}
