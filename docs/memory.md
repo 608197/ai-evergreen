@@ -7,6 +7,20 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-13 — Home Screen & TopBar Cleanup (Search Alignment, Persona Dropdown & Estate Bar Removal)
+
+**What changed:**
+- **TopBar Search Box Fix (`TopBar.tsx` & `TopBar.css`)**:
+  - Resolved vertical text wrapping/misalignment by enforcing `white-space: nowrap`, `overflow: hidden`, `text-overflow: ellipsis`, and `line-height: normal` on `.ev-topbar__search-placeholder`.
+  - Added `flex-shrink: 0` to search icon and kbd shortcut chip, and set elastic `flex: 1 1 auto; max-width: 440px; min-width: 200px;` on search container so it never clips or wraps awkwardly across screen resolutions.
+- **TopBar Persona Dropdown Removal (`TopBar.tsx` & `TopBar.css`)**:
+  - Removed redundant top-right persona switcher dropdown (`ev-topbar__identity-wrapper`) since personas are switchable directly via in-page perspective tabs on `/`.
+  - Cleaned up obsolete identity state, click-outside handlers, and CSS classes. Preserved Keyboard Shortcuts launcher `<HelpCircle>` as an icon button in the header tools.
+- **HomeScreen Connected Estate Bar Removal (`HomeScreen.tsx` & `HomeScreen.css`)**:
+  - Removed top Connected Estate bar (`ev-home-connectors-bar`) containing AWS Bedrock, ServiceNow CMDB, and Jira chips to streamline cockpit focus directly on persona action heroes and active events.
+  - Full connector health and sync management remains fully dedicated at `/integrations`.
+- **Build Verification**: `npm run build` in `web/` passed with **0 errors** (2,020 modules transformed cleanly).
+
 ## 2026-10-13 — Tabbed Infographic Transformations (Portfolio & Design Patterns Screens)
 
 **What changed:**

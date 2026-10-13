@@ -2,16 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
 import { SandboxBadge } from '../common/SandboxBadge';
 import { FreshnessPill } from '../common/FreshnessPill';
-import { Search, Bell, Shield, ChevronDown, Check, HelpCircle, Command, BookOpen, Sparkles } from 'lucide-react';
+import { Search, Bell, Shield, Command, BookOpen, Sparkles, HelpCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import './TopBar.css';
 
 export const TopBar: React.FC = () => {
   const navigate = useNavigate();
   const {
-    currentUser,
-    identities,
-    setCurrentUser,
     notifications,
     markNotificationRead,
     isGraphStale,
@@ -23,20 +20,14 @@ export const TopBar: React.FC = () => {
     backendInfo,
   } = useEvergreenStore();
 
-  const [identityOpen, setIdentityOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-
-  const identityRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
   const unreadNotifs = notifications.filter((n) => !n.readAt);
 
-  // Close menus on outside click
+  // Close notifications menu on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (identityRef.current && !identityRef.current.contains(e.target as Node)) {
-        setIdentityOpen(false);
-      }
       if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
         setNotifOpen(false);
       }
@@ -64,6 +55,7 @@ export const TopBar: React.FC = () => {
           className="ev-topbar__search-trigger"
           onClick={() => setCommandPaletteOpen(true)}
           aria-label="Open command palette (Ctrl+K)"
+          title="Search events, applications, models, rules... (Ctrl+K)"
         >
           <Search size={16} className="ev-topbar__search-icon" aria-hidden="true" />
           <span className="ev-topbar__search-placeholder">
@@ -155,6 +147,17 @@ export const TopBar: React.FC = () => {
           <BookOpen size={18} aria-hidden="true" />
         </button>
 
+        {/* Keyboard Shortcuts */}
+        <button
+          type="button"
+          className="ev-topbar__tool-btn"
+          onClick={() => useEvergreenStore.getState().openDrawer('shortcuts')}
+          title="Keyboard Shortcuts (?)"
+          aria-label="Keyboard Shortcuts"
+        >
+          <HelpCircle size={18} aria-hidden="true" />
+        </button>
+
         {/* System Narrator Launcher */}
         <button
           type="button"
@@ -206,101 +209,6 @@ export const TopBar: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
-        </div>
-
-        {/* Identity & Role Switcher */}
-        <div className="ev-topbar__identity-wrapper" ref={identityRef}>
-          <button
-            type="button"
-            className="ev-topbar__identity-btn"
-            onClick={() => setIdentityOpen(!identityOpen)}
-            aria-expanded={identityOpen}
-            aria-label={`User menu: ${currentUser.name}, ${currentUser.roleTitle}`}
-          >
-            <span className="ev-topbar__avatar" aria-hidden="true">
-              {currentUser.initials}
-            </span>
-            <div className="ev-topbar__identity-info">
-              <span className="ev-topbar__identity-name">{currentUser.name}</span>
-              <span className="ev-topbar__identity-role">{currentUser.roleTitle}</span>
-            </div>
-            <ChevronDown size={14} className="ev-topbar__identity-chevron" aria-hidden="true" />
-          </button>
-
-          {identityOpen && (
-            <div className="ev-topbar__popover ev-topbar__identity-popover" role="menu">
-              <div className="ev-topbar__popover-header">
-                <div>
-                  <div className="ev-topbar__identity-popover-name">{currentUser.name}</div>
-                  <div className="ev-topbar__identity-popover-role">{currentUser.roleTitle}</div>
-                </div>
-                <span className="ev-topbar__synthetic-tag">Synthetic User</span>
-              </div>
-
-              <div className="ev-topbar__role-section">
-                <div className="ev-topbar__section-label">SWITCH DEMO IDENTITY</div>
-                <div className="ev-topbar__role-list">
-                  {identities.map((id) => (
-                    <button
-                      key={id.id}
-                      type="button"
-                      role="menuitem"
-                      className={`ev-topbar__role-item ${id.id === currentUser.id ? 'ev-topbar__role-item--current' : ''}`}
-                      onClick={() => {
-                        setCurrentUser(id.id);
-                        setIdentityOpen(false);
-                      }}
-                    >
-                      <span className="ev-topbar__avatar-sm">{id.initials}</span>
-                      <div className="ev-topbar__role-details">
-                        <span className="ev-topbar__role-name">{id.name}</span>
-                        <span className="ev-topbar__role-title">{id.roleTitle}</span>
-                      </div>
-                      {id.id === currentUser.id && (
-                        <Check size={14} className="ev-topbar__check-icon" aria-hidden="true" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="ev-topbar__popover-footer">
-                <button
-                  type="button"
-                  className="ev-topbar__footer-action"
-                  onClick={() => {
-                    setIdentityOpen(false);
-                    setDemoDirectorOpen(true);
-                  }}
-                >
-                  <Sparkles size={14} style={{ color: '#38BDF8' }} aria-hidden="true" />
-                  Demo Director Mode (Ctrl+Alt+D)
-                </button>
-                <button
-                  type="button"
-                  className="ev-topbar__footer-action"
-                  onClick={() => {
-                    setIdentityOpen(false);
-                    setGlossaryPanelOpen(true);
-                  }}
-                >
-                  <BookOpen size={14} aria-hidden="true" />
-                  Charter Glossary (O5)
-                </button>
-                <button
-                  type="button"
-                  className="ev-topbar__footer-action"
-                  onClick={() => {
-                    setIdentityOpen(false);
-                    useEvergreenStore.getState().openDrawer('shortcuts');
-                  }}
-                >
-                  <HelpCircle size={14} aria-hidden="true" />
-                  Keyboard Shortcuts (?)
-                </button>
-              </div>
             </div>
           )}
         </div>

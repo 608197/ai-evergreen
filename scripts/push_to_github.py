@@ -17,7 +17,7 @@ import urllib.request
 from pathlib import Path
 
 
-def api_request(url: str, token: str, data: dict | None = None, method: str = "GET", retries: int = 3) -> dict:
+def api_request(url: str, token: str, data: dict | None = None, method: str = "GET", retries: int = 5) -> dict:
     payload = json.dumps(data).encode("utf-8") if data is not None else None
     headers = {
         "Authorization": f"token {token}",
@@ -29,17 +29,19 @@ def api_request(url: str, token: str, data: dict | None = None, method: str = "G
     for attempt in range(retries):
         try:
             req = urllib.request.Request(url, data=payload, method=method, headers=headers)
-            with urllib.request.urlopen(req) as resp:
+            with urllib.request.urlopen(req, timeout=30) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             error_body = e.read().decode("utf-8") if e.fp else ""
             if attempt == retries - 1:
                 print(f"[ERROR] HTTP {e.code} for {method} {url}: {error_body}")
                 raise
+            time.sleep(1.5 * (attempt + 1))
         except Exception as e:
             if attempt == retries - 1:
                 print(f"[ERROR] Request failed for {method} {url}: {e}")
                 raise
+            time.sleep(1.5 * (attempt + 1))
 
 
 def get_token() -> str:
@@ -122,10 +124,10 @@ def push_via_api(owner: str, repo: str, token: str, commit_msg: str) -> str:
     print(f"[*] Found {len(files)} tracked files to process.")
 
     # 2. Upload blobs in parallel
-    print("[*] Uploading blobs in parallel (8 workers)...")
+    print("[*] Uploading blobs in parallel (4 workers)...")
     tree_items = []
     completed = 0
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         future_to_file = {
             executor.submit(upload_single_blob, f, owner, repo, token): f for f in files
         }

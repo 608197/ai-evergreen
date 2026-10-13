@@ -44,8 +44,8 @@
 ## 3. UI Features & Screen Architecture
 
 ### 3.1 Home Screen (`HomeScreen.tsx` — Cockpit)
-- **Layer 1 — Connected Estate Bar**: Live indicators for 6 enterprise connectors (AWS Bedrock, Azure OpenAI, ServiceNow CMDB, GitHub AST Scanner, Jira/Xray, Cognizant AI Gateway). Shows sync timestamps, active event badges, and quick link to Integrations.
-- **Layer 2 — Greeting & Evaluator Perspective Switcher**:
+- **TopBar Shell**: Fixed single-line overflow-protected search pill with ellipsis and `Ctrl+K` trigger; redundant top-right persona dropdown removed in favor of in-page persona tabs.
+- **Layer 1 — Greeting & Evaluator Perspective Switcher**:
   - One-click horizontal tab strip directly on the page:
     - `[AR] Asha (Application Owner)`
     - `[ML] Marcus (QA / Test Lead)`
@@ -53,8 +53,8 @@
     - `[SA] Sofia (SRE / Operations)`
     - `[RK] Ravi (AI Platform Engineer)`
     - `[JW] Jonas (Executive CIO)`
-  - Instantaneous switching without searching for hidden dropdowns.
-- **Layer 2b — Persona Action Hero**: Dynamically swaps hero action card based on active persona (e.g., SRE Canary monitor, QA regression planner, Risk approval matrix).
+  - Instantaneous switching without hidden dropdowns.
+- **Layer 2 — Persona Action Hero**: Dynamically swaps hero action card based on active persona (e.g., SRE Canary monitor, QA regression planner, Risk approval matrix).
 - **Layer 2c — Persona KPI Dials**: Metric dials tailored to the active role (e.g., Seeded Defect Recall %, Test Reduction %, ROI, Unreasoned Exclusions).
 - **Layer 3 — Fast-Track Scenarios**: 3 quick-launch cards for evaluators (Happy Path Migration, Seeded Defect Block, Autonomous Canary Rollback).
 - **Layer 4 — Active Event Spotlight**: Deep dive into event `E-2026-001` (Atlas-1 Deprecation), 6 affected workloads, 1 unconfirmed edge blocking Gate G1.

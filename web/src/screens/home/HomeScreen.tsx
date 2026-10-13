@@ -14,8 +14,6 @@ import {
   CheckCircle,
   ExternalLink,
   Plus,
-  Cloud,
-  Database,
   ShieldCheck,
   Sparkles,
   Users,
@@ -476,39 +474,7 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <div className="ev-home">
-      {/* Layer 1: Enterprise Connected Estate Bar */}
-      <section className="ev-home-connectors-bar" aria-label="Connected Enterprise Sources">
-        <div className="connectors-bar-left">
-          <span className="connectors-bar-badge">
-            <span className="connectors-live-dot" /> CONNECTED ESTATE
-          </span>
-          <div className="connectors-chips">
-            <span className="conn-chip" title="AWS Bedrock connected in us-east-1">
-              <Cloud size={13} className="conn-icon" /> AWS Bedrock (4 Models)
-            </span>
-            <span className="conn-chip" title="ServiceNow CMDB synced 12m ago">
-              <Database size={13} className="conn-icon" /> ServiceNow CMDB (6 Apps)
-            </span>
-            <span className="conn-chip" title="Jira and Xray indexed 480 test cases">
-              <ShieldCheck size={13} className="conn-icon" /> Jira / Xray (480 Tests)
-            </span>
-            <span className="conn-chip conn-chip--gateway" title="Cognizant AI Gateway live routing">
-              <Activity size={13} className="conn-icon" /> AI Gateway (&lt;850ms Rollback)
-            </span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="connectors-bar-action"
-          onClick={() => navigate('/integrations')}
-        >
-          <span>Manage Integrations & Sources</span>
-          <ArrowRight size={14} />
-        </button>
-      </section>
-
-      {/* Layer 2: Hero Section & Greeting */}
+      {/* Hero Section & Greeting */}
       <section className="ev-home__hero">
         <div className="ev-home__hero-content">
           <div className="ev-home__greeting-row">
