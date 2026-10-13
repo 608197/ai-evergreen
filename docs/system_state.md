@@ -87,7 +87,7 @@
 7. **S7 Qualification Record** (`/events/:eventId/record`): Cryptographic audit ledger, Merkle hash verification, reproducible evaluation export.
 8. **S8 Estate** (`/estate`): Enterprise-wide connected topology, inventory, and qualification banners.
 9. **S10 Memory** (`/memory`): Tabbed infographic intelligence center: Tab 1 "Discovered Behavioral Patterns" (dual-lane trajectory infographics, lead-indicator timeline, schema diffs, risk spectrum bar); Tab 2 "Seeded Invariant & Test Reuse Log" (~18h effort avoided distribution bar, visual test asset cards with lineage flows, cards/table toggle); Tab 3 "Contract Proposals & Roadmap" (red/green schema diffs, Phase 3 horizon radar).
-10. **S11 Controls** (`/controls`): Operating invariant verification, self-governance policy (Evergreen cannot mark its own homework).
+10. **S11 Controls** (`/controls`): Tabbed executive governance center: Global 3-Stage Deterministic Pipeline (Kernel -> LLM Advisor -> Human Authority); Tab 1 "Deterministic Invariants & Hard Stops" (lifecycle phase circuit, 7 hard stops with O4 interstitial triggers, 8 kernel elements with hit-rate meters & card/table toggle); Tab 2 "Spike Acceptance Matrix" (12/12 unconditional GO dial, domain summary clusters, target vs measured differential bars); Tab 3 "Human Authority & Self-Governance" (criticality escalation ladder, recursive qualification flowchart with independent judge); Tab 4 "Enterprise Scope Boundary" (3-tier stack architecture diagram, build vs integrate vs out-of-scope matrix).
 11. **S12 Portfolio** (`/portfolio`): AI technical debt, model retirement runways, executive ROI metrics.
 12. **Design Patterns** (`/gallery`): Component design system and design tokens showcase.
 

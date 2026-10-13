@@ -7,25 +7,22 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
-## 2026-10-13 — Qualification Memory Tabbed Infographic Center
+## 2026-10-13 — Tabbed Infographic Transformations (Memory & Controls Screens)
 
 **What changed:**
-- **Tabbed Memory Architecture (`MemoryScreen.tsx` & `MemoryScreen.css`)**:
-  - Implemented 3 dedicated in-page tabs to eliminate long vertical scrolling and show everything in one clean view:
-    1. **Tab 1: Discovered Behavioral Patterns** (`3`):
-       - Converted text-heavy paragraphs into **Infographics**:
-         - *Risk Spectrum Bar*: Visual breakdown showing Critical (Financial Tools), High (Citation Drift), and Medium (Schema Omission).
-         - *Dual-Lane Execution Flowchart* (Tool Order Drift): Side-by-side red lane (`Prompt` -> `Disburse Tool ⚠️` -> `Auth Skipped 💥`) vs green lane (`Prompt` -> `Pre-Auth Enforced ✓` -> `Disburse Tool 🛡️`).
-         - *Lead-Indicator Timeline* (RAG Citation Drift): 3-stage temporal diagram showing Fluency 99% (deceptive) vs Citation Validity 68% (drops 48h early), guarded by Probe `T-0103`.
-         - *Side-by-Side Schema Diff Infographic* (Key Omission): JSON contract card `{ "taxCode": null }` vs model revision `{ } (Key Missing ❌)` with downstream ERP crash protection badge.
-         - *Metadata Chips*: Explicit Target Workload & Enforced Invariant pills.
-         - *Collapsible Accordion*: Full trajectory root cause analysis kept on-demand.
-    2. **Tab 2: Seeded Invariant & Test Reuse Log** (`47 Probes / 18h Saved`):
-       - *Visual ROI Dashboard*: ~18 Hours Avoided + 64% authoring acceleration + workload distribution bar.
-       - *View Mode Switcher*: Toggle between **Infographic Asset Cards** (card view with test badges, workload icons, origin->active lineage pipeline, and progress effort meters) and **Data Table** (full tabular view).
-    3. **Tab 3: Contract Proposals & Roadmap** (`2`):
-       - Git-style visual schema diffs (`- [v3.0]` vs `+ [v4.0]`).
-       - Phase 3 predictive horizon radar with 3-phase milestone timeline.
+- **Qualification Controls Screen Elevation (`ControlsScreen.tsx` & `ControlsScreen.css`)**:
+  - Re-architected `/controls` from vertical text walls into an interactive executive infographic cockpit:
+    - **Global Hero Infographic**: 3-Stage Deterministic Pipeline (`01 Deterministic Kernel (Rule-Based, Block-First)` -> `02 LLM Probabilistic Advisor` -> `03 Signed Human Authority`) with active Fail-Closed security badge.
+    - **In-Page Tab Navigation (4 Tabs)**:
+      1. *Tab 1: Deterministic Invariants & Hard Stops*: Lifecycle Phase Strip (Intake -> Planning -> Evaluation -> Promotion) with 7 hard-stop cards + interactive O4 interstitial preview buttons; 8 Trusted Kernel elements with active execution hit-rate meters and Infographic Cards / Data Table toggle.
+      2. *Tab 2: Spike Acceptance Matrix (H1–H12)*: 12/12 UNCONDITIONAL GO radial dial with 4 domain summary clusters (Blast Radius, Defect Recall, Compute Reduction, Promotion Integrity); category filter pills; target vs measured comparative progress bars.
+      3. *Tab 3: Human Authority & Self-Governance*: Workload Criticality Escalation Ladder (Tier 4 to Tier 1) with sign-off roles and dual-confirmation locks; recursive self-governance flowchart illustrating independent judge architecture and recursion depth limit = 1.
+      4. *Tab 4: Enterprise Scope Boundary & Moat*: 3-tier enterprise control plane stack diagram (Systems of Record -> Evergreen Control Plane -> Runtime Gateways) with Build vs Integrate vs Out-of-Scope capability matrix.
+- **Qualification Memory Tabbed Architecture (`MemoryScreen.tsx` & `MemoryScreen.css`)**:
+  - Implemented 3 dedicated in-page tabs for `/memory` with pure infographics:
+    1. *Discovered Behavioral Patterns*: Risk spectrum bar, dual-lane tool order flowchart, lead-indicator citation timeline, and side-by-side schema diffs.
+    2. *Seeded Invariant & Test Reuse Log*: ~18h avoided effort distribution bar, visual test asset cards with lineage flows, and card/table toggle.
+    3. *Contract Proposals & Roadmap*: Git-style schema diffs and Phase 3 horizon radar.
 - **Build Verification**: `npm run build` in `web/` passed with **0 errors** (2,020 modules transformed cleanly).
 
 **What's still open:**
