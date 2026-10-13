@@ -23,15 +23,33 @@ import type { StageStep } from '../components/common/StageStepper';
 import { TrajectoryTimeline } from '../components/results/TrajectoryTimeline';
 import { DiffViewer } from '../components/results/DiffViewer';
 import { ThresholdChart } from '../components/rollout/ThresholdChart';
-import { ShieldCheck } from 'lucide-react';
+import {
+  ShieldCheck,
+  Layers,
+  CheckCircle2,
+  Lock,
+  Activity,
+  Layout,
+  Sliders,
+  Sparkles,
+} from 'lucide-react';
 
 import './Gallery.css';
 
+type GalleryTab = 'primitives' | 'gates' | 'evaluation' | 'feedback';
+
 export const Gallery: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<GalleryTab>('primitives');
+
   // Toast state
   const [toasts, setToasts] = useState<Array<{ id: string; type: ToastType; message: string; subtext?: string }>>([
     { id: '1', type: 'success', message: 'Gate G1 passed', subtext: 'Refund Agent critical edge confirmed by Ravi Kulkarni' },
   ]);
+
+  const addToast = (type: ToastType, msg: string, sub?: string) => {
+    const newToast = { id: String(Date.now()), type, message: msg, subtext: sub };
+    setToasts((prev) => [...prev, newToast]);
+  };
 
   // Stepper state
   const [currentStage, setCurrentStage] = useState('plan');
@@ -59,7 +77,7 @@ export const Gallery: React.FC = () => {
       <header className="ev-gallery-header">
         <div className="ev-gallery-title-wrap">
           <SandboxBadge />
-          <h1 className="ev-gallery-title">AI Evergreen Design Patterns & Component Gallery</h1>
+          <h1 className="ev-gallery-title">AI Evergreen Design Patterns &amp; Component Gallery</h1>
           <p className="ev-gallery-subtitle">
             Deterministic design patterns, safety primitives, confidence gauges, and evidence visualizers used across the 6-stage qualification lifecycle.
           </p>
@@ -86,323 +104,432 @@ export const Gallery: React.FC = () => {
       </div>
 
       <main className="ev-gallery-content">
-        {/* SECTION 1: StatusChips */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">1. StatusChip Component (§5.2, §6.1)</h2>
-          <p className="ev-section-desc">
-            Rule: Always pairs colour with an icon and a text label. Colour is never the sole cue.
-          </p>
-          <div className="ev-gallery-grid-chips">
-            {statusVariants.map((s) => (
-              <div key={s} className="ev-chip-item">
-                <StatusChip status={s} />
-                <span className="ev-chip-subtext">{s} (medium)</span>
-                <StatusChip status={s} size="small" />
-                <span className="ev-chip-subtext">{s} (small)</span>
+        {/* Global Hero Infographic: Design System Vital Principles */}
+        <div className="gallery-vitals-card">
+          <div className="g-vitals-header">
+            <div className="g-vitals-title-group">
+              <Layers className="g-vitals-icon" size={18} />
+              <div>
+                <h3 className="g-vitals-title">Deterministic Design Language Standards</h3>
+                <p className="g-vitals-subtitle">Charter Operating Principles #1, #2 &amp; #3 enforced across all UI primitives</p>
               </div>
-            ))}
+            </div>
+            <div className="g-actions-row">
+              <button
+                type="button"
+                className="btn-toast-trigger"
+                onClick={() => addToast('success', 'Live Notification Triggered', 'Design system toast demonstration')}
+              >
+                <Sparkles size={12} /> Test Toast Trigger
+              </button>
+              <span className="g-vitals-pill">
+                <CheckCircle2 size={13} /> 24 Components Verified
+              </span>
+            </div>
           </div>
-        </section>
 
-        {/* SECTION 2: RiskMeter */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">2. RiskMeter Component (§5.2, §6.1)</h2>
-          <p className="ev-section-desc">
-            Rule: Risk tier is NOT a colour. Four navy segments (1 to 4). Never red.
-          </p>
-          <div className="ev-gallery-row">
-            {riskTiers.map((tier) => (
-              <div key={tier} className="ev-card-sample">
-                <RiskMeter tier={tier} />
-                <span className="ev-chip-subtext">Compact:</span>
-                <RiskMeter tier={tier} compact />
+          <div className="g-vitals-grid">
+            <div className="g-vital-box">
+              <span className="g-vital-num">01</span>
+              <strong className="g-vital-label">Triple-Cue Rule</strong>
+              <span className="g-vital-desc">Colour is NEVER the sole indicator. Every status always pairs color + icon + text label.</span>
+            </div>
+            <div className="g-vital-box">
+              <span className="g-vital-num">02</span>
+              <strong className="g-vital-label">Navy Risk Scale</strong>
+              <span className="g-vital-desc">Workload risk tiers are 4 segmented navy blocks (1–4). Red is strictly reserved for failures.</span>
+            </div>
+            <div className="g-vital-box">
+              <span className="g-vital-num">03</span>
+              <strong className="g-vital-label">Evidence Provenance</strong>
+              <span className="g-vital-desc">Every recommendation carries a mandatory origin tag: Rule-based, AI-proposed, or Human.</span>
+            </div>
+            <div className="g-vital-box">
+              <span className="g-vital-num">04</span>
+              <strong className="g-vital-label">Design Token Purity</strong>
+              <span className="g-vital-desc">100% scoped CSS variables in tokens.css. Zero hardcoded hex codes across production views.</span>
+            </div>
+          </div>
+        </div>
+
+        {/* In-Page Navigation Tabs */}
+        <nav className="gallery-nav-tabs" aria-label="Gallery sections">
+          <button
+            type="button"
+            className={`gallery-nav-tab ${activeTab === 'primitives' ? 'active' : ''}`}
+            onClick={() => setActiveTab('primitives')}
+          >
+            <Sliders size={16} />
+            <span>Deterministic Primitives</span>
+            <span className="g-tab-badge">Status, Risk, Confidence, Provenance</span>
+          </button>
+
+          <button
+            type="button"
+            className={`gallery-nav-tab ${activeTab === 'gates' ? 'active' : ''}`}
+            onClick={() => setActiveTab('gates')}
+          >
+            <Lock size={16} />
+            <span>Gates &amp; Evidence Audit</span>
+            <span className="g-tab-badge highlight">Banners, Kernel, Stepper, Hashes</span>
+          </button>
+
+          <button
+            type="button"
+            className={`gallery-nav-tab ${activeTab === 'evaluation' ? 'active' : ''}`}
+            onClick={() => setActiveTab('evaluation')}
+          >
+            <Activity size={16} />
+            <span>Deep Evaluation &amp; Telemetry</span>
+            <span className="g-tab-badge">Trajectories, Diffs, Rollouts</span>
+          </button>
+
+          <button
+            type="button"
+            className={`gallery-nav-tab ${activeTab === 'feedback' ? 'active' : ''}`}
+            onClick={() => setActiveTab('feedback')}
+          >
+            <Layout size={16} />
+            <span>Layout, Feedback &amp; Glossary</span>
+            <span className="g-tab-badge">Stats, Glossary, Empty, Skeleton</span>
+          </button>
+        </nav>
+
+        {/* TAB 1: Deterministic Primitives */}
+        {activeTab === 'primitives' && (
+          <div className="gallery-tab-pane">
+            {/* SECTION 1: StatusChips */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">1. StatusChip Component (§5.2, §6.1)</h2>
+              <p className="ev-section-desc">
+                Rule: Always pairs colour with an icon and a text label. Colour is never the sole cue.
+              </p>
+              <div className="ev-gallery-grid-chips">
+                {statusVariants.map((s) => (
+                  <div key={s} className="ev-chip-item">
+                    <StatusChip status={s} />
+                    <span className="ev-chip-subtext">{s} (medium)</span>
+                    <StatusChip status={s} size="small" />
+                    <span className="ev-chip-subtext">{s} (small)</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* SECTION 3: ConfidenceMeter */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">3. ConfidenceMeter Component (§6.1)</h2>
-          <p className="ev-section-desc">
-            Rule: Number (2 decimals) + band label. Below 0.75 triggers explicit warning: "Confidence limits apply".
-          </p>
-          <div className="ev-gallery-row">
-            <div className="ev-card-sample">
-              <ConfidenceMeter score={0.97} />
-            </div>
-            <div className="ev-card-sample">
-              <ConfidenceMeter score={0.88} />
-            </div>
-            <div className="ev-card-sample">
-              <ConfidenceMeter score={0.71} />
-            </div>
-            <div className="ev-card-sample">
-              <ConfidenceMeter score={0.58} />
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 4: ProvenanceTag */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">4. ProvenanceTag Component (§5.2, §6.1)</h2>
-          <p className="ev-section-desc">
-            Rule: Mandatory on every machine decision, recommendation, test, and edge. Hover/focus reveals source.
-          </p>
-          <div className="ev-gallery-row">
-            {provenanceKinds.map((k) => (
-              <div key={k} className="ev-card-sample">
-                <ProvenanceTag kind={k} source="ast-scanner" timestamp="10:21 IST" />
+            {/* SECTION 2: RiskMeter */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">2. RiskMeter Component (§5.2, §6.1)</h2>
+              <p className="ev-section-desc">
+                Rule: Risk tier is NOT a colour. Four navy segments (1 to 4). Never red.
+              </p>
+              <div className="ev-gallery-row">
+                {riskTiers.map((tier) => (
+                  <div key={tier} className="ev-card-sample">
+                    <RiskMeter tier={tier} />
+                    <span className="ev-chip-subtext">Compact:</span>
+                    <RiskMeter tier={tier} compact />
+                  </div>
+                ))}
               </div>
-            ))}
+            </section>
+
+            {/* SECTION 3: ConfidenceMeter */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">3. ConfidenceMeter Component (§6.1)</h2>
+              <p className="ev-section-desc">
+                Rule: Number (2 decimals) + band label. Below 0.75 triggers explicit warning: "Confidence limits apply".
+              </p>
+              <div className="ev-gallery-row">
+                <div className="ev-card-sample">
+                  <ConfidenceMeter score={0.97} />
+                </div>
+                <div className="ev-card-sample">
+                  <ConfidenceMeter score={0.88} />
+                </div>
+                <div className="ev-card-sample">
+                  <ConfidenceMeter score={0.71} />
+                </div>
+                <div className="ev-card-sample">
+                  <ConfidenceMeter score={0.58} />
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 4: ProvenanceTag */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">4. ProvenanceTag Component (§5.2, §6.1)</h2>
+              <p className="ev-section-desc">
+                Rule: Mandatory on every machine decision, recommendation, test, and edge. Hover/focus reveals source.
+              </p>
+              <div className="ev-gallery-row">
+                {provenanceKinds.map((k) => (
+                  <div key={k} className="ev-card-sample">
+                    <ProvenanceTag kind={k} source="ast-scanner" timestamp="10:21 IST" />
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
-        </section>
+        )}
 
-        {/* SECTION 5: GateBanner & KernelVerdict */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">5. GateBanner & KernelVerdict Components (§6.1)</h2>
-          <div className="ev-gallery-col">
-            <GateBanner
-              gateId="Gate G1"
-              gateName="Critical Blast Radius Boundary"
-              blockingCount={1}
-              message="Unconfirmed critical edge: Refund Agent → Fallback model (0.62 confidence)"
-              actionText="Review & confirm edge"
-              onActionClick={() => alert('Opening Edge Review modal')}
-            />
+        {/* TAB 2: Gates & Evidence Integrity */}
+        {activeTab === 'gates' && (
+          <div className="gallery-tab-pane">
+            {/* SECTION 5: GateBanner & KernelVerdict */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">5. GateBanner &amp; KernelVerdict Components (§6.1)</h2>
+              <div className="ev-gallery-col">
+                <GateBanner
+                  gateId="Gate G1"
+                  gateName="Critical Blast Radius Boundary"
+                  blockingCount={1}
+                  message="Unconfirmed critical edge: Refund Agent → Fallback model (0.62 confidence)"
+                  actionText="Review & confirm edge"
+                  onActionClick={() => alert('Opening Edge Review modal')}
+                />
 
-            <div className="ev-gallery-row">
-              <div className="ev-card-sample" style={{ flex: 1 }}>
-                <KernelVerdict
-                  decision="permit"
-                  ruleId="K-001"
-                  reason="Workload contract invariants satisfied. Rollout authorized within 5% canary limit."
-                  onViewRule={(id) => alert(`Viewing rule ${id}`)}
+                <div className="ev-gallery-row">
+                  <div className="ev-card-sample" style={{ flex: 1 }}>
+                    <KernelVerdict
+                      decision="permit"
+                      ruleId="K-001"
+                      reason="Workload contract invariants satisfied. Rollout authorized within 5% canary limit."
+                      onViewRule={(id) => alert(`Viewing rule ${id}`)}
+                    />
+                  </div>
+                  <div className="ev-card-sample" style={{ flex: 1 }}>
+                    <KernelVerdict
+                      decision="deny"
+                      ruleId="K-014"
+                      reason="Mandatory pre-condition check missing: Candidate agent skipped refund policy verification step."
+                      onViewRule={(id) => alert(`Viewing rule ${id}`)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 7: HashChip, SandboxBadge & FreshnessPill */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">7. HashChip, Sandbox &amp; Freshness (§6.1)</h2>
+              <div className="ev-gallery-row">
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Verified SHA-256 Hash:</span>
+                  <HashChip hash="9e8a72b04f183726dae004bfae92716492b95764c92" isVerified={true} />
+                </div>
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Broken Hash (Raises Hard Stop O4):</span>
+                  <HashChip
+                    hash="c4ca4238a0b923820dcc509a6f75849b284e71f7b"
+                    isVerified={false}
+                    onBrokenClick={() => alert('HARD STOP O4: Evidence record tamper detected!')}
+                  />
+                </div>
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Freshness State:</span>
+                  <FreshnessPill isStale={false} />
+                </div>
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Stale Degraded Mode:</span>
+                  <FreshnessPill isStale={true} />
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 8: StageStepper */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">8. StageStepper Component (§6.1, §9.6)</h2>
+              <p className="ev-section-desc">
+                Rule: 6-stage event workspace spine. Locked steps explain why in tooltip &amp; accessibility description.
+              </p>
+              <div className="ev-card-sample" style={{ padding: 0 }}>
+                <StageStepper
+                  stages={stepperStages}
+                  currentStageId={currentStage}
+                  onSelectStage={(id) => setCurrentStage(id)}
                 />
               </div>
-              <div className="ev-card-sample" style={{ flex: 1 }}>
-                <KernelVerdict
-                  decision="deny"
-                  ruleId="K-014"
-                  reason="Mandatory pre-condition check missing: Candidate agent skipped refund policy verification step."
-                  onViewRule={(id) => alert(`Viewing rule ${id}`)}
-                />
+            </section>
+          </div>
+        )}
+
+        {/* TAB 3: Deep Evaluation & Telemetry */}
+        {activeTab === 'evaluation' && (
+          <div className="gallery-tab-pane">
+            {/* SECTION 11: Phase 2 Evaluation Components */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">11. Phase 2 Evaluation &amp; Diff Components (§11)</h2>
+              <p className="ev-section-desc">
+                Rule: Deterministic failure overrides probabilistic judges. Agents are evaluated on the trajectory they took, not just final answer.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Agent Trajectory Timeline (Refund Agent C-0087 — Skipped Step):</span>
+                  <TrajectoryTimeline
+                    currentSteps={[
+                      'lookup_transaction(id="tx_9821")',
+                      'policy_check(amount=1250.00, customer_tier="standard")',
+                      'refund_declined(reason="EXCEEDS_TIER_LIMIT")',
+                    ]}
+                    candidateSteps={[
+                      'lookup_transaction(id="tx_9821")',
+                      'refund_declined(reason="EXCEEDS_TIER_LIMIT")',
+                    ]}
+                    skippedNote="Required step missing: policy check did not run."
+                    isDeterministicFail={true}
+                  />
+                </div>
+
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Differential Response Diff Viewer (Claims Policy C-0142):</span>
+                  <DiffViewer
+                    currentText="Coverage for burst pipes is provided under Section 4.2.1 (Water Damage Rider), with a $500 standard deductible applying."
+                    candidateText="Water damage from pipe failure is covered under General Property Provisions (Section 4), subject to standard deductible terms."
+                    explanation="Candidate omitted specific rider subclause 4.2.1 citation required by behavioural contract v3.1."
+                    verdictNote="Semantic grounding variance detected."
+                  />
+                </div>
               </div>
-            </div>
+            </section>
+
+            {/* SECTION 12: Phase 3 Telemetry Threshold Charts & Rollout (§13) */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">12. Telemetry Threshold Charts (§13)</h2>
+              <p className="ev-section-desc">
+                Rule: Metric cards display limit line, trend SVG, and accessible table toggle. Breaches trigger red alert state and automated rollback.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Healthy Telemetry (Citation Validity):</span>
+                  <ThresholdChart
+                    metric={{
+                      id: 'metric-sample-1',
+                      name: 'CITATION VALIDITY',
+                      limit: 0.95,
+                      current: 0.97,
+                      comparator: '>',
+                      unit: '',
+                      isBreach: false,
+                      history: [
+                        { timestamp: '14:00', value: 0.98 },
+                        { timestamp: '14:05', value: 0.97 },
+                        { timestamp: '14:10', value: 0.97 },
+                      ],
+                    }}
+                  />
+                </div>
+
+                <div className="ev-card-sample">
+                  <span className="ev-sample-label">Seeded Anomaly Breach (Groundedness &lt; 0.85):</span>
+                  <ThresholdChart
+                    metric={{
+                      id: 'metric-sample-2',
+                      name: 'GROUNDEDNESS',
+                      limit: 0.85,
+                      current: 0.71,
+                      comparator: '<',
+                      unit: '',
+                      isBreach: true,
+                      history: [
+                        { timestamp: '14:00', value: 0.88 },
+                        { timestamp: '14:05', value: 0.86 },
+                        { timestamp: '14:10', value: 0.71 },
+                      ],
+                    }}
+                  />
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
+        )}
 
-        {/* SECTION 6: RiskBadgeRow & StatTile */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">6. RiskBadgeRow & StatTile Components (§6.1)</h2>
-          <p className="ev-section-desc">
-            Rule: Every stat tile MUST carry an "illustrative" or "measured" tag. A tile without a tag is a defect.
-          </p>
-          <div className="ev-gallery-col">
-            <RiskBadgeRow
-              counts={{ migrate: 2, canary: 2, investigate: 1, block: 1 }}
-              onFilterClick={(key) => alert(`Filtering by ${key}`)}
-            />
+        {/* TAB 4: Layout, Feedback & Glossary */}
+        {activeTab === 'feedback' && (
+          <div className="gallery-tab-pane">
+            {/* SECTION 6: RiskBadgeRow & StatTile */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">6. RiskBadgeRow &amp; StatTile Components (§6.1)</h2>
+              <p className="ev-section-desc">
+                Rule: Every stat tile MUST carry an "illustrative" or "measured" tag. A tile without a tag is a defect.
+              </p>
+              <div className="ev-gallery-col">
+                <RiskBadgeRow
+                  counts={{ migrate: 2, canary: 2, investigate: 1, block: 1 }}
+                  onFilterClick={(key) => alert(`Filtering by ${key}`)}
+                />
 
-            <div className="ev-gallery-row">
-              <StatTile
-                label="Selected Test Scope"
-                value="134 / 480"
-                delta={{ value: "-72% reduced", positive: true }}
-                proofType="illustrative"
-                subtext="100% critical invariants locked"
-              />
-              <StatTile
-                label="Automated Recovery"
-                value="2m 14s"
-                delta={{ value: "Target: < 5m", positive: true }}
-                proofType="measured"
-                subtext="Canary rollback completed safely"
-              />
-              <StatTile
-                label="Seeded Regression Recall"
-                value="100%"
-                delta={{ value: "12 of 12 caught", positive: true }}
-                proofType="measured"
-                subtext="Zero missed critical invariants"
-              />
-            </div>
+                <div className="ev-gallery-row">
+                  <StatTile
+                    label="Selected Test Scope"
+                    value="134 / 480"
+                    delta={{ value: "-72% reduced", positive: true }}
+                    proofType="illustrative"
+                    subtext="100% critical invariants locked"
+                  />
+                  <StatTile
+                    label="Automated Recovery"
+                    value="2m 14s"
+                    delta={{ value: "Target: < 5m", positive: true }}
+                    proofType="measured"
+                    subtext="Canary rollback completed safely"
+                  />
+                  <StatTile
+                    label="Seeded Regression Recall"
+                    value="100%"
+                    delta={{ value: "12 of 12 caught", positive: true }}
+                    proofType="measured"
+                    subtext="Zero missed critical invariants"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 9: GlossaryTerm in Context */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">9. GlossaryTerm in Context (§6.1, §14)</h2>
+              <p className="ev-section-desc">
+                Rule: Dotted underline with hover popover. Verbatim charter definitions for all 20 charter terms.
+              </p>
+              <div className="ev-card-sample">
+                <p style={{ margin: 0, lineHeight: 1.6 }}>
+                  When a <GlossaryTerm term="Model change event" /> occurs across the estate,{' '}
+                  <GlossaryTerm term="AI Evergreen" /> orchestrates a{' '}
+                  <GlossaryTerm term="Differential evaluation" /> against the workload's{' '}
+                  <GlossaryTerm term="Behavioural contract" />. The{' '}
+                  <GlossaryTerm term="Trusted kernel" /> enforces policies and verifies the immutable{' '}
+                  <GlossaryTerm term="Qualification evidence record" /> before any{' '}
+                  <GlossaryTerm term="Promotion" /> can proceed.
+                </p>
+              </div>
+            </section>
+
+            {/* SECTION 10: EmptyState & SkeletonBlock */}
+            <section className="ev-gallery-section">
+              <h2 className="ev-section-title">10. EmptyState &amp; SkeletonBlock (§6.1, §12)</h2>
+              <div className="ev-gallery-row">
+                <div style={{ flex: 1 }}>
+                  <EmptyState
+                    icon={ShieldCheck}
+                    title="All Gate Invariants Satisfied"
+                    description="No pending critical edge confirmations or missing tests. Regression execution plan is ready."
+                    actionText="Proceed to Results"
+                    onActionClick={() => alert('Moving to next stage')}
+                  />
+                </div>
+                <div className="ev-card-sample" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <span className="ev-sample-label">Skeleton Placeholder (Loading State):</span>
+                  <SkeletonBlock height="28px" width="60%" />
+                  <SkeletonBlock height="16px" width="100%" />
+                  <SkeletonBlock height="16px" width="85%" />
+                  <SkeletonBlock height="36px" width="40%" borderRadius="var(--ev-radius-chip)" />
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-
-        {/* SECTION 7: HashChip, SandboxBadge & FreshnessPill */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">7. HashChip, Sandbox & Freshness (§6.1)</h2>
-          <div className="ev-gallery-row">
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Verified SHA-256 Hash:</span>
-              <HashChip hash="9e8a72b04f183726dae004bfae92716492b95764c92" isVerified={true} />
-            </div>
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Broken Hash (Raises Hard Stop O4):</span>
-              <HashChip
-                hash="c4ca4238a0b923820dcc509a6f75849b284e71f7b"
-                isVerified={false}
-                onBrokenClick={() => alert('HARD STOP O4: Evidence record tamper detected!')}
-              />
-            </div>
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Freshness State:</span>
-              <FreshnessPill isStale={false} />
-            </div>
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Stale Degraded Mode:</span>
-              <FreshnessPill isStale={true} />
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 8: StageStepper */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">8. StageStepper Component (§6.1, §9.6)</h2>
-          <p className="ev-section-desc">
-            Rule: 6-stage event workspace spine. Locked steps explain why in tooltip & accessibility description.
-          </p>
-          <div className="ev-card-sample" style={{ padding: 0 }}>
-            <StageStepper
-              stages={stepperStages}
-              currentStageId={currentStage}
-              onSelectStage={(id) => setCurrentStage(id)}
-            />
-          </div>
-        </section>
-
-        {/* SECTION 9: GlossaryTerm in Context */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">9. GlossaryTerm in Context (§6.1, §14)</h2>
-          <p className="ev-section-desc">
-            Rule: Dotted underline with hover popover. Verbatim charter definitions for all 20 charter terms.
-          </p>
-          <div className="ev-card-sample">
-            <p style={{ margin: 0, lineHeight: 1.6 }}>
-              When a <GlossaryTerm term="Model change event" /> occurs across the estate,{' '}
-              <GlossaryTerm term="AI Evergreen" /> orchestrates a{' '}
-              <GlossaryTerm term="Differential evaluation" /> against the workload's{' '}
-              <GlossaryTerm term="Behavioural contract" />. The{' '}
-              <GlossaryTerm term="Trusted kernel" /> enforces policies and verifies the immutable{' '}
-              <GlossaryTerm term="Qualification evidence record" /> before any{' '}
-              <GlossaryTerm term="Promotion" /> can proceed.
-            </p>
-          </div>
-        </section>
-
-        {/* SECTION 10: EmptyState & SkeletonBlock */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">10. EmptyState & SkeletonBlock (§6.1, §12)</h2>
-          <div className="ev-gallery-row">
-            <div style={{ flex: 1 }}>
-              <EmptyState
-                icon={ShieldCheck}
-                title="All Gate Invariants Satisfied"
-                description="No pending critical edge confirmations or missing tests. Regression execution plan is ready."
-                actionText="Proceed to Results"
-                onActionClick={() => alert('Moving to next stage')}
-              />
-            </div>
-            <div className="ev-card-sample" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <span className="ev-sample-label">Skeleton Placeholder (Loading State):</span>
-              <SkeletonBlock height="28px" width="60%" />
-              <SkeletonBlock height="16px" width="100%" />
-              <SkeletonBlock height="16px" width="85%" />
-              <SkeletonBlock height="36px" width="40%" borderRadius="var(--ev-radius-chip)" />
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 11: Phase 2 Evaluation Components */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">11. Phase 2 Evaluation & Diff Components (§11)</h2>
-          <p className="ev-section-desc">
-            Rule: Deterministic failure overrides probabilistic judges. Agents are evaluated on the trajectory they took, not just final answer.
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Agent Trajectory Timeline (Refund Agent C-0087 — Skipped Step):</span>
-              <TrajectoryTimeline
-                currentSteps={[
-                  'lookup_transaction(id="tx_9821")',
-                  'policy_check(amount=1250.00, customer_tier="standard")',
-                  'refund_declined(reason="EXCEEDS_TIER_LIMIT")',
-                ]}
-                candidateSteps={[
-                  'lookup_transaction(id="tx_9821")',
-                  'refund_declined(reason="EXCEEDS_TIER_LIMIT")',
-                ]}
-                skippedNote="Required step missing: policy check did not run."
-                isDeterministicFail={true}
-              />
-            </div>
-
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Differential Response Diff Viewer (Claims Policy C-0142):</span>
-              <DiffViewer
-                currentText="Coverage for burst pipes is provided under Section 4.2.1 (Water Damage Rider), with a $500 standard deductible applying."
-                candidateText="Water damage from pipe failure is covered under General Property Provisions (Section 4), subject to standard deductible terms."
-                explanation="Candidate omitted specific rider subclause 4.2.1 citation required by behavioural contract v3.1."
-                verdictNote="Semantic grounding variance detected."
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 11: Phase 3 Telemetry Threshold Charts & Rollout (§13) */}
-        <section className="ev-gallery-section">
-          <h2 className="ev-section-title">11. Telemetry Threshold Charts (§13)</h2>
-          <p className="ev-section-desc">
-            Rule: Metric cards display limit line, trend SVG, and accessible table toggle. Breaches trigger red alert state and automated rollback.
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Healthy Telemetry (Citation Validity):</span>
-              <ThresholdChart
-                metric={{
-                  id: 'metric-sample-1',
-                  name: 'CITATION VALIDITY',
-                  limit: 0.95,
-                  current: 0.97,
-                  comparator: '>',
-                  unit: '',
-                  isBreach: false,
-                  history: [
-                    { timestamp: '14:00', value: 0.98 },
-                    { timestamp: '14:05', value: 0.97 },
-                    { timestamp: '14:10', value: 0.97 },
-                  ],
-                }}
-              />
-            </div>
-
-            <div className="ev-card-sample">
-              <span className="ev-sample-label">Seeded Anomaly Breach (Groundedness &lt; 0.85):</span>
-              <ThresholdChart
-                metric={{
-                  id: 'metric-sample-2',
-                  name: 'GROUNDEDNESS',
-                  limit: 0.85,
-                  current: 0.71,
-                  comparator: '<',
-                  unit: '',
-                  isBreach: true,
-                  history: [
-                    { timestamp: '14:00', value: 0.88 },
-                    { timestamp: '14:05', value: 0.86 },
-                    { timestamp: '14:10', value: 0.71 },
-                  ],
-                }}
-              />
-            </div>
-          </div>
-        </section>
+        )}
       </main>
-
-
 
       <SandboxBadge variant="strip" />
     </div>

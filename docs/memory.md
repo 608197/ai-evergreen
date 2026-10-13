@@ -7,6 +7,36 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-13 — Tabbed Infographic Transformations (Portfolio & Design Patterns Screens)
+
+**What changed:**
+- **Executive Portfolio & Horizon Scanning (`PortfolioScreen.tsx` & `PortfolioScreen.css`)**:
+  - Replaced single-column vertical layout with dedicated in-page tabs and infographics:
+    - **Global Executive Infographic Bar**: Enterprise Fleet Vital Health display (14 active models, 84% fleet compliant, 2 deprecations <90d, 4.2h mean qualification velocity, 9 mission-critical workloads protected).
+    - **Tab 1: AI Technical Debt & Fleet Risk**:
+      - Qualification Cycle Time Acceleration infographic comparing legacy enterprise IT governance (18.5 days / 444h) against AI Evergreen (4.2h, a 77x / 99.05% lead time reduction).
+      - 5 interactive technical debt exposure cards with progress meters and status alerts (Deprecated Models, Stale Contracts >90d, Unsupported Tools, Orphaned Workloads, Qualification Velocity).
+    - **Tab 2: Model Lifecycle & Deprecation Runway**:
+      - Horizon View Countdown Gantt timeline with color-coded urgency bars (urgent red <60d, warn amber <120d, normal teal).
+      - Provider filter pills (`All Providers`, `Anthropic`, `Amazon`, `Cohere`).
+      - Detailed lifecycle cards with affected workload badges linking directly to `/estate` and blast radius action button linking to `/events/E-2026-001/blast-radius`.
+    - **Tab 3: Strategic Enterprise Roadmap**:
+      - 5-Phase Maturity Roadmap pipeline infographic (`Spike Baseline` -> `Enterprise Pilot` -> `Automated Scan` -> `Multi-Cloud` -> `Closed-Loop`).
+      - Detailed milestone phase cards with architecture deliverables (Kong gateway adapter, ServiceNow bi-directional sync, AST parser, sub-second circuit breaker).
+- **Design Patterns & Component Gallery (`Gallery.tsx` & `Gallery.css`)**:
+  - Re-architected 12 scrolling component sections into 4 structured in-page tabs:
+    - **Global Standards Header**: Deterministic Design Language Standards infographic highlighting Charter Principles (Triple-Cue Rule, Navy Risk Scale, Evidence Provenance, Design Token Purity) with interactive live toast test trigger.
+    - **Tab 1: Deterministic Primitives**: 14 StatusChip variants, 4-tier navy RiskMeters (compact/expanded), ConfidenceMeters with limit alerts, ProvenanceTags.
+    - **Tab 2: Gates & Evidence Audit**: GateBanner & KernelVerdict (permit/deny with rule inspect), SHA-256 verifiable HashChips with Hard Stop O4 trigger, 6-stage StageStepper.
+    - **Tab 3: Deep Evaluation & Telemetry**: Agent Trajectory Timeline (deterministic failure overrides LLM), Differential Response DiffViewer, Telemetry Threshold Charts with anomaly alert.
+    - **Tab 4: Layout, Feedback & Glossary**: RiskBadgeRow, StatTiles with illustrative/measured proof tags, 20-term interactive hover GlossaryTerm, EmptyState, and SkeletonBlock loading placeholders.
+- **Build Verification**: `npm run build` in `web/` passed with 0 errors (2,020 modules transformed cleanly).
+
+**What's still open:**
+- Run retention audit script.
+- Push commit via GitHub REST API.
+- Pull and restart docker compose on remote EC2 instance.
+
 ## 2026-10-13 — Automated State Synchronization & Memory Retention Update
 
 **What changed:**

@@ -67,12 +67,202 @@
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--ev-space-8) var(--ev-space-6);
+  padding: var(--ev-space-6) var(--ev-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--ev-space-8);
+  gap: var(--ev-space-4);
 }
 
+/* =========================================================================
+   GLOBAL HERO INFOGRAPHIC: Design Language Standards
+   ========================================================================= */
+.gallery-vitals-card {
+  background-color: var(--ev-white);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-card);
+  padding: var(--ev-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-3);
+  box-shadow: var(--ev-shadow-card);
+}
+
+.g-vitals-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ev-space-2);
+  border-bottom: 1px solid var(--ev-line-soft);
+  padding-bottom: var(--ev-space-3);
+}
+
+.g-vitals-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+}
+
+.g-vitals-icon {
+  color: var(--ev-teal);
+}
+
+.g-vitals-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ev-navy);
+}
+
+.g-vitals-subtitle {
+  font-size: 12px;
+  color: var(--ev-slate);
+  margin: 2px 0 0 0;
+}
+
+.g-actions-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+}
+
+.btn-toast-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--ev-cream);
+  border: 1px solid var(--ev-line-soft);
+  color: var(--ev-navy);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--ev-radius-control);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-toast-trigger:hover {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border-color: var(--ev-teal);
+}
+
+.g-vitals-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border: 1px solid var(--ev-teal);
+  padding: 4px 10px;
+  border-radius: var(--ev-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.g-vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ev-space-3);
+}
+
+@media (max-width: 900px) {
+  .g-vitals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.g-vital-box {
+  background-color: var(--ev-cream);
+  border: 1px solid var(--ev-line-soft);
+  border-radius: var(--ev-radius-sm, 6px);
+  padding: var(--ev-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.g-vital-num {
+  font-family: var(--ev-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ev-teal);
+}
+
+.g-vital-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ev-navy);
+}
+
+.g-vital-desc {
+  font-size: 11px;
+  color: var(--ev-slate);
+  line-height: 1.35;
+}
+
+/* =========================================================================
+   IN-PAGE NAVIGATION TABS
+   ========================================================================= */
+.gallery-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  border-bottom: 2px solid var(--ev-line-soft);
+  padding-bottom: 2px;
+  overflow-x: auto;
+}
+
+.gallery-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -4px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ev-slate);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.gallery-nav-tab:hover {
+  color: var(--ev-navy);
+}
+
+.gallery-nav-tab.active {
+  color: var(--ev-teal);
+  border-bottom-color: var(--ev-teal);
+}
+
+.g-tab-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background-color: var(--ev-cream);
+  color: var(--ev-slate-muted);
+  padding: 2px 8px;
+  border-radius: var(--ev-radius-full);
+  border: 1px solid var(--ev-line-soft);
+}
+
+.g-tab-badge.highlight {
+  background-color: var(--ev-teal-light);
+  color: var(--ev-teal);
+  border-color: var(--ev-teal);
+}
+
+.gallery-tab-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-6);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Section Components */
 .ev-gallery-section {
   display: flex;
   flex-direction: column;
