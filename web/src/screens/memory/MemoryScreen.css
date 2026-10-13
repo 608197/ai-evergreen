@@ -1,6 +1,6 @@
 /* ==============================================================================
    AI Evergreen — Memory Screen (§Screen 10)
-   Enhanced with visual diagrams, failure trajectory flows & ROI charts
+   Tabbed Infographic Architecture & Visual Intelligence Center
    ============================================================================== */
 
 .memory-screen {
@@ -46,7 +46,7 @@
   padding: var(--ev-space-4) var(--ev-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--ev-space-6);
+  gap: var(--ev-space-5);
   max-width: 1500px;
   width: 100%;
   margin: 0 auto;
@@ -66,7 +66,7 @@
 }
 
 /* ==============================================================================
-   Visual Graphic 1: Qualification Memory Pipeline Card
+   Global Infographic: Qualification Memory Pipeline Card
    ============================================================================== */
 .memory-pipeline-card {
   background: linear-gradient(135deg, var(--ev-bg-surface) 0%, #FAF9F6 100%);
@@ -129,12 +129,12 @@
   justify-content: space-between;
   gap: var(--ev-space-2);
   overflow-x: auto;
-  padding: var(--ev-space-2) 0;
+  padding: var(--ev-space-1) 0;
 }
 
 .pipeline-stage {
   flex: 1;
-  min-width: 200px;
+  min-width: 190px;
   background: var(--ev-bg-surface);
   border: 1px solid var(--ev-border-subtle);
   border-radius: var(--ev-radius-md);
@@ -209,46 +209,159 @@
 }
 
 /* ==============================================================================
-   Section Headers & Pattern Filter Strip
+   Primary Tab Navigation Bar
    ============================================================================== */
-.memory-section {
+.memory-nav-tabs {
+  display: flex;
+  gap: var(--ev-space-2);
+  border-bottom: 2px solid var(--ev-border-subtle);
+  padding-bottom: 0;
+  margin-top: var(--ev-space-1);
+}
+
+.memory-nav-tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--ev-space-3) var(--ev-space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  font-size: var(--ev-font-sm);
+  font-weight: 600;
+  color: var(--ev-text-secondary);
+  cursor: pointer;
+  margin-bottom: -2px;
+  transition: all var(--ev-duration-micro) ease;
+}
+
+.memory-nav-tab:hover {
+  color: var(--ev-navy);
+  border-bottom-color: var(--ev-line-soft);
+}
+
+.memory-nav-tab.active {
+  color: var(--ev-brand-primary);
+  border-bottom-color: var(--ev-brand-primary);
+  font-weight: 700;
+}
+
+.tab-counter-badge {
+  background: var(--ev-bg-subtle);
+  color: var(--ev-slate);
+  border: 1px solid var(--ev-border-subtle);
+  padding: 2px 8px;
+  border-radius: var(--ev-radius-chip);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tab-counter-badge.highlight {
+  background: var(--ev-surface-pass);
+  color: var(--ev-text-pass);
+  border-color: rgba(14, 98, 69, 0.2);
+}
+
+.memory-tab-content {
   display: flex;
   flex-direction: column;
-  gap: var(--ev-space-3);
+  gap: var(--ev-space-4);
 }
 
-.section-header-row {
+/* ==============================================================================
+   TAB 1: Discovered Behavioral Patterns (Infographics)
+   ============================================================================== */
+.patterns-infographic-header {
+  background: var(--ev-bg-surface);
+  border: 1px solid var(--ev-border-subtle);
+  border-radius: var(--ev-radius-card);
+  padding: var(--ev-space-4);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 1px solid var(--ev-border-subtle);
-  padding-bottom: var(--ev-space-3);
+  align-items: center;
   flex-wrap: wrap;
-  gap: var(--ev-space-3);
+  gap: var(--ev-space-4);
+  box-shadow: var(--ev-shadow-card);
 }
 
-.section-header {
-  border-bottom: 1px solid var(--ev-border-subtle);
-  padding-bottom: var(--ev-space-2);
+.spectrum-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-2);
+  flex: 1;
+  min-width: 320px;
 }
 
-.section-heading {
-  font-size: var(--ev-font-lg);
+.spectrum-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--ev-slate-muted);
+}
+
+.spectrum-title {
+  font-size: var(--ev-font-md);
   font-weight: 700;
   margin: 0;
   color: var(--ev-navy);
 }
 
-.section-subheading {
-  font-size: var(--ev-font-xs);
-  color: var(--ev-text-secondary);
-  margin: 3px 0 0 0;
+.spectrum-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 600px;
 }
+
+.spectrum-bar {
+  display: flex;
+  height: 20px;
+  border-radius: var(--ev-radius-sm);
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.spec-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spec-segment.crit { background: #B42318; }
+.spec-segment.high { background: #A8791A; }
+.spec-segment.med { background: #0284C7; }
+
+.spec-legend {
+  display: flex;
+  gap: var(--ev-space-4);
+  font-size: 11px;
+  color: var(--ev-text-secondary);
+}
+
+.spec-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.crit { background: #B42318; }
+.dot.high { background: #A8791A; }
+.dot.med { background: #0284C7; }
 
 .pattern-filter-strip {
   display: flex;
   gap: var(--ev-space-2);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .filter-pill {
@@ -256,7 +369,7 @@
   border: 1px solid var(--ev-border-subtle);
   color: var(--ev-text-secondary);
   border-radius: var(--ev-radius-chip);
-  padding: 4px 12px;
+  padding: 5px 12px;
   font-size: var(--ev-font-xs);
   font-weight: 600;
   cursor: pointer;
@@ -274,9 +387,7 @@
   color: #FFFFFF;
 }
 
-/* ==============================================================================
-   Section 1: Discovered Behavioral Patterns
-   ============================================================================== */
+/* Pattern Cards Grid */
 .patterns-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -337,15 +448,15 @@
 }
 
 .pattern-severity.high {
-  background: var(--ev-surface-fail);
-  color: var(--ev-text-fail);
-  border: 1px solid rgba(180, 35, 24, 0.2);
-}
-
-.pattern-severity.medium {
   background: var(--ev-surface-warn);
   color: var(--ev-text-warn);
   border: 1px solid rgba(168, 121, 26, 0.2);
+}
+
+.pattern-severity.medium {
+  background: #E0F2FE;
+  color: #0369A1;
+  border: 1px solid rgba(2, 132, 199, 0.2);
 }
 
 .pattern-new-tag {
@@ -388,11 +499,11 @@
 }
 
 /* ==============================================================================
-   Visual Graphic 2: Visual Failure Trajectory Diagrams
+   Pure Infographic Elements for Patterns
    ============================================================================== */
-.failure-trajectory-box {
+.infographic-box {
   background: #F8FAFC;
-  border: 1px dashed #CBD5E1;
+  border: 1px solid #E2E8F0;
   border-radius: var(--ev-radius-md);
   padding: var(--ev-space-3);
   display: flex;
@@ -400,149 +511,226 @@
   gap: var(--ev-space-2);
 }
 
-.trajectory-title {
-  font-size: 11px;
-  font-weight: 700;
+.infographic-box-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   color: #475569;
   display: flex;
   align-items: center;
   gap: 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
-/* Flow diagram for Tool Order Drift */
-.trajectory-flow {
+/* Dual Lane Flow (Pattern 1) */
+.dual-lane-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lane {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--ev-radius-sm);
+  padding: 6px 8px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   font-size: 11px;
 }
 
-.traj-node {
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  padding: 3px 8px;
+.lane.unsafe {
+  background: #FFF5F5;
+  border-color: #FED7D7;
+}
+
+.lane.safe {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+}
+
+.lane-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
   border-radius: var(--ev-radius-sm);
-  font-weight: 500;
-  color: #334155;
+  text-transform: uppercase;
+  flex-shrink: 0;
 }
 
-.traj-node.fail {
-  background: var(--ev-surface-fail);
-  border-color: rgba(180, 35, 24, 0.3);
-  color: var(--ev-text-fail);
-  font-weight: 600;
-}
+.lane-badge.red { background: #B42318; color: #FFFFFF; }
+.lane-badge.green { background: #0E6245; color: #FFFFFF; }
 
-.traj-node.skip {
-  background: var(--ev-surface-warn);
-  border-color: rgba(168, 121, 26, 0.3);
-  color: var(--ev-text-warn);
-  font-weight: 600;
-}
-
-.traj-node.shield {
-  background: var(--ev-surface-pass);
-  border-color: rgba(14, 98, 69, 0.3);
-  color: var(--ev-text-pass);
-  font-weight: 600;
-  display: inline-flex;
+.lane-steps {
+  display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: wrap;
 }
 
-.traj-arrow {
+.lane-step {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.lane-step.fail { background: #FEE2E2; color: #991B1B; }
+.lane-step.bypass { background: #B42318; color: #FFFFFF; font-weight: 700; }
+.lane-step.pass { background: #DCFCE7; color: #166534; }
+
+.lane-arrow {
   color: #94A3B8;
   font-weight: bold;
 }
 
-/* Metrics comparison for RAG Citation Drift */
-.trajectory-metrics-row {
+/* Timeline Infographic (Pattern 2) */
+.timeline-infographic {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: var(--ev-space-2);
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--ev-radius-sm);
+  padding: 8px;
+  gap: 4px;
 }
 
-.traj-metric {
-  padding: 4px 8px;
-  border-radius: var(--ev-radius-sm);
+.time-col {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3px;
 }
 
-.traj-metric.pass {
-  background: var(--ev-surface-pass);
-  border: 1px solid rgba(14, 98, 69, 0.2);
+.time-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
 }
 
-.traj-metric.pass .metric-name { font-size: 9px; font-weight: 700; color: var(--ev-text-pass); }
-.traj-metric.pass .metric-val { font-size: 11px; font-weight: 700; color: var(--ev-text-pass); }
+.time-tag.warn { color: #A8791A; }
+.time-tag.red { color: #B42318; }
 
-.traj-metric.fail {
-  background: var(--ev-surface-fail);
-  border: 1px solid rgba(180, 35, 24, 0.2);
+.metric-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
 }
 
-.traj-metric.fail .metric-name { font-size: 9px; font-weight: 700; color: var(--ev-text-fail); }
-.traj-metric.fail .metric-val { font-size: 11px; font-weight: 700; color: var(--ev-text-fail); }
-
-.traj-metric-lead {
+.metric-pill.pass { background: #DCFCE7; color: #166534; }
+.metric-pill.fail { background: #FEE2E2; color: #991B1B; font-weight: 700; }
+.metric-pill.shield {
+  background: #CCFBF1;
+  color: #0F766E;
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--ev-text-warn);
+  font-weight: 700;
 }
 
-.traj-metric.shield {
-  margin-left: auto;
-  background: var(--ev-brand-subtle);
-  border: 1px solid rgba(43, 111, 119, 0.3);
-  color: var(--ev-brand-primary);
-  font-size: 11px;
-  font-weight: 600;
-  flex-direction: row;
-  align-items: center;
-}
-
-/* Schema diff for Key Omission */
-.trajectory-diff-mini {
+.time-arrow-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  font-size: 11px;
+  color: #94A3B8;
 }
 
-.diff-tag {
-  font-size: 9px;
+.time-gap {
+  font-size: 8px;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: var(--ev-radius-sm);
-}
-
-.diff-tag.exp { background: #E2E8F0; color: #475569; }
-.diff-tag.act { background: var(--ev-surface-fail); color: var(--ev-text-fail); }
-
-.trajectory-diff-mini code {
-  font-family: var(--ev-font-mono);
-  font-size: 11px;
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  padding: 2px 6px;
-  border-radius: var(--ev-radius-sm);
-}
-
-.diff-vs {
-  font-size: 10px;
   color: #94A3B8;
+}
+
+.time-arrow {
+  color: #94A3B8;
+}
+
+/* Schema Diff Infographic (Pattern 3) */
+.schema-diff-infographic {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--ev-radius-sm);
+  padding: 8px;
+}
+
+.schema-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.schema-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: #475569;
+}
+
+.schema-label.red { color: #B42318; }
+
+.schema-card code {
+  font-family: var(--ev-font-mono);
+  font-size: 10px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 3px;
+  padding: 4px 6px;
+  white-space: pre-wrap;
+  color: #1E293B;
+  display: block;
+}
+
+.schema-vs-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #94A3B8;
+}
+
+.schema-vs {
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.schema-shield-pill {
+  font-size: 10px;
+  font-weight: 600;
+  color: #0E6245;
+  background: #E6F4EA;
+  padding: 3px 8px;
+  border-radius: var(--ev-radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Pattern Meta Strip */
+.pattern-meta-strip {
+  display: flex;
+  justify-content: space-between;
+  background: var(--ev-bg-subtle);
+  border: 1px solid var(--ev-border-subtle);
+  border-radius: var(--ev-radius-sm);
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.meta-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.meta-label {
+  font-size: 9px;
   font-weight: 700;
+  color: var(--ev-slate-muted);
 }
 
 /* Supporting Cases */
@@ -666,7 +854,7 @@
 }
 
 /* ==============================================================================
-   Visual Graphic 3: ROI & Hours Saved Distribution Card
+   TAB 2: Seeded Invariant & Test Reuse Log (Infographics + Cards/Table Toggle)
    ============================================================================== */
 .reuse-visual-summary-card {
   background: var(--ev-bg-surface);
@@ -767,20 +955,10 @@
   font-size: 11px;
   font-weight: 700;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  transition: opacity var(--ev-duration-micro) ease;
 }
 
-.dist-segment:hover {
-  opacity: 0.9;
-}
-
-.dist-segment.refund {
-  background: #0E6245; /* Dark emerald */
-}
-
-.dist-segment.claims {
-  background: #2B6F77; /* Evergreen teal */
-}
+.dist-segment.refund { background: #0E6245; }
+.dist-segment.claims { background: #2B6F77; }
 
 .dist-legend {
   display: flex;
@@ -806,9 +984,206 @@
 .legend-dot.refund { background: #0E6245; }
 .legend-dot.claims { background: #2B6F77; }
 
-/* ==============================================================================
-   Reuse Table
-   ============================================================================== */
+/* Reuse Controls Bar */
+.reuse-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ev-space-3);
+  padding-top: var(--ev-space-1);
+}
+
+.reuse-section-title {
+  font-size: var(--ev-font-md);
+  font-weight: 700;
+  margin: 0;
+  color: var(--ev-navy);
+}
+
+.reuse-section-sub {
+  font-size: var(--ev-font-xs);
+  color: var(--ev-text-muted);
+}
+
+.view-mode-toggle {
+  display: inline-flex;
+  background: var(--ev-bg-surface);
+  border: 1px solid var(--ev-border-subtle);
+  border-radius: var(--ev-radius-chip);
+  padding: 2px;
+}
+
+.view-mode-btn {
+  background: none;
+  border: none;
+  padding: 4px 12px;
+  border-radius: var(--ev-radius-chip);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ev-text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--ev-duration-micro) ease;
+}
+
+.view-mode-btn.active {
+  background: var(--ev-brand-primary);
+  color: #FFFFFF;
+}
+
+/* Infographic Asset Cards */
+.reuse-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ev-space-4);
+}
+
+@media (max-width: 1024px) {
+  .reuse-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reuse-asset-card {
+  background: var(--ev-bg-surface);
+  border: 1px solid var(--ev-border-subtle);
+  border-radius: var(--ev-radius-card);
+  padding: var(--ev-space-4);
+  box-shadow: var(--ev-shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ev-space-3);
+  transition: all var(--ev-duration-micro) ease;
+}
+
+.reuse-asset-card:hover {
+  border-color: var(--ev-brand-primary);
+}
+
+.asset-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asset-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ev-bg-subtle);
+  border: 1px solid var(--ev-border-subtle);
+  padding: 2px 8px;
+  border-radius: var(--ev-radius-sm);
+  font-family: var(--ev-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ev-navy);
+}
+
+.asset-card-name {
+  font-size: var(--ev-font-md);
+  font-weight: 700;
+  margin: 0;
+  color: var(--ev-navy);
+  line-height: 1.35;
+}
+
+.asset-card-workload {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ev-font-xs);
+  color: var(--ev-slate);
+}
+
+.workload-bot-icon { color: var(--ev-brand-primary); }
+.workload-doc-icon { color: var(--ev-slate); }
+
+.asset-lineage-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--ev-radius-sm);
+  padding: 8px 10px;
+}
+
+.lineage-origin, .lineage-active {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lineage-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+}
+
+.lineage-val {
+  font-family: var(--ev-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.lineage-val.active {
+  color: var(--ev-brand-primary);
+}
+
+.lineage-arrow-wrap {
+  display: flex;
+  align-items: center;
+  color: #94A3B8;
+}
+
+.asset-effort-meter {
+  display: flex;
+  align-items: center;
+  gap: var(--ev-space-2);
+  background: var(--ev-surface-pass);
+  border: 1px solid rgba(14, 98, 69, 0.2);
+  padding: 6px 10px;
+  border-radius: var(--ev-radius-sm);
+}
+
+.meter-clock {
+  color: var(--ev-text-pass);
+  flex-shrink: 0;
+}
+
+.meter-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.meter-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ev-text-pass);
+}
+
+.meter-bar {
+  height: 4px;
+  background: rgba(14, 98, 69, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meter-bar-fill {
+  height: 100%;
+  background: #0E6245;
+  border-radius: 2px;
+}
+
+/* Reuse Table */
 .reuse-table-container {
   background: var(--ev-bg-surface);
   border: 1px solid var(--ev-border-subtle);
@@ -907,7 +1282,7 @@
 }
 
 /* ==============================================================================
-   Section 3: Dual Grid (Proposals + Visual Roadmap)
+   TAB 3: Contract Proposals & Roadmap
    ============================================================================== */
 .memory-dual-grid {
   display: grid;
@@ -990,7 +1365,7 @@
   color: var(--ev-text-secondary);
 }
 
-/* Visual Graphic 4: Contract Schema Diff Box */
+/* Contract Diff Box */
 .contract-diff-box {
   background: #FFFFFF;
   border: 1px solid var(--ev-border-subtle);
@@ -1059,9 +1434,7 @@
   text-decoration: underline;
 }
 
-/* ==============================================================================
-   Visual Graphic 5: Roadmap Preview with Horizon Radar & Timeline
-   ============================================================================== */
+/* Visual Graphic 5: Roadmap Preview with Horizon Radar & Timeline */
 .roadmap-preview-card {
   background: linear-gradient(145deg, #0B2036 0%, #12304A 100%);
   border-color: #2B6F77;

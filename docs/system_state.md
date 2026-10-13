@@ -86,7 +86,7 @@
 6. **S6 Canary Rollout** (`/events/:eventId/rollout`): Live traffic routing, autonomous rollback controller (<850ms).
 7. **S7 Qualification Record** (`/events/:eventId/record`): Cryptographic audit ledger, Merkle hash verification, reproducible evaluation export.
 8. **S8 Estate** (`/estate`): Enterprise-wide connected topology, inventory, and qualification banners.
-9. **S10 Memory** (`/memory`): Discovered behavioral contracts, visual memory lifecycle pipeline, failure trajectory flows, 18h avoided effort distribution chart, schema diff boxes, and Phase 3 predictive horizon radar.
+9. **S10 Memory** (`/memory`): Tabbed infographic intelligence center: Tab 1 "Discovered Behavioral Patterns" (dual-lane trajectory infographics, lead-indicator timeline, schema diffs, risk spectrum bar); Tab 2 "Seeded Invariant & Test Reuse Log" (~18h effort avoided distribution bar, visual test asset cards with lineage flows, cards/table toggle); Tab 3 "Contract Proposals & Roadmap" (red/green schema diffs, Phase 3 horizon radar).
 10. **S11 Controls** (`/controls`): Operating invariant verification, self-governance policy (Evergreen cannot mark its own homework).
 11. **S12 Portfolio** (`/portfolio`): AI technical debt, model retirement runways, executive ROI metrics.
 12. **Design Patterns** (`/gallery`): Component design system and design tokens showcase.

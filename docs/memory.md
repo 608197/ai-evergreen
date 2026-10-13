@@ -7,26 +7,30 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
-## 2026-10-13 — Qualification Memory Visual UX Enhancement & Interactive Architecture
+## 2026-10-13 — Qualification Memory Tabbed Infographic Center
 
 **What changed:**
-- **Redesigned Qualification Memory Screen (`MemoryScreen.tsx` & `MemoryScreen.css`)**:
-  - Transformed text-dense screen into a modern visual command center with 0% content loss.
-  - **Graphic 1 (Memory Flow Architecture)**: 4-stage interactive lifecycle pipeline (`01 Crypto Store` -> `02 Trajectory Shifts` -> `03 Seeded Reuse` -> `04 Active Shield`) demonstrating closed-loop invariant feedback.
-  - **Graphic 2 (Visual Failure Signatures)**: Added dynamic flow diagrams for behavioral patterns:
-    - Tool call reordering anomaly flow (`[Disburse] -> [Auth Bypassed] -> [Evergreen K-014 Enforced]`).
-    - Lead indicator metric comparison card (Tone 99% normal vs Citation 68% degradation).
-    - Silent schema key omission diff (`{ "taxCode": null }` vs `{ }`).
-    - Added interactive risk-tier filter pills (`All (3)`, `Critical (1)`, `High (1)`, `Medium (1)`) and accordion drawers for full deep-dive evidence text.
-  - **Graphic 3 (Avoided Effort ROI Distribution)**: Visual stacked distribution bar illustrating the 18 avoided engineering hours across workloads (`Refund Agent: 12h (67%)`, `Claims Policy: 6h (33%)`) with +64% authoring acceleration metric.
-  - **Graphic 4 (Contract Schema Diffs)**: Red (-) vs green (+) visual diff viewer highlighting proposed invariant version bumps.
-  - **Graphic 5 (Phase 3 Horizon Radar)**: 3-phase evolutionary roadmap radar tracking deterministic memory -> cross-org clustering -> zero-day horizon simulation.
-- **Design System Tokens (`tokens.css`)**: Added semantic token aliases (`--ev-brand-primary`, `--ev-bg-surface`, `--ev-text-pass`, etc.) directly into `:root` for robust cross-screen styling.
-- **Build Verification**: Passed TypeScript & Vite build clean (`2020 modules transformed, 0 errors`).
+- **Tabbed Memory Architecture (`MemoryScreen.tsx` & `MemoryScreen.css`)**:
+  - Implemented 3 dedicated in-page tabs to eliminate long vertical scrolling and show everything in one clean view:
+    1. **Tab 1: Discovered Behavioral Patterns** (`3`):
+       - Converted text-heavy paragraphs into **Infographics**:
+         - *Risk Spectrum Bar*: Visual breakdown showing Critical (Financial Tools), High (Citation Drift), and Medium (Schema Omission).
+         - *Dual-Lane Execution Flowchart* (Tool Order Drift): Side-by-side red lane (`Prompt` -> `Disburse Tool ⚠️` -> `Auth Skipped 💥`) vs green lane (`Prompt` -> `Pre-Auth Enforced ✓` -> `Disburse Tool 🛡️`).
+         - *Lead-Indicator Timeline* (RAG Citation Drift): 3-stage temporal diagram showing Fluency 99% (deceptive) vs Citation Validity 68% (drops 48h early), guarded by Probe `T-0103`.
+         - *Side-by-Side Schema Diff Infographic* (Key Omission): JSON contract card `{ "taxCode": null }` vs model revision `{ } (Key Missing ❌)` with downstream ERP crash protection badge.
+         - *Metadata Chips*: Explicit Target Workload & Enforced Invariant pills.
+         - *Collapsible Accordion*: Full trajectory root cause analysis kept on-demand.
+    2. **Tab 2: Seeded Invariant & Test Reuse Log** (`47 Probes / 18h Saved`):
+       - *Visual ROI Dashboard*: ~18 Hours Avoided + 64% authoring acceleration + workload distribution bar.
+       - *View Mode Switcher*: Toggle between **Infographic Asset Cards** (card view with test badges, workload icons, origin->active lineage pipeline, and progress effort meters) and **Data Table** (full tabular view).
+    3. **Tab 3: Contract Proposals & Roadmap** (`2`):
+       - Git-style visual schema diffs (`- [v3.0]` vs `+ [v4.0]`).
+       - Phase 3 predictive horizon radar with 3-phase milestone timeline.
+- **Build Verification**: `npm run build` in `web/` passed with **0 errors** (2,020 modules transformed cleanly).
 
 **What's still open:**
-- Test push with self-healing Python Retention Auditor.
-- User to pull and build container on AWS EC2.
+- Push to GitHub via REST API.
+- User to pull on remote EC2 instance.
 
 ## 2026-10-11 — Automated State Synchronization & Memory Retention Update
 
