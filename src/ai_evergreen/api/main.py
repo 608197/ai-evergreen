@@ -450,3 +450,21 @@ def inject_demo_failure(req: DemoFailureInjectionRequest) -> dict[str, Any]:
         "audit": audit_record,
     }
 
+
+@app.post("/api/v1/demo/reset")
+def reset_demo_state() -> dict[str, Any]:
+    """Reset all in-memory events, recommendations, and evidence back to seed state."""
+    global in_memory_events, in_memory_recommendations, in_memory_evidence_packages, estate_cache
+    in_memory_events.clear()
+    in_memory_recommendations.clear()
+    in_memory_evidence_packages.clear()
+    estate_cache.clear()
+    _ensure_estate_loaded()
+    list_change_signals()
+    return {
+        "status": "SUCCESS",
+        "message": "Demo state successfully reset to seed baseline",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+

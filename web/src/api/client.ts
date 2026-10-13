@@ -281,4 +281,18 @@ export const apiClient = {
       return null;
     }
   },
+
+  /**
+   * Reset backend demo state back to pristine seed baseline.
+   */
+  async resetDemoState(): Promise<any | null> {
+    try {
+      return await request<any>('/demo/reset', {
+        method: 'POST',
+      });
+    } catch {
+      return null;
+    }
+  },
 };
+

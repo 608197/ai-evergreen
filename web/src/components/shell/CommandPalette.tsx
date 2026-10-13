@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
 import { useNavigate } from 'react-router-dom';
-import { Search, Layers, Cpu, ShieldAlert, ArrowRight, X, Plus, BookOpen, Sparkles } from 'lucide-react';
+import { Search, Layers, Cpu, ShieldAlert, ArrowRight, X, Plus, BookOpen, Sparkles, RotateCcw } from 'lucide-react';
+import { apiClient } from '../../api/client';
 import './CommandPalette.css';
 
 export const CommandPalette: React.FC = () => {
@@ -13,6 +14,7 @@ export const CommandPalette: React.FC = () => {
     setManualEventModalOpen,
     setGlossaryPanelOpen,
     setDemoDirectorOpen,
+    resetScenario,
   } = useEvergreenStore();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -69,6 +71,18 @@ export const CommandPalette: React.FC = () => {
       category: 'Action',
       icon: Sparkles,
       action: () => setDemoDirectorOpen(true),
+    },
+    {
+      id: 'action-reset-demo',
+      title: 'Reset Demo Scenario (Restore Seed State & Clear Injections)',
+      category: 'Action',
+      icon: RotateCcw,
+      action: () => {
+        resetScenario();
+        apiClient.resetDemoState().catch(() => {});
+        navigate('/');
+        setCommandPaletteOpen(false);
+      },
     },
     {
       id: 'action-glossary',

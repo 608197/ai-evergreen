@@ -117,6 +117,12 @@
 - **Key Deterministic Failure**: Refund Agent with Atlas-2 skips the mandatory policy check step. Trajectory evaluation detects failure; Trusted Kernel enforces **Deny (Rule K-014)**. Strictly NO bypass button.
 - **Canary Autonomous Rollback**: Ticket Summariser canary groundness drops to 0.71 (below 0.85 SLA); Rollback Controller executes automated rollback in **850ms**.
 - **Full Walkthrough Script**: Documented in [`docs/demo_walkthrough_guide.md`](file:///c:/Extra%20Work/IEP%20Techathon%202026/ai-evergreen/docs/demo_walkthrough_guide.md).
+- **Demo Reset & Customer Re-Run Mechanics**:
+  - **In-App Reset Button**: Demo Director footer button (*"Reset Demo Scenario"*) resets all client stores and navigates back to `/` in `<1s`.
+  - **Command Palette Action**: <kbd>Ctrl</kbd>+<kbd>K</kbd> -> *"Reset Demo Scenario (Restore Seed State & Clear Injections)"* resets client and backend.
+  - **Backend Seed Endpoint**: `POST /api/v1/demo/reset` clears all in-memory events, recommendations, and evidence back to seed baseline.
+  - **Browser Reload**: Pure in-memory Zustand store without persistence allows instant hard reload (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) to pristine state.
+  - **Container Restart**: `docker compose restart` restores fresh environment on EC2 in ~3 seconds.
 
 ---
 

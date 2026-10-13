@@ -170,3 +170,9 @@ def test_api_events_and_memory_endpoints() -> None:
     assert res_inj.status_code == 200
     assert res_inj.json()["audit"]["injected_for_demo"] is True
 
+    # 4. Demo reset to baseline
+    res_reset = client.post("/api/v1/demo/reset")
+    assert res_reset.status_code == 200
+    assert res_reset.json()["status"] == "SUCCESS"
+
+

@@ -7,6 +7,21 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-13 — End-to-End Demo Reset & Customer Re-Run Architecture
+
+**What changed:**
+- **Backend Demo Reset Endpoint (`src/ai_evergreen/api/main.py`)**:
+  - Implemented `POST /api/v1/demo/reset` which clears all in-memory events, recommendations, and evidence packages, re-reads `data/synthetic/estate.json`, and re-seeds canonical signals.
+  - Added test coverage in `tests/integration/test_api_endpoints.py` (6/6 passing).
+- **Frontend API Client (`web/src/api/client.ts`)**:
+  - Added `apiClient.resetDemoState()` method with graceful offline fallback.
+- **Demo Director Reset Integration (`web/src/components/shell/DemoDirector.tsx`)**:
+  - Wired `handleReset` to trigger both `resetScenario()` (Zustand client state reset) and `apiClient.resetDemoState()` (FastAPI backend reset) simultaneously. Cancels any active speech synthesis narration and returns to `/` with confirmation banner.
+- **Command Palette Fast Trigger (`web/src/components/shell/CommandPalette.tsx`)**:
+  - Added `"Reset Demo Scenario (Restore Seed State & Clear Injections)"` command item accessible via <kbd>Ctrl</kbd>+<kbd>K</kbd> -> typing `"reset"`.
+- **Zero-Persistence Parity**: Confirmed Zustand stores operate purely in-memory; hitting browser refresh (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) or container restart (`docker compose restart`) cleanly wipes state back to seed baseline.
+
+
 ## 2026-10-13 — Home Screen & TopBar Cleanup (Search Alignment, Persona Dropdown & Estate Bar Removal)
 
 **What changed:**

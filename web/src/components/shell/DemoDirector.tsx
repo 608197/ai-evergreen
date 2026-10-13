@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEvergreenStore } from '../../store/useEvergreenStore';
+import { apiClient } from '../../api/client';
 import {
   Sparkles,
   ChevronRight,
@@ -340,6 +341,7 @@ export const DemoDirector: React.FC = () => {
       setIsSpeaking(false);
     }
     resetScenario();
+    apiClient.resetDemoState().catch(() => {});
     navigate('/');
     setResetConfirmed(true);
     setTimeout(() => setResetConfirmed(false), 2500);
