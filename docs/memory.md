@@ -7,6 +7,27 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-13 — Qualification Memory Visual UX Enhancement & Interactive Architecture
+
+**What changed:**
+- **Redesigned Qualification Memory Screen (`MemoryScreen.tsx` & `MemoryScreen.css`)**:
+  - Transformed text-dense screen into a modern visual command center with 0% content loss.
+  - **Graphic 1 (Memory Flow Architecture)**: 4-stage interactive lifecycle pipeline (`01 Crypto Store` -> `02 Trajectory Shifts` -> `03 Seeded Reuse` -> `04 Active Shield`) demonstrating closed-loop invariant feedback.
+  - **Graphic 2 (Visual Failure Signatures)**: Added dynamic flow diagrams for behavioral patterns:
+    - Tool call reordering anomaly flow (`[Disburse] -> [Auth Bypassed] -> [Evergreen K-014 Enforced]`).
+    - Lead indicator metric comparison card (Tone 99% normal vs Citation 68% degradation).
+    - Silent schema key omission diff (`{ "taxCode": null }` vs `{ }`).
+    - Added interactive risk-tier filter pills (`All (3)`, `Critical (1)`, `High (1)`, `Medium (1)`) and accordion drawers for full deep-dive evidence text.
+  - **Graphic 3 (Avoided Effort ROI Distribution)**: Visual stacked distribution bar illustrating the 18 avoided engineering hours across workloads (`Refund Agent: 12h (67%)`, `Claims Policy: 6h (33%)`) with +64% authoring acceleration metric.
+  - **Graphic 4 (Contract Schema Diffs)**: Red (-) vs green (+) visual diff viewer highlighting proposed invariant version bumps.
+  - **Graphic 5 (Phase 3 Horizon Radar)**: 3-phase evolutionary roadmap radar tracking deterministic memory -> cross-org clustering -> zero-day horizon simulation.
+- **Design System Tokens (`tokens.css`)**: Added semantic token aliases (`--ev-brand-primary`, `--ev-bg-surface`, `--ev-text-pass`, etc.) directly into `:root` for robust cross-screen styling.
+- **Build Verification**: Passed TypeScript & Vite build clean (`2020 modules transformed, 0 errors`).
+
+**What's still open:**
+- Test push with self-healing Python Retention Auditor.
+- User to pull and build container on AWS EC2.
+
 ## 2026-10-11 — Automated State Synchronization & Memory Retention Update
 
 **What changed:**

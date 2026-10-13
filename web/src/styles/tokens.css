@@ -23,6 +23,31 @@
   --ev-white: #FFFFFF;          /* Cards, tables, inputs, modal backgrounds */
   --ev-focus: #1F6FEB;          /* 4.6:1 - Focus ring (2px with 2px white offset) */
 
+  /* 5.2 Semantic Aliases & Application Tokens */
+  --ev-brand-primary: var(--ev-teal);
+  --ev-brand-subtle: var(--ev-teal-light);
+  --ev-bg-app: var(--ev-cream);
+  --ev-bg-surface: var(--ev-white);
+  --ev-bg-subtle: #F0EFEA;
+  --ev-border-subtle: var(--ev-line-soft);
+  --ev-text-primary: var(--ev-navy);
+  --ev-text-secondary: var(--ev-slate);
+  --ev-text-muted: var(--ev-slate-muted);
+  --ev-text-pass: #0E6245;
+  --ev-surface-pass: #E6F4EA;
+  --ev-text-warn: var(--ev-gold-text);
+  --ev-surface-warn: var(--ev-gold-tint);
+  --ev-text-fail: var(--ev-red);
+  --ev-surface-fail: var(--ev-red-tint);
+  --ev-radius-sm: 4px;
+  --ev-radius-md: 8px;
+  --ev-radius-lg: 12px;
+  --ev-font-xs: 12px;
+  --ev-font-sm: 13px;
+  --ev-font-md: 14px;
+  --ev-font-lg: 18px;
+  --ev-font-xl: 22px;
+
   /* 5.3 Typography Stacks */
   --ev-font-heading: Cambria, "Source Serif 4", Georgia, serif;
   --ev-font-ui: Calibri, Carlito, "Segoe UI", system-ui, -apple-system, sans-serif;
