@@ -90,6 +90,10 @@ def upload_single_blob(file_rel: str, owner: str, repo: str, token: str) -> dict
         return None
 
     raw_bytes = file_path.read_bytes()
+    # Normalize CRLF to LF for text files to ensure strict parity with Linux Git checkouts & .gitattributes
+    binary_exts = (".png", ".jpg", ".jpeg", ".ico", ".db", ".sqlite", ".sqlite3", ".woff", ".woff2", ".ttf")
+    if not (file_rel.lower().endswith(binary_exts) or b"\x00" in raw_bytes[:8000]):
+        raw_bytes = raw_bytes.replace(b"\r\n", b"\n")
     b64_content = base64.b64encode(raw_bytes).decode("utf-8")
 
     blob_resp = api_request(

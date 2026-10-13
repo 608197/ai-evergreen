@@ -20,6 +20,7 @@ Format: `Date | What went wrong | Correction / rule going forward`
 | 2026-10-11 | TopBar persona dropdown was obscured behind the Canary Hero card on the Home page because CSS variables `--ev-z-sticky` and `--ev-z-popover` were missing from `tokens.css`, evaluating to `z-index: auto`. | Added complete Z-index scale tokens to `tokens.css` and set explicit `z-index: 100` on `.ev-topbar` and `z-index: 1000` on `.ev-topbar__popover`. |
 | 2026-10-11 | Evaluators could not easily discover how to switch personas because the role switcher was tucked away inside a small top-right user menu. | Added an explicit, prominent horizontal "SWITCH PERSPECTIVE:" selector tab strip directly on `HomeScreen.tsx` above the hero card with 1-click access to all 6 core personas. |
 | 2026-10-11 | Sub-pages (Estate, Memory, Portfolio) had inconsistent active event banners and dead `#/...` anchor links. | Updated sub-screens to maintain active event `E-2026-001` continuity and replaced anchor tags with React Router `useNavigate()` navigation. |
+| 2026-10-13 | Remote Linux EC2 host failed `git pull` with "local changes to docs/memory.md would be overwritten by merge" because Windows push script uploaded raw CRLF bytes to GitHub blobs, causing Linux git checkout (`eol=lf`) to mark files as locally modified. | Updated `scripts/push_to_github.py` to auto-normalize all text files from `\r\n` (CRLF) to `\n` (LF) prior to creating GitHub blobs, ensuring 100% parity with Linux checkouts and `.gitattributes`. |
 
 ---
 
