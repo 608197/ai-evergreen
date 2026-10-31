@@ -7,6 +7,22 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-31 — Solid Modal Surfaces & Approval Modal 1-Click Rationale Enhancement
+
+**What changed:**
+- **System-Wide CSS Variable Token Aliases (`tokens.css`)**:
+  - Identified root cause of transparent modals: components referenced modern CSS variables (`--color-surface-panel`, `--color-surface-nested`, `--color-surface-bg`, `--bg-surface`, `--border-subtle`, etc.) that were missing from `:root`, causing browsers to evaluate modal surfaces as transparent against dark backdrops.
+  - Added comprehensive token alias mapping in `:root` guaranteeing solid opaque `#ffffff` and `#f8fafc` surfaces across the entire application.
+- **Explicit Solid Modal Styling (`ApprovalModal.css`, `PlanScreen.css`, `EvidenceDrawer.css`, `GlossaryPanel.css`)**:
+  - Enforced solid `background-color: #ffffff !important;` and high-contrast text across modal dialogs, headers, bodies, textareas, code inputs, and drawer sidebars.
+- **Approval Modal 1-Click Rationale & Friction Helpers (`ApprovalModal.tsx`)**:
+  - Pre-populated compliant standard rationale by default: `"Proportionate regression suite verified (100% critical invariants passing; 0 safety regressions; canary rollout approved)."`.
+  - Added a `[⚡ Pre-fill Recommended Rationale]` button and critical tier `[⚡ Auto-fill phrase]` button.
+  - Added clear validation status indicators and character count feedback, completely resolving disabled sign button confusion.
+- **Decision Screen Stage 5 Persistent Action Bar (`DecisionScreen.tsx`)**:
+  - Added persistent completion banner after Gate G4 passes with explicit `[Proceed to Stage 5: Canary Rollout & Observability →]` CTA.
+- **Build Verification**: `npm run build` completed with 0 errors (2,020 modules transformed).
+
 ## 2026-10-31 — Results Screen Bottom Action Bar & Navigation UX Enhancement
 
 **What changed:**

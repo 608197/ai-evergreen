@@ -658,9 +658,11 @@
 .plan-modal-dialog {
   width: 520px;
   max-width: 90%;
-  background-color: var(--color-surface);
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
   border-radius: var(--radius-lg);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35) !important;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -668,7 +670,8 @@
 
 .plan-modal-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #e2e8f0 !important;
+  background-color: #f8fafc !important;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -317,6 +317,57 @@ export const DecisionScreen: React.FC = () => {
         })}
       </div>
 
+      {/* Persistent Gate G4 completion bar */}
+      {gateG4.passed && (
+        <div
+          style={{
+            marginTop: '2rem',
+            marginBottom: '4rem',
+            padding: '1.25rem 1.5rem',
+            backgroundColor: '#f0fdf4',
+            border: '2px solid #86efac',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.1)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ fontSize: '1.75rem', color: '#16a34a' }}>✓</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1rem', color: '#14532d' }}>
+                Gate G4 Passed — Signed Promotion Approval Recorded
+              </div>
+              <div style={{ fontSize: '0.875rem', color: '#166534' }}>
+                Cryptographic approval record verified by Trusted Kernel. Proceed to canary rollout.
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => navigate(`/events/${currentEventId}/rollout`)}
+            style={{
+              padding: '0.75rem 1.5rem',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              backgroundColor: '#059669',
+              border: 'none',
+              borderRadius: '8px',
+              color: '#ffffff',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+          >
+            <span>Proceed to Stage 5: Canary Rollout & Observability</span>
+            <span>→</span>
+          </button>
+        </div>
+      )}
+
       {/* Sticky Approval Panel */}
       <ApprovalPanel
         selectedIds={selectedWorkloadIds}
