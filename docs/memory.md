@@ -7,6 +7,15 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-31 — Plan Screen Gate G2 Approval & Persona Switch UX Fix
+
+**What changed:**
+- **Gate G2 Banner Action Button Wiring (`PlanScreen.tsx`)**:
+  - Fixed `GateBanner`'s `onActionClick` handler: when `gateG2.actionText === 'Approve plan'`, clicking the banner action button now immediately triggers `handleApprovePlanClick()`, opening the regression scope sign-off modal directly instead of querying for already-approved missing tests.
+- **In-Banner Persona Quick-Switch (`PlanScreen.tsx`)**:
+  - Added an inline `"Switch to Marcus Lee & Approve"` action button inside `plan-role-warning` banner. If an evaluator is currently acting as another persona (e.g., Ravi Kulkarni or Asha Rao), clicking `Approve plan` provides a 1-click identity switch to Marcus Lee (QA Lead) and immediately opens the sign-off dialog.
+- **Build Verification**: `npm run build` completed with 0 errors (2,020 modules transformed).
+
 ## 2026-10-13 — End-to-End Demo Reset & Customer Re-Run Architecture
 
 **What changed:**

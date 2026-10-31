@@ -25,6 +25,7 @@ export const PlanScreen: React.FC = () => {
 
   const {
     currentUser,
+    setCurrentUser,
     workloads,
     planItems,
     missingTests,
@@ -241,6 +242,31 @@ export const PlanScreen: React.FC = () => {
           <span>{roleWarning}</span>
           <button
             type="button"
+            className="warning-switch-btn"
+            style={{
+              marginLeft: 'auto',
+              background: '#2563eb',
+              color: '#ffffff',
+              border: 'none',
+              padding: '0.35rem 0.75rem',
+              borderRadius: '4px',
+              fontSize: '0.8125rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+            }}
+            onClick={() => {
+              setCurrentUser('user-marcus');
+              setRoleWarning(null);
+              setConfirmModalOpen(true);
+            }}
+          >
+            <span>Switch to Marcus Lee & Approve</span>
+          </button>
+          <button
+            type="button"
             className="warning-dismiss"
             onClick={() => setRoleWarning(null)}
           >
@@ -259,9 +285,15 @@ export const PlanScreen: React.FC = () => {
             message={gateG2.blockingReason || 'Review pending tests'}
             actionText={gateG2.actionText || 'Review missing test'}
             onActionClick={() => {
-              const pending = missingTests.find((m) => m.status === 'proposed');
-              if (pending) {
-                handleOpenDrawerForMissing(pending);
+              if (gateG2.actionText === 'Approve plan') {
+                handleApprovePlanClick();
+              } else {
+                const pending = missingTests.find((m) => m.status === 'proposed');
+                if (pending) {
+                  handleOpenDrawerForMissing(pending);
+                } else {
+                  handleApprovePlanClick();
+                }
               }
             }}
           />

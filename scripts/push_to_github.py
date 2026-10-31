@@ -54,9 +54,10 @@ def get_token() -> str:
     try:
         proc = subprocess.run(
             ["git", "credential", "fill"],
-            input="protocol=https\nhost=github.com\n",
+            input="protocol=https\nhost=github.com\n\n",
             capture_output=True,
             text=True,
+            timeout=5,
             check=True,
         )
         for line in proc.stdout.splitlines():
