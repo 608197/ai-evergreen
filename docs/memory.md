@@ -7,6 +7,15 @@ as an incomplete task per `AGENTS.md` §7.
 Format per entry: date, what changed, what's still open, what to do next.
 Newest entry at the top.
 
+## 2026-10-31 — Results Screen Bottom Action Bar & Navigation UX Enhancement
+
+**What changed:**
+- **Results Screen Differential Inspection Footer (`ResultsScreen.tsx`)**:
+  - Added an integrated footer directly below the Differential Case Inspection & Trajectory timeline showing deterministic violation status and an explicit `"Continue to Decision & Approval"` action button.
+- **Stage 3 Persistent Bottom Completion Bar (`ResultsScreen.tsx`)**:
+  - Added a full-width persistent completion bar at the bottom of `/events/E-2026-001/results` with a green completion indicator and prominent `"Continue to Stage 4: Decision & Approval"` CTA so evaluators do not have to scroll back up to advance the pipeline.
+- **Build Verification**: `npm run build` completed with 0 errors (2,020 modules transformed).
+
 ## 2026-10-31 — Plan Screen Gate G2 Approval & Persona Switch UX Fix
 
 **What changed:**

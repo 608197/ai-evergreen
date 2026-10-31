@@ -296,6 +296,36 @@ export const ResultsScreen: React.FC = () => {
               )}
             </div>
 
+            <div className="inspection-card-footer" style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '1rem 1.25rem',
+              borderTop: '1px solid var(--color-border)',
+              backgroundColor: 'var(--color-surface-subtle)',
+              borderBottomLeftRadius: 'var(--radius-lg)',
+              borderBottomRightRadius: 'var(--radius-lg)',
+              flexWrap: 'wrap',
+              gap: '0.75rem',
+            }}>
+              <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+                {activeCase.isDeterministicFail ? (
+                  <span style={{ color: '#dc2626', fontWeight: 600 }}>
+                    Deterministic Hard Stop: Trajectory violation flagged for Decision & Approval stage.
+                  </span>
+                ) : (
+                  <span>Inspection complete. Evidence compiled into run manifest.</span>
+                )}
+              </div>
+              <button
+                type="button"
+                className="results-continue-btn"
+                onClick={() => navigate(`/events/${id}/decision`)}
+              >
+                <span>Continue to Decision & Approval</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -394,6 +424,55 @@ export const ResultsScreen: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Persistent Bottom Completion Bar */}
+      <div className="results-bottom-bar" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '1.25rem 1.75rem',
+        background: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+        marginTop: '0.5rem',
+        flexWrap: 'wrap',
+        gap: '1rem',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+          <div style={{
+            width: '38px',
+            height: '38px',
+            borderRadius: '50%',
+            background: '#dcfce7',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#15803d',
+            flexShrink: 0,
+          }}>
+            <CheckCircle size={22} />
+          </div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--color-text-main)' }}>
+              Stage 3 Evidence Compilation Complete
+            </div>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+              134 tests executed · Seed {runManifest.seed} · Deterministic failure caught on Refund Agent (Rule K-014)
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="results-continue-btn"
+          style={{ padding: '0.75rem 1.5rem', fontSize: '0.9375rem' }}
+          onClick={() => navigate(`/events/${id}/decision`)}
+        >
+          <span>Continue to Stage 4: Decision & Approval</span>
+          <ArrowRight size={18} />
+        </button>
       </div>
 
       {/* Evidence Drawer Overlay (O1) */}
